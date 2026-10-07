@@ -1,0 +1,2 @@
+# Netlify: serve the app for any path without its own file (industry pages have their own HTML).
+/*    /index.html   200

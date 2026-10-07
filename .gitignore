@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+
+# API
+server/.venv/
+server/.env
+server/*.db
+server/.pytest_cache/
+__pycache__/
+*.pyc
+
+# Local screenshots
+shots/
+*.tsbuildinfo

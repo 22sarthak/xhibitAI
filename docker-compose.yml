@@ -1,0 +1,38 @@
+# Local Postgres + API:   docker compose up --build
+# API docs:               http://localhost:8010/api/docs
+# (Port 8010 locally so it never clashes with other apps on 8000. Change with API_PORT=...)
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: xhibit
+      POSTGRES_PASSWORD: xhibit_dev_password
+      POSTGRES_DB: xhibit
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xhibit -d xhibit"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  api:
+    build: ./server
+    restart: unless-stopped
+    env_file:
+      - path: ./server/.env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://xhibit:xhibit_dev_password@db:5432/xhibit
+      ALLOWED_ORIGINS: http://localhost:5173,http://localhost:4173
+    ports:
+      - "${API_PORT:-8010}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

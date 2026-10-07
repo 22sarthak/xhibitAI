@@ -1,0 +1,646 @@
+{
+  "restaurants": [
+    {
+      "name": "hero",
+      "id": "DROPNgCSqNI",
+      "raw": "https://images.unsplash.com/photo-1705174299330-939dd03cc864",
+      "w": 1400,
+      "h": 1000,
+      "author": "Hrushi Chavhan",
+      "username": "hcphotos",
+      "alt": "a person is spooning food out of a bowl"
+    },
+    {
+      "name": "biryani",
+      "id": "o5XB6XwTb1I",
+      "raw": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8",
+      "w": 900,
+      "h": 900,
+      "author": "Omkar Jadhav",
+      "username": "jadhav24omkar",
+      "alt": "two plates of food on a black table"
+    },
+    {
+      "name": "paneer-tikka",
+      "id": "WmKXu-bzygo",
+      "raw": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8",
+      "w": 480,
+      "h": 480,
+      "author": "Viktor Forgacs",
+      "username": "sonance",
+      "alt": "cooked foods"
+    },
+    {
+      "name": "butter-chicken",
+      "id": "gwUA_pHaOYY",
+      "raw": "https://images.unsplash.com/photo-1742599361539-f096753d1100",
+      "w": 480,
+      "h": 480,
+      "author": "Imad 786",
+      "username": "imad8321",
+      "alt": "Delicious indian chicken curry and rice, ready to eat"
+    },
+    {
+      "name": "dal-makhani",
+      "id": "WR13Tw8gmsA",
+      "raw": "https://images.unsplash.com/photo-1789983665266-f1a6ea13b311",
+      "w": 480,
+      "h": 480,
+      "author": "Chetanya Sharma",
+      "username": "chetanya_designs",
+      "alt": "Dal makhani with a swirl of cream and butter in a black pot"
+    },
+    {
+      "name": "naan",
+      "id": "h7cZs0aFicw",
+      "raw": "https://images.unsplash.com/photo-1697155406014-04dc649b0953",
+      "w": 480,
+      "h": 480,
+      "author": "Rashpal Singh",
+      "username": "rashpalsingh",
+      "alt": "a bowl filled with pita bread and a fork"
+    },
+    {
+      "name": "thali",
+      "id": "4pT9e68P_mU",
+      "raw": "https://images.unsplash.com/photo-1742281258189-3b933879867a",
+      "w": 900,
+      "h": 900,
+      "author": "Zoshua Colah",
+      "username": "zoshuacolah",
+      "alt": "Delicious indian meal served on a platter"
+    },
+    {
+      "name": "kebab",
+      "id": "-yFswqcNxXk",
+      "raw": "https://images.unsplash.com/photo-1781332143834-19a40f746cd9",
+      "w": 480,
+      "h": 480,
+      "author": "Zayed Ahmed Zadu",
+      "username": "zayed_ahmed_zadu",
+      "alt": "Four skewers of grilled food served on a wooden stand"
+    },
+    {
+      "name": "dessert",
+      "id": "2oJ4eGRPqrE",
+      "raw": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12",
+      "w": 480,
+      "h": 480,
+      "author": "Umair Ali Asad",
+      "username": "umairaliasad",
+      "alt": "a plate of food"
+    },
+    {
+      "name": "interior",
+      "id": "-lw_lvc9hq8",
+      "raw": "https://images.unsplash.com/photo-1582228096960-7f5d2ec4aa8e",
+      "w": 1100,
+      "h": 800,
+      "author": "beth d",
+      "username": "bethdys",
+      "alt": "brown wooden table with plates and bowls"
+    },
+    {
+      "name": "ambience",
+      "id": "6JxC2GoC7i4",
+      "raw": "https://images.unsplash.com/photo-1763626080059-523898c7ffef",
+      "w": 900,
+      "h": 900,
+      "author": "Rahul Himkar",
+      "username": "rahulhimkar",
+      "alt": "Man reading a menu at a restaurant table"
+    },
+    {
+      "name": "festive",
+      "id": "JrXbNQoizfc",
+      "raw": "https://images.unsplash.com/photo-1728745118618-941ec839208f",
+      "w": 900,
+      "h": 900,
+      "author": "Sabhyata Sahu",
+      "username": "sabbythefreeelf",
+      "alt": "A plate of food on a wooden table"
+    },
+    {
+      "name": "curry",
+      "id": "zRZxs9tDha0",
+      "raw": "https://images.unsplash.com/photo-1728910107534-e04e261768ae",
+      "w": 900,
+      "h": 900,
+      "author": "Perspective Studio",
+      "username": "perspectievstudio",
+      "alt": "A bowl of food sitting on top of a table"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "hero",
+      "id": "B_sK_xgzwVA",
+      "raw": "https://images.unsplash.com/photo-1629909614456-6b1c5c94cecc",
+      "w": 1400,
+      "h": 1000,
+      "author": "Benyamin Bohlouli",
+      "username": "benyamin_bohlouli",
+      "alt": "blue couch beside green potted plant"
+    },
+    {
+      "name": "reception",
+      "id": "E7Tzh2TTS6c",
+      "raw": "https://images.unsplash.com/photo-1578991624414-276ef23a534f",
+      "w": 1000,
+      "h": 750,
+      "author": "Smartworks Coworking",
+      "username": "smartworkscoworking",
+      "alt": "unknown person sitting on blue couch"
+    },
+    {
+      "name": "doctor",
+      "id": "hIgeoQjS_iE",
+      "raw": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7",
+      "w": 900,
+      "h": 900,
+      "author": "Online Marketing",
+      "username": "impulsq",
+      "alt": "doctor holding red stethoscope"
+    },
+    {
+      "name": "lab",
+      "id": "GlZv6YgCUyM",
+      "raw": "https://images.unsplash.com/photo-1582719299074-be127353065f",
+      "w": 900,
+      "h": 700,
+      "author": "National Cancer Institute",
+      "username": "nci",
+      "alt": "woman in white scrub suit standing near white printer"
+    },
+    {
+      "name": "dental",
+      "id": "Pc8lpKJwecM",
+      "raw": "https://images.unsplash.com/photo-1643660527098-559f89e45a92",
+      "w": 900,
+      "h": 700,
+      "author": "Ozkan Guner",
+      "username": "dentistozkanguner",
+      "alt": "a dental room with a chair and a monitor"
+    },
+    {
+      "name": "waiting",
+      "id": "FFA8yd4OynY",
+      "raw": "https://images.unsplash.com/photo-1581982231900-6a1a46b744c9",
+      "w": 900,
+      "h": 700,
+      "author": "smallbox",
+      "username": "reoutput",
+      "alt": "brown and white padded armchairs"
+    }
+  ],
+  "schools": [
+    {
+      "name": "hero",
+      "id": "b5UILRPGV_g",
+      "raw": "https://images.unsplash.com/photo-1569173675610-42c361a86e37",
+      "w": 1400,
+      "h": 1000,
+      "author": "Akshar Dave🌻",
+      "username": "akshar_dave",
+      "alt": "group of boys wearing blue school uniforms photo"
+    },
+    {
+      "name": "classroom",
+      "id": "OcDJhBm8Jnc",
+      "raw": "https://images.unsplash.com/photo-1719159381916-062fa9f435a6",
+      "w": 900,
+      "h": 700,
+      "author": "Haseeb Modi",
+      "username": "haseebm",
+      "alt": "A group of children sitting at desks in a classroom"
+    },
+    {
+      "name": "building",
+      "id": "1lmGTHdQdjM",
+      "raw": "https://images.unsplash.com/photo-1613896527026-f195d5c818ed",
+      "w": 1100,
+      "h": 800,
+      "author": "Wander Fleur",
+      "username": "wanderfleur",
+      "alt": "brown concrete building under blue sky during daytime"
+    },
+    {
+      "name": "library",
+      "id": "2JIvboGLeho",
+      "raw": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+      "w": 900,
+      "h": 700,
+      "author": "Susan Q Yin",
+      "username": "syinq",
+      "alt": "books on brown wooden shelf"
+    },
+    {
+      "name": "sports",
+      "id": "utyOEK4GwDM",
+      "raw": "https://images.unsplash.com/photo-1649008726820-d90aeb70c32e",
+      "w": 900,
+      "h": 700,
+      "author": "Joydeep Sensarma",
+      "username": "jsensarma",
+      "alt": "a group of people standing in a line doing yoga"
+    },
+    {
+      "name": "study",
+      "id": "xMYq46yAetM",
+      "raw": "https://images.unsplash.com/photo-1692269725827-699e04a11cdf",
+      "w": 900,
+      "h": 700,
+      "author": "Swastik Arora",
+      "username": "swastikarora",
+      "alt": "two young boys sitting at a desk with a book"
+    }
+  ],
+  "salons": [
+    {
+      "name": "hero",
+      "id": "gI9rvJK61L8",
+      "raw": "https://images.unsplash.com/photo-1626379501846-0df4067b8bb9",
+      "w": 1400,
+      "h": 1100,
+      "author": "Giorgio Trovato",
+      "username": "giorgiotrovato",
+      "alt": "black and silver office rolling chair beside mirror"
+    },
+    {
+      "name": "interior",
+      "id": "OKXwmdbdXkk",
+      "raw": "https://images.unsplash.com/photo-1626383137804-ff908d2753a2",
+      "w": 1000,
+      "h": 750,
+      "author": "Giorgio Trovato",
+      "username": "giorgiotrovato",
+      "alt": "woman in white shirt standing near black leather chairs"
+    },
+    {
+      "name": "hair",
+      "id": "Xr12kfinkYA",
+      "raw": "https://images.unsplash.com/photo-1675034741473-afed58a142e8",
+      "w": 800,
+      "h": 1000,
+      "author": "Vinicius \"amnx\" Amano",
+      "username": "viniciusamano",
+      "alt": "a woman cutting another woman's hair in a salon"
+    },
+    {
+      "name": "bridal",
+      "id": "ohENjR9w0bk",
+      "raw": "https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9",
+      "w": 1000,
+      "h": 1200,
+      "author": "Alok Verma",
+      "username": "theweddingfocus",
+      "alt": "A woman in a red bridal outfit with intricate gold jewelry and henna patterns"
+    },
+    {
+      "name": "bridal-2",
+      "id": "ByInrRliROc",
+      "raw": "https://images.unsplash.com/photo-1610276347233-2ab70fc71da8",
+      "w": 800,
+      "h": 1000,
+      "author": "Bulbul Ahmed",
+      "username": "bulbul252",
+      "alt": "woman in red and gold dress"
+    },
+    {
+      "name": "nails",
+      "id": "51-4BSipn7E",
+      "raw": "https://images.unsplash.com/photo-1720343409646-960f6dcccae3",
+      "w": 800,
+      "h": 800,
+      "author": "Kingsley Hemans",
+      "username": "hemansjr",
+      "alt": "A close up of a person's hands with rings on them"
+    },
+    {
+      "name": "spa",
+      "id": "7Q1Jwr5BhgI",
+      "raw": "https://images.unsplash.com/photo-1716893917077-5b320c1ecfec",
+      "w": 800,
+      "h": 800,
+      "author": "Raajit Sharma",
+      "username": "raajit",
+      "alt": "a bath room with a bath tub and a tray of flowers"
+    },
+    {
+      "name": "makeup",
+      "id": "FoeIOgztCXo",
+      "raw": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796",
+      "w": 800,
+      "h": 800,
+      "author": "Jazmin Quaynor",
+      "username": "jazminantoinette",
+      "alt": "close-up photography of assorted cosmetics"
+    },
+    {
+      "name": "facial",
+      "id": "g-m8EDc4X6Q",
+      "raw": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9",
+      "w": 800,
+      "h": 800,
+      "author": "engin akyurt",
+      "username": "enginakyurt",
+      "alt": "woman lying on blue towel with white cream on face"
+    },
+    {
+      "name": "mens",
+      "id": "MUdB4YzDeKA",
+      "raw": "https://images.unsplash.com/photo-1593702288056-7927b442d0fa",
+      "w": 800,
+      "h": 800,
+      "author": "Michael DeMoya",
+      "username": "demoya",
+      "alt": "man in white dress shirt cutting hair of man in white dress shirt"
+    }
+  ],
+  "gyms": [
+    {
+      "name": "hero",
+      "id": "uPrxxLSkovY",
+      "raw": "https://images.unsplash.com/photo-1613845205719-8c87760ab728",
+      "w": 1400,
+      "h": 1100,
+      "author": "Aaron Brogden",
+      "username": "aaronbrogden",
+      "alt": "man in black tank top holding black dumbbell"
+    },
+    {
+      "name": "floor",
+      "id": "DLhXl7A1ds0",
+      "raw": "https://images.unsplash.com/photo-1693214674451-d6bd02e642d1",
+      "w": 1100,
+      "h": 800,
+      "author": "Frederick Shaw",
+      "username": "dropfastcollective",
+      "alt": "a gym with a lot of equipment in it"
+    },
+    {
+      "name": "weights",
+      "id": "Il9YbhIBiOA",
+      "raw": "https://images.unsplash.com/photo-1741156229623-da94e6d7977d",
+      "w": 900,
+      "h": 700,
+      "author": "Jakub Żerdzicki",
+      "username": "jakubzerdzicki",
+      "alt": "Weights and equipment are ready for a workout"
+    },
+    {
+      "name": "yoga",
+      "id": "PktK6GuC3U4",
+      "raw": "https://images.unsplash.com/photo-1651077837628-52b3247550ae",
+      "w": 900,
+      "h": 700,
+      "author": "David Whipple",
+      "username": "iamdavidwhipple",
+      "alt": "a group of people sitting at a table"
+    },
+    {
+      "name": "boxing",
+      "id": "de5OZMjb5ww",
+      "raw": "https://images.unsplash.com/photo-1606335543042-57c525922933",
+      "w": 900,
+      "h": 700,
+      "author": "Lorenzo Fattò Offidani",
+      "username": "lollish",
+      "alt": "man in black tank top and black shorts wearing black boxing gloves"
+    },
+    {
+      "name": "training",
+      "id": "53JXtipb4-A",
+      "raw": "https://images.unsplash.com/photo-1630065612426-e03d3fec7348",
+      "w": 800,
+      "h": 800,
+      "author": "Gyan Shahane",
+      "username": "gyanoba",
+      "alt": "man in orange crew neck t-shirt holding black exercise equipment"
+    },
+    {
+      "name": "kettlebell",
+      "id": "g_bglWB48JA",
+      "raw": "https://images.unsplash.com/photo-1597076545399-91a3ff0e71b3",
+      "w": 800,
+      "h": 800,
+      "author": "Ambitious Studio* | Rick Barrett",
+      "username": "weareambitious",
+      "alt": "person in black leather shoes standing on gray asphalt road"
+    }
+  ],
+  "hotels": [
+    {
+      "name": "hero",
+      "id": "yZtuVRrQZIg",
+      "raw": "https://images.unsplash.com/photo-1699166877362-73cba7e56867",
+      "w": 1500,
+      "h": 1000,
+      "author": "Nicolas Spehler",
+      "username": "nspehler",
+      "alt": "a lit up building with a lot of windows"
+    },
+    {
+      "name": "pool",
+      "id": "tT86huQhF24",
+      "raw": "https://images.unsplash.com/photo-1648995505975-8fe3ebc7b253",
+      "w": 1100,
+      "h": 800,
+      "author": "Alka Jha",
+      "username": "alka_jha",
+      "alt": "a large swimming pool next to a lush green hillside"
+    },
+    {
+      "name": "room-deluxe",
+      "id": "Yrxr3bsPdS0",
+      "raw": "https://images.unsplash.com/photo-1618773928121-c32242e63f39",
+      "w": 900,
+      "h": 650,
+      "author": "Vojtech Bruzek",
+      "username": "vojtechbruzek",
+      "alt": "white bed linen with throw pillows"
+    },
+    {
+      "name": "room-executive",
+      "id": "aI6Su7Mu9Ro",
+      "raw": "https://images.unsplash.com/photo-1590490360182-c33d57733427",
+      "w": 900,
+      "h": 650,
+      "author": "reisetopia",
+      "username": "reisetopia",
+      "alt": "red throw pillow on white couch"
+    },
+    {
+      "name": "room-suite",
+      "id": "T5pL6ciEn-I",
+      "raw": "https://images.unsplash.com/photo-1611892440504-42a792e24d32",
+      "w": 900,
+      "h": 650,
+      "author": "visualsofdana",
+      "username": "visualsofdana",
+      "alt": "A hotel bedroom with a wooden bed, teal pillows, and a private garden view"
+    },
+    {
+      "name": "lobby",
+      "id": "kfnWOD1Tbp8",
+      "raw": "https://images.unsplash.com/photo-1759038085950-1234ca8f5fed",
+      "w": 1000,
+      "h": 750,
+      "author": "Neon Wang",
+      "username": "neonwangphotography",
+      "alt": "Hotel reception desk with modern wooden furniture and seating"
+    },
+    {
+      "name": "wedding",
+      "id": "BEdxXAiRfRM",
+      "raw": "https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2",
+      "w": 1100,
+      "h": 800,
+      "author": "AMISH THAKKAR",
+      "username": "amishthakkar",
+      "alt": "A couple performing a wedding ritual under a floral canopy in a ballroom"
+    },
+    {
+      "name": "hall",
+      "id": "cQxEJoQZ_-E",
+      "raw": "https://images.unsplash.com/photo-1768851142332-75f3d1b47452",
+      "w": 1000,
+      "h": 750,
+      "author": "Matt Benson",
+      "username": "mattgyver",
+      "alt": "Elegant banquet hall set for an event with round tables"
+    },
+    {
+      "name": "nature",
+      "id": "_mORCo5GMQs",
+      "raw": "https://images.unsplash.com/photo-1597384532390-98ece5da73cd",
+      "w": 900,
+      "h": 700,
+      "author": "Bitan Basak",
+      "username": "bitanbasak",
+      "alt": "green grass and trees near river"
+    },
+    {
+      "name": "dining",
+      "id": "aVjfdNp9ess",
+      "raw": "https://images.unsplash.com/photo-1637730827702-de34e9ae4ede",
+      "w": 900,
+      "h": 700,
+      "author": "Jakob Owens",
+      "username": "jakobowens1",
+      "alt": "a large room with a lot of chairs and tables"
+    }
+  ],
+  "retail": [
+    {
+      "name": "hero",
+      "id": "Rm9DL9DmGi4",
+      "raw": "https://images.unsplash.com/photo-1727430228383-aa1fb59db8bf",
+      "w": 1200,
+      "h": 1400,
+      "author": "shades by 43",
+      "username": "shades_by_43",
+      "alt": "A woman in a sari posing for a picture"
+    },
+    {
+      "name": "banarasi",
+      "id": "AZz_MHYNzFA",
+      "raw": "https://images.unsplash.com/photo-1610189025857-f42fe6e8dd91",
+      "w": 600,
+      "h": 800,
+      "author": "Bulbul Ahmed",
+      "username": "bulbul252",
+      "alt": "woman in blue and white floral robe"
+    },
+    {
+      "name": "tussar",
+      "id": "A7H3qmJTNJc",
+      "raw": "https://images.unsplash.com/photo-1609748340041-f5d61e061ebc",
+      "w": 600,
+      "h": 800,
+      "author": "Bulbul Ahmed",
+      "username": "bulbul252",
+      "alt": "woman in green and white dress"
+    },
+    {
+      "name": "kanjeevaram",
+      "id": "tjRs987fPfg",
+      "raw": "https://images.unsplash.com/photo-1610189012906-4c0aa9b9781e",
+      "w": 600,
+      "h": 800,
+      "author": "Bulbul Ahmed",
+      "username": "bulbul252",
+      "alt": "woman in blue and yellow sari dress"
+    },
+    {
+      "name": "lehenga",
+      "id": "pkqmkwkApgA",
+      "raw": "https://images.unsplash.com/photo-1649930055986-ca57250a7fd4",
+      "w": 600,
+      "h": 800,
+      "author": "Ardy Arjun",
+      "username": "ardyastic",
+      "alt": "a woman in a long dress standing in a garden"
+    },
+    {
+      "name": "kurta",
+      "id": "hEuVOYuq1l4",
+      "raw": "https://images.unsplash.com/photo-1727835523545-70ee992b5763",
+      "w": 600,
+      "h": 800,
+      "author": "Firangi Yarn Menswear Brand",
+      "username": "firangiyarn",
+      "alt": "A man standing next to a tree wearing a green shirt"
+    },
+    {
+      "name": "kurti",
+      "id": "IgtdzxZLfuE",
+      "raw": "https://images.unsplash.com/photo-1667665970118-f55705003914",
+      "w": 600,
+      "h": 800,
+      "author": "Sahil Shettigar",
+      "username": "sahilshettigar_",
+      "alt": "a woman in a dress standing on a bridge over water"
+    },
+    {
+      "name": "dupatta",
+      "id": "udCX1mvNFos",
+      "raw": "https://images.unsplash.com/photo-1717585679395-bbe39b5fb6bc",
+      "w": 600,
+      "h": 800,
+      "author": "Jainica Dhingra",
+      "username": "jainica",
+      "alt": "a pile of different types of cloths on a table"
+    },
+    {
+      "name": "tissue",
+      "id": "ohEYtC4TEsg",
+      "raw": "https://images.unsplash.com/photo-1610030468706-9a6dbad49b0a",
+      "w": 600,
+      "h": 800,
+      "author": "Bulbul Ahmed",
+      "username": "bulbul252",
+      "alt": "person in brown and white hijab"
+    },
+    {
+      "name": "loom",
+      "id": "YFXUumP4m5U",
+      "raw": "https://images.unsplash.com/photo-1569909115134-a0426936c879",
+      "w": 1100,
+      "h": 800,
+      "author": "Sergio Gonzalez",
+      "username": "sergiogonzalez2024",
+      "alt": "assorted-color textiles"
+    },
+    {
+      "name": "store",
+      "id": "2gLL2ZgBlcU",
+      "raw": "https://images.unsplash.com/photo-1718985342149-7178154e0aee",
+      "w": 1000,
+      "h": 750,
+      "author": "Laura Peruchi",
+      "username": "lauraperuchi",
+      "alt": "A clothing store with clothes and hats on display"
+    }
+  ]
+}
