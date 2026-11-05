@@ -9,6 +9,9 @@ from .config import get_settings
 
 log = logging.getLogger("xhibit.notify")
 
+PROJECT_LABELS = {"website": "Website", "landing": "Landing page", "webapp": "Web app / dashboard", "store": "Online store", "ai": "AI assistant / automation", "unsure": "Not sure yet"}
+BUDGET_LABELS = {"under_25k": "Under ₹25,000", "25k_75k": "₹25,000 – ₹75,000", "75k_2l": "₹75,000 – ₹2 lakh", "above_2l": "Above ₹2 lakh", "unsure": "Not sure yet"}
+
 
 def format_enquiry(e: dict[str, Any]) -> str:
     lines = [
@@ -17,6 +20,12 @@ def format_enquiry(e: dict[str, Any]) -> str:
     ]
     if e.get("business_name") or e.get("business_type"):
         lines.append(f"Business: {e.get('business_name') or '-'} ({e.get('business_type') or 'type not given'})")
+    if e.get("project_type"):
+        lines.append(f"Wants: {PROJECT_LABELS.get(e['project_type'], e['project_type'])}")
+    if e.get("budget"):
+        lines.append(f"Budget: {BUDGET_LABELS.get(e['budget'], e['budget'])}")
+    if e.get("city"):
+        lines.append(f"City: {e['city']}")
     if e.get("message"):
         lines.append(f"Message: {e['message']}")
     if e.get("source_page"):

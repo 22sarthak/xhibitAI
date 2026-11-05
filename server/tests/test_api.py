@@ -105,3 +105,30 @@ def test_update_status_and_export_csv():
     assert r.status_code == 200 and r.json()["status"] == "contacted"
     csv_text = client.get("/api/admin/enquiries.csv", headers=ADMIN).text
     assert "Priya Singh" in csv_text and "contacted" in csv_text
+
+
+def test_project_budget_and_city_are_stored():
+    r = client.post(
+        "/api/enquiries",
+        json=enquiry(project_type="webapp", budget="75k_2l", city="  Pune  "),
+        headers={"X-Forwarded-For": "10.0.0.21"},
+    )
+    assert r.status_code == 201
+    rows = client.get("/api/admin/enquiries", headers=ADMIN).json()
+    row = next(x for x in rows if x["id"] == r.json()["id"])
+    assert (row["project_type"], row["budget"], row["city"]) == ("webapp", "75k_2l", "Pune")
+
+
+def test_unknown_project_type_and_budget_are_dropped():
+    r = client.post("/api/enquiries", json=enquiry(project_type="rocket", budget="1 crore"), headers={"X-Forwarded-For": "10.0.0.22"})
+    assert r.status_code == 201
+    rows = client.get("/api/admin/enquiries", headers=ADMIN).json()
+    row = next(x for x in rows if x["id"] == r.json()["id"])
+    assert row["project_type"] is None and row["budget"] is None
+
+
+def test_format_enquiry_includes_new_fields():
+    from app.notify import format_enquiry
+
+    text = format_enquiry({"name": "Asha", "phone": "9876543210", "preferred_contact": "call", "project_type": "store", "budget": "25k_75k", "city": "Mumbai"})
+    assert "Wants: Online store" in text and "Budget: ₹25,000 – ₹75,000" in text and "City: Mumbai" in text

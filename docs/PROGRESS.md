@@ -40,4 +40,12 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - Share images now show a MacBook with an iPhone in front, for the home page and all eight industries.
 - Chat colours darkened for contrast. Build passes; accessibility audit: 0 violations.
 
-**Now list complete.** Next up: contact form fields, service pages, new demos.
+**Now list complete.**
+
+**Contact form**
+- New optional fields: "What do you want to build?" (website, landing page, web app, online store, AI, not sure), city, and the visitor's rough budget band (under ₹25k up to above ₹2 lakh, or not sure). These are the visitor's budget, not our prices.
+- The visible "What kind of business?" chips are gone; industry pages still send their industry automatically.
+- Server stores `project_type`, `budget` and `city`, includes them in the Telegram alert and CSV export, and adds the columns to an existing database on start-up. Tested against a database with the old layout.
+- API tests: 14 pass (3 new). Real submission through the form verified end to end.
+
+Next up: service pages, new demos.

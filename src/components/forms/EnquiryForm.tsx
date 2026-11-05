@@ -15,6 +15,44 @@ import { WhatsAppDisc } from "../ui/icons";
 
 type Errors = Partial<Record<"name" | "phone" | "message", string>>;
 
+const PROJECTS = [
+  { value: "website", label: "Website" },
+  { value: "landing", label: "Landing page" },
+  { value: "webapp", label: "Web app / dashboard" },
+  { value: "store", label: "Online store" },
+  { value: "ai", label: "AI assistant / automation" },
+  { value: "unsure", label: "Not sure yet" },
+];
+
+/** The visitor's own budget band, so we can suggest the right scope. Not our prices. */
+const BUDGETS = [
+  { value: "under_25k", label: "Under ₹25k" },
+  { value: "25k_75k", label: "₹25k – 75k" },
+  { value: "75k_2l", label: "₹75k – 2 lakh" },
+  { value: "above_2l", label: "Above ₹2 lakh" },
+  { value: "unsure", label: "Not sure yet" },
+];
+
+function Chips({ legend, hint, name, options, value, onChange }: { legend: string; hint?: string; name: string; options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+  return (
+    <fieldset>
+      <legend className="mb-2 text-[0.875rem] font-semibold">
+        {legend} {hint && <span className="font-normal text-ink-mute">{hint}</span>}
+      </legend>
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => (
+          <label key={o.value} className="cursor-pointer">
+            <input type="radio" name={name} value={o.value} checked={value === o.value} onChange={() => onChange(o.value)} className="peer sr-only" />
+            <span className="block rounded-full bg-white px-3.5 py-2 text-[0.875rem] font-medium ring-1 ring-ink/12 transition-colors peer-checked:bg-ink peer-checked:text-ivory peer-checked:ring-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-clay">
+              {o.label}
+            </span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 /** "+91 98765-43210" / "098765 43210" → "9876543210", or null if not a valid Indian mobile. */
 export function normalisePhone(raw: string) {
   let d = raw.replace(/\D/g, "");
@@ -28,10 +66,12 @@ const fieldCls =
 
 export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlug; source: string }) {
   const uid = useId();
-  const { name: businessName, setName: setBusinessName } = usePersonalization();
+  const { name: businessName, setName: setBusinessName, city: personalCity } = usePersonalization();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [type, setType] = useState<string>(defaultType ?? "");
+  const [project, setProject] = useState("");
+  const [budget, setBudget] = useState("");
+  const [city, setCity] = useState(personalCity);
   const [message, setMessage] = useState("");
   const [contact, setContact] = useState<"whatsapp" | "call">("whatsapp");
   const [honeypot, setHoneypot] = useState("");
@@ -40,12 +80,17 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
   const [serverError, setServerError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
-  const kind = industries.find((i) => i.slug === type)?.kind.toLowerCase();
+  const kind = industries.find((i) => i.slug === defaultType)?.kind.toLowerCase();
+  const projectLabel = PROJECTS.find((p) => p.value === project && p.value !== "unsure")?.label.toLowerCase();
+  const budgetLabel = BUDGETS.find((b) => b.value === budget && b.value !== "unsure")?.label;
   const fallbackText = [
-    `Hi ${site.brand.name}! I'm ${name.trim() || "interested in a website"}`,
+    `Hi ${site.brand.name}! I'm ${name.trim() || "interested in working with you"}`,
     businessName.trim() ? ` from ${businessName.trim()}` : "",
     kind ? ` (${kind})` : "",
+    city.trim() ? `, ${city.trim()}` : "",
     ".",
+    projectLabel ? ` I'd like a ${projectLabel}.` : "",
+    budgetLabel ? ` My budget is around ${budgetLabel}.` : "",
     message.trim() ? ` ${message.trim()}` : "",
     phone.trim() ? ` You can reach me on ${phone.trim()}.` : "",
   ].join("");
@@ -72,7 +117,10 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
       name: name.trim(),
       phone: normalisePhone(phone)!,
       business_name: businessName.trim() || undefined,
-      business_type: type || undefined,
+      business_type: defaultType || undefined,
+      project_type: project || undefined,
+      budget: budget || undefined,
+      city: city.trim() || undefined,
       message: message.trim() || undefined,
       preferred_contact: contact,
       source_page: source,
@@ -80,7 +128,7 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
     });
     if (res.ok) {
       setStatus("sent");
-      track("form_submit", { source, industry: type });
+      track("form_submit", { source, industry: defaultType ?? "", project, budget });
     } else {
       setStatus("error");
       setServerError(res.error);
@@ -174,45 +222,45 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
               </div>
             </div>
 
-            <div>
-              <label htmlFor={`${uid}-biz`} className="mb-2 block text-[0.875rem] font-semibold">
-                Business name <span className="font-normal text-ink-mute">(optional)</span>
-              </label>
-              <input
-                id={`${uid}-biz`}
-                name="business_name"
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                autoComplete="organization"
-                placeholder="e.g. Sharma Sweets"
-                className={fieldCls}
-              />
+            <Chips legend="What do you want to build?" name="project_type" options={PROJECTS} value={project} onChange={setProject} />
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor={`${uid}-biz`} className="mb-2 block text-[0.875rem] font-semibold">
+                  Business or project name <span className="font-normal text-ink-mute">(optional)</span>
+                </label>
+                <input
+                  id={`${uid}-biz`}
+                  name="business_name"
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
+                  autoComplete="organization"
+                  placeholder="e.g. Sharma Sweets"
+                  className={fieldCls}
+                />
+              </div>
+              <div>
+                <label htmlFor={`${uid}-city`} className="mb-2 block text-[0.875rem] font-semibold">
+                  City <span className="font-normal text-ink-mute">(optional)</span>
+                </label>
+                <input
+                  id={`${uid}-city`}
+                  name="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  maxLength={60}
+                  autoComplete="address-level2"
+                  placeholder="e.g. Bengaluru"
+                  className={fieldCls}
+                />
+              </div>
             </div>
 
-            <fieldset>
-              <legend className="mb-2 text-[0.875rem] font-semibold">What kind of business?</legend>
-              <div className="flex flex-wrap gap-2">
-                {[...industries.map((i) => ({ value: i.slug as string, label: i.kind })), { value: "other", label: "Something else" }].map((o) => (
-                  <label key={o.value} className="cursor-pointer">
-                    <input
-                      type="radio"
-                      name="business_type"
-                      value={o.value}
-                      checked={type === o.value}
-                      onChange={() => setType(o.value)}
-                      className="peer sr-only"
-                    />
-                    <span className="block rounded-full bg-white px-3.5 py-2 text-[0.875rem] font-medium ring-1 ring-ink/12 transition-colors peer-checked:bg-ink peer-checked:text-ivory peer-checked:ring-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-clay">
-                      {o.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <Chips legend="Rough budget" hint="(optional, helps us suggest the right scope)" name="budget" options={BUDGETS} value={budget} onChange={setBudget} />
 
             <div>
               <label htmlFor={`${uid}-msg`} className="mb-2 block text-[0.875rem] font-semibold">
-                Anything you'd like to tell us? <span className="font-normal text-ink-mute">(optional)</span>
+                Tell us about your idea <span className="font-normal text-ink-mute">(optional)</span>
               </label>
               <textarea
                 id={`${uid}-msg`}
@@ -220,7 +268,7 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={3}
-                placeholder="e.g. I want customers to see our menu and book tables online."
+                placeholder="What should it do, who is it for, and any sites you like?"
                 aria-invalid={!!errors.message}
                 className={cn(fieldCls, "h-auto resize-none py-3.5 leading-relaxed")}
               />

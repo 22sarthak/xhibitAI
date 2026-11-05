@@ -5,6 +5,8 @@ from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 BUSINESS_TYPES = {"restaurants", "clinics", "schools", "salons", "gyms", "hotels", "retail", "business", "other"}
+PROJECT_TYPES = {"website", "landing", "webapp", "store", "ai", "unsure"}
+BUDGETS = {"under_25k", "25k_75k", "75k_2l", "above_2l", "unsure"}
 Status = Literal["new", "contacted", "won", "lost"]
 
 
@@ -32,6 +34,9 @@ class EnquiryIn(BaseModel):
     phone: str
     business_name: str | None = Field(default=None, max_length=80)
     business_type: str | None = None
+    project_type: str | None = None
+    budget: str | None = None
+    city: str | None = Field(default=None, max_length=60)
     message: str | None = Field(default=None, max_length=1000)
     preferred_contact: Literal["whatsapp", "call"] = "whatsapp"
     source_page: str | None = Field(default=None, max_length=80)
@@ -41,7 +46,7 @@ class EnquiryIn(BaseModel):
     # Honeypot: hidden from people; bots fill it in.
     company_website: str | None = None
 
-    @field_validator("name", "business_name", "source_page", "utm_source", "utm_medium", "utm_campaign", mode="before")
+    @field_validator("name", "business_name", "city", "source_page", "utm_source", "utm_medium", "utm_campaign", mode="before")
     @classmethod
     def _strip(cls, v: Any) -> Any:
         return _clean(v)
@@ -64,6 +69,13 @@ class EnquiryIn(BaseModel):
             return None
         return v if v in BUSINESS_TYPES else "other"
 
+    @field_validator("project_type", "budget", mode="before")
+    @classmethod
+    def _choice(cls, v: Any, info: Any) -> Any:
+        v = _clean(v)
+        allowed = PROJECT_TYPES if info.field_name == "project_type" else BUDGETS
+        return v if v in allowed else None
+
 
 class EnquiryCreated(BaseModel):
     id: str
@@ -78,6 +90,9 @@ class EnquiryOut(BaseModel):
     phone: str
     business_name: str | None
     business_type: str | None
+    project_type: str | None
+    budget: str | None
+    city: str | None
     message: str | None
     preferred_contact: str
     source_page: str | None

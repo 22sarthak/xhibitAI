@@ -43,7 +43,7 @@ Progress is logged in [PROGRESS.md](PROGRESS.md).
 - [ ] Work gallery with laptop + phone pairs; new demos (startup landing page, SaaS web app, AI tool)
 - [ ] Service pages: Websites, Landing pages, Web apps, Online stores, AI & automation
 - [ ] Product process (discovery → prototype → weekly builds → launch)
-- [ ] Contact form: "What do you want to build?", budget range, city
+- [x] Contact form: "What do you want to build?", budget range, city
 - [ ] New logo (founders are generating options) → redraw as SVG, favicon, share images
 
 ### Later

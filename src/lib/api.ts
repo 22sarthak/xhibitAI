@@ -51,6 +51,9 @@ export interface EnquiryInput {
   phone: string;
   business_name?: string;
   business_type?: string;
+  project_type?: string;
+  budget?: string;
+  city?: string;
   message?: string;
   preferred_contact: "whatsapp" | "call";
   source_page: string;

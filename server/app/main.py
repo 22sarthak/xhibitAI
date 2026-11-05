@@ -28,7 +28,7 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import ValidationError
-from sqlalchemy import func, select
+from sqlalchemy import func, inspect, select, text
 from sqlalchemy.orm import Session
 
 from .config import get_settings
@@ -41,10 +41,26 @@ from .schemas import EnquiryCreated, EnquiryIn, EnquiryOut, EnquiryUpdate, Event
 settings = get_settings()
 
 
+# Columns added after the first release: (name, SQL type). create_all() never alters existing tables.
+NEW_ENQUIRY_COLUMNS = [("project_type", "VARCHAR(30)"), ("budget", "VARCHAR(20)"), ("city", "VARCHAR(60)")]
+
+
+def add_missing_columns() -> None:
+    insp = inspect(engine)
+    if "enquiries" not in insp.get_table_names():
+        return
+    have = {c["name"] for c in insp.get_columns("enquiries")}
+    with engine.begin() as conn:
+        for name, sql_type in NEW_ENQUIRY_COLUMNS:
+            if name not in have:
+                conn.execute(text(f"ALTER TABLE enquiries ADD COLUMN {name} {sql_type}"))
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    # Creates tables on first run. For later schema changes, add Alembic migrations.
+    # Creates tables on first run, then adds any columns introduced since.
     Base.metadata.create_all(engine)
+    add_missing_columns()
     yield
 
 
@@ -162,7 +178,7 @@ def update_enquiry(enquiry_id: str, payload: EnquiryUpdate, db: DB) -> Enquiry:
 
 @app.get("/api/admin/enquiries.csv", dependencies=[Depends(require_admin)])
 def export_enquiries(db: DB) -> StreamingResponse:
-    cols = ["created_at", "name", "phone", "business_name", "business_type", "message", "preferred_contact", "status", "notes", "source_page", "utm_source", "utm_medium", "utm_campaign", "id"]
+    cols = ["created_at", "name", "phone", "business_name", "business_type", "project_type", "budget", "city", "message", "preferred_contact", "status", "notes", "source_page", "utm_source", "utm_medium", "utm_campaign", "id"]
     buf = io.StringIO()
     writer = csv.writer(buf)
     writer.writerow(cols)

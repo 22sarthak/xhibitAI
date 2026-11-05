@@ -23,6 +23,9 @@ class Enquiry(Base):
     phone: Mapped[str] = mapped_column(String(15), index=True)  # 10-digit Indian mobile
     business_name: Mapped[str | None] = mapped_column(String(80))
     business_type: Mapped[str | None] = mapped_column(String(30), index=True)
+    project_type: Mapped[str | None] = mapped_column(String(30))  # website, landing, webapp, store, ai, unsure
+    budget: Mapped[str | None] = mapped_column(String(20))  # the visitor's rough budget band
+    city: Mapped[str | None] = mapped_column(String(60))
     message: Mapped[str | None] = mapped_column(Text)
     preferred_contact: Mapped[str] = mapped_column(String(10), default="whatsapp")
 
