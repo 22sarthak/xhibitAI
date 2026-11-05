@@ -32,4 +32,12 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - `npm run build` passes; accessibility audit: 0 violations on /, /for/restaurants, /privacy.
 - Share images regenerated (`npm run og`).
 
-**Still to do (Now list):** studio laptop/phone switch, phone first-screen device, laptop share images.
+**Later the same day**
+- Hero badge moved to the phone's bottom-right corner.
+- Live Services tiles (`LiveVisuals.tsx`): self-playing WhatsApp assistant chat and an iPhone lock screen receiving notifications.
+- Phones: tighter hero spacing and compact promise row, so the live demo shows on the first screen (about 230px of it on a 390px-wide iPhone, up from 150px).
+- "Try it yourself" has a Laptop / Phone switch (laptop by default on big screens). The laptop's address bar shows the visitor's own business name as a domain.
+- Share images now show a MacBook with an iPhone in front, for the home page and all eight industries.
+- Chat colours darkened for contrast. Build passes; accessibility audit: 0 violations.
+
+**Now list complete.** Next up: contact form fields, service pages, new demos.

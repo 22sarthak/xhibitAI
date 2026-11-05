@@ -203,7 +203,7 @@ export function LiveChat() {
               )}
             >
               <p>{m.text}</p>
-              <p className="mt-0.5 flex items-center justify-end gap-1 text-[9.5px] text-[#667]">
+              <p className="mt-0.5 flex items-center justify-end gap-1 text-[9.5px] text-[#5d5d6a]">
                 {m.time}
                 {!m.bot && (
                   <svg width="14" height="9" viewBox="0 0 16 10" fill="none" stroke="#3b9ae1" strokeWidth="1.6">
@@ -217,8 +217,8 @@ export function LiveChat() {
                     <span
                       key={chip}
                       className={cn(
-                        "py-2 text-center text-[12.5px] font-semibold text-[#0f8a6c] transition-colors duration-150 first:border-r first:border-black/[0.07]",
-                        pressed === chip && "bg-[#0f8a6c]/12",
+                        "py-2 text-center text-[12.5px] font-semibold text-[#0a6e55] transition-colors duration-150 first:border-r first:border-black/[0.07]",
+                        pressed === chip && "bg-[#0a6e55]/12",
                       )}
                     >
                       {chip}
@@ -253,7 +253,7 @@ export function LiveChat() {
               <span className="ml-px inline-block h-[1.05em] w-[1.5px] translate-y-[2px] animate-pulse bg-[#1fa855]" />
             </span>
           ) : (
-            <span className="text-[#99a]">Message</span>
+            <span className="text-[#6b6b78]">Message</span>
           )}
         </div>
         <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#1fa855] text-white">

@@ -35,9 +35,9 @@ Progress is logged in [PROGRESS.md](PROGRESS.md).
 - [x] Demo fixes: gym hero brand, salon hero street, biryani photo, empty menu cards, seekh kebab, falls card, yoga → training, makeup photo, unused photos
 - [x] Demo businesses spread across cities; `city` in personalised links; WhatsApp message without a hard-coded city
 - [x] SEO: titles, descriptions, structured data (service area India, Bengaluru address), share images
-- [ ] Try-it studio: Laptop / Phone switch
-- [ ] Phone first screen: show the device under the headline
-- [ ] Share images with laptop + phone
+- [x] Try-it studio: Laptop / Phone switch
+- [x] Phone first screen: show the device under the headline
+- [x] Share images with laptop + phone
 
 ### Next
 - [ ] Work gallery with laptop + phone pairs; new demos (startup landing page, SaaS web app, AI tool)

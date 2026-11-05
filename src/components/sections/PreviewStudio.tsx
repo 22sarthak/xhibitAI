@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from "motion/react";
+import { Laptop, Smartphone } from "lucide-react";
 import { useState } from "react";
 import { curtainFor, industries, industryBySlug, type IndustrySlug } from "../../content/industries";
 import { prefetchDemo } from "../../demos/registry";
 import { track } from "../../lib/api";
+import { useMediaQuery } from "../../lib/hooks";
 import { ease } from "../../lib/motion";
 import { usePersonalization } from "../../lib/personalization";
 import { cn } from "../../lib/utils";
@@ -31,6 +33,11 @@ export function PreviewStudio() {
   const industry = industryBySlug(slug)!;
   const who = name.trim() || "my business";
   const demoUrl = `/for/${slug}${name.trim() ? `?name=${encodeURIComponent(name.trim())}` : ""}`;
+  // Laptop by default on big screens, phone on small ones, until the visitor picks.
+  const wide = useMediaQuery("(min-width: 1024px)");
+  const [picked, setPicked] = useState<"phone" | "laptop" | null>(null);
+  const mode = picked ?? (wide ? "laptop" : "phone");
+  const laptop = mode === "laptop";
 
   return (
     <section id="industries" aria-labelledby="studio-title" className="relative scroll-mt-4 px-2 sm:px-3">
@@ -46,7 +53,7 @@ export function PreviewStudio() {
             <RevealHeading id="studio-title" text="See your business online — in *five seconds*." className="mt-6 text-display" />
             <Reveal delay={0.1}>
               <p className="mt-5 max-w-[32rem] text-lead text-ink-soft">
-                Type your business name, pick what you do, and watch your website appear. It's live — tap around inside the phone.
+                Type your business name, pick what you do, and watch your website appear on a laptop or a phone. It's live, so click around.
               </p>
             </Reveal>
 
@@ -119,21 +126,48 @@ export function PreviewStudio() {
           </div>
 
           {/* Device */}
-          <div className="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
+          <div className={cn("lg:row-span-2 lg:row-start-1", laptop ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-5 lg:col-start-8")}>
             <div className="lg:sticky lg:top-24">
-              <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-[21.5rem]">
+              <div role="radiogroup" aria-label="Preview on" className="mx-auto mb-6 flex w-fit gap-1 rounded-full bg-linen/80 p-1 ring-1 ring-ink/[0.07]">
+                {(
+                  [
+                    ["laptop", "Laptop", Laptop],
+                    ["phone", "Phone", Smartphone],
+                  ] as const
+                ).map(([value, label, Icon]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    role="radio"
+                    aria-checked={mode === value}
+                    onClick={() => {
+                      setPicked(value);
+                      track("studio_device", { device: value });
+                    }}
+                    className={cn(
+                      "relative flex items-center gap-2 rounded-full px-4 py-2 text-[0.875rem] font-semibold transition-colors",
+                      mode === value ? "text-ivory" : "text-ink-soft hover:text-ink",
+                    )}
+                  >
+                    {mode === value && <motion.span layoutId="studio-device" className="absolute inset-0 rounded-full bg-ink" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+                    <Icon className="relative size-4" strokeWidth={1.8} aria-hidden="true" />
+                    <span className="relative">{label}</span>
+                  </button>
+                ))}
+              </div>
+              <div className={cn("relative mx-auto w-full", laptop ? "max-w-[46rem]" : "max-w-[20rem] sm:max-w-[21.5rem]")}>
                 <AnimatePresence mode="popLayout" initial={false}>
                   <motion.div
-                    key={slug}
-                    initial={{ opacity: 0, y: 30, rotate: 2.5, scale: 0.96 }}
+                    key={`${slug}-${mode}`}
+                    initial={{ opacity: 0, y: 30, rotate: laptop ? 0 : 2.5, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, rotate: -2.5, scale: 0.96 }}
+                    exit={{ opacity: 0, y: -20, rotate: laptop ? 0 : -2.5, scale: 0.96 }}
                     transition={{ duration: 0.65, ease }}
                   >
-                    <DemoDevice industry={industry} name={name} />
+                    <DemoDevice industry={industry} name={name} mode={mode} />
                   </motion.div>
                 </AnimatePresence>
-                <p className="mt-6 text-center text-[0.8125rem] font-medium text-ink-soft">It's live: tap, scroll and try things.</p>
+                <p className="mt-6 text-center text-[0.8125rem] font-medium text-ink-soft">{laptop ? "It's live: scroll, click and try things." : "It's live: tap, scroll and try things."}</p>
               </div>
             </div>
           </div>

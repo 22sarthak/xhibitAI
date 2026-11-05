@@ -148,7 +148,7 @@ export function Hero() {
           <div className="absolute inset-0 bg-linear-to-b from-ivory/70 via-ivory/20 to-transparent lg:bg-linear-to-r lg:from-ivory/75 lg:via-ivory/25 lg:to-transparent" />
         </div>
 
-        <div className="container-x relative grid flex-1 items-center gap-10 pb-10 pt-28 sm:pt-32 lg:grid-cols-12 lg:gap-6 lg:pb-16 lg:pt-28 lg:[@media(max-height:820px)]:pb-10 lg:[@media(max-height:820px)]:pt-24">
+        <div className="container-x relative grid flex-1 items-center gap-7 pb-10 pt-24 sm:gap-10 sm:pt-32 lg:grid-cols-12 lg:gap-6 lg:pb-16 lg:pt-28 lg:[@media(max-height:820px)]:pb-10 lg:[@media(max-height:820px)]:pt-24">
           {/* Copy */}
           <div className="lg:col-span-7">
             <motion.p
@@ -161,7 +161,7 @@ export function Hero() {
               Websites · Web apps · AI tools
             </motion.p>
 
-            <h1 id="hero-title" className="mt-7 text-hero text-ink">
+            <h1 id="hero-title" className="mt-5 text-hero text-ink sm:mt-7">
               <span className="sr-only">
                 Your business, made to be seen. Websites, web apps and AI tools for restaurants, clinics, schools, salons, gyms, hotels, shops and startups.
               </span>
@@ -204,7 +204,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.75 }}
-              className="mt-7 max-w-[34rem] text-lead text-ink-soft"
+              className="mt-5 max-w-[34rem] text-lead text-ink-soft sm:mt-7"
             >
               We design and build websites, web apps and AI tools around your idea — so customers can{" "}
               <span className="text-ink">find you, trust you and reach you in one tap.</span>
@@ -214,7 +214,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.9 }}
-              className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+              className="mt-7 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:items-center sm:gap-3"
             >
               <Magnetic>
                 <ButtonLink
@@ -238,11 +238,11 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease, delay: 1.1 }}
-                className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[0.875rem] text-ink-soft"
+                className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 text-[0.8125rem] text-ink-soft sm:mt-8 sm:gap-x-6 sm:gap-y-2 sm:text-[0.875rem]"
                 aria-label="Our promises"
               >
                 {trust.map((t) => (
-                  <li key={t} className="flex items-center gap-2">
+                  <li key={t} className="flex items-center gap-1.5 sm:gap-2">
                     <svg viewBox="0 0 16 16" className="size-4 text-sal" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -304,7 +304,7 @@ export function Hero() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="absolute -bottom-20 -right-20 hidden xl:block xl:[@media(max-height:780px)]:hidden">
+            <div className="absolute -bottom-24 -right-24 hidden xl:block xl:[@media(max-height:780px)]:hidden">
               <RotatingBadge />
             </div>
           </motion.div>
