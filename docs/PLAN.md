@@ -40,7 +40,7 @@ Progress is logged in [PROGRESS.md](PROGRESS.md).
 - [x] Share images with laptop + phone
 
 ### Next
-- [ ] Work gallery with laptop + phone pairs; new demos (startup landing page, SaaS web app, AI tool)
+- [x] Work gallery with laptop + phone pairs; new demos (startup landing page, SaaS web app, AI tool)
 - [x] Service pages: Websites, Landing pages, Web apps, Online stores, AI & automation
 - [ ] Product process (discovery → prototype → weekly builds → launch)
 - [x] Contact form: "What do you want to build?", budget range, city

@@ -4,6 +4,7 @@ import { LogoMark } from "../components/brand/Logo";
 import { DemoDevice } from "../components/device/DemoDevice";
 import { LiveChat, LiveNotifications } from "../components/sections/LiveVisuals";
 import { baseSilk, industries, industryBySlug } from "../content/industries";
+import { demoSpec } from "../content/showcase";
 import { serviceBySlug } from "../content/services";
 
 /**
@@ -13,9 +14,10 @@ import { serviceBySlug } from "../content/services";
 export default function OgCard() {
   const { slug } = useParams();
   const service = slug?.startsWith("service-") ? serviceBySlug(slug.slice("service-".length)) : undefined;
-  const industry = industryBySlug(service ? (service.demo ?? "clinics") : slug) ?? industries[0];
+  const industry = industryBySlug(service ? service.demo : slug) ?? industries[0];
+  const device = service?.demo ? demoSpec(service.demo) : industry;
   const isHome = slug === "home";
-  const silk = isHome || (service && !service.demo) ? baseSilk : industry.theme.silk;
+  const silk = isHome || (service && !industryBySlug(service.demo)) ? baseSilk : industry.theme.silk;
 
   useEffect(() => {
     document.documentElement.style.background = "#f5f5f2";
@@ -77,10 +79,10 @@ export default function OgCard() {
         <>
           {/* MacBook bleeding off the right edge, iPhone in front of it */}
           <div className="absolute right-[-150px] top-[120px] w-[760px] drop-shadow-[0_30px_40px_rgb(0_0_0/0.18)]">
-            <DemoDevice industry={industry} mode="laptop" interactive={false} />
+            <DemoDevice industry={device} mode="laptop" interactive={false} />
           </div>
           <div className="absolute bottom-[-150px] left-[600px] w-[210px] rotate-[-4deg] drop-shadow-[0_24px_30px_rgb(0_0_0/0.28)]">
-            <DemoDevice industry={industry} mode="phone" interactive={false} />
+            <DemoDevice industry={device} mode="phone" interactive={false} />
           </div>
         </>
       )}

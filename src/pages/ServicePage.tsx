@@ -14,6 +14,7 @@ import { Reveal, RevealHeading } from "../components/ui/Reveal";
 import { steps } from "../content/home";
 import { curtainFor, industryBySlug } from "../content/industries";
 import { curtainForService, serviceBySlug, services, type Service } from "../content/services";
+import { demoSpec } from "../content/showcase";
 import { prefetchDemo } from "../demos/registry";
 import { track } from "../lib/api";
 import { useMediaQuery } from "../lib/hooks";
@@ -293,7 +294,7 @@ function ServiceView({ service }: { service: Service }) {
 
 /** The service's live demo on a MacBook, with the same site on an iPhone in front. */
 function DevicePair({ service }: { service: Service }) {
-  const industry = industryBySlug(service.demo!)!;
+  const industry = demoSpec(service.demo!);
   const wide = useMediaQuery("(min-width: 1024px)");
   const { name } = usePersonalization();
   return (

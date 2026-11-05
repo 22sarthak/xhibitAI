@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import type { CurtainSpec } from "../lib/transition";
 import type { IndustrySlug } from "./industries";
+import type { DemoSlug } from "./showcase";
 import { serviceMeta, type ServiceSlug } from "./service-meta";
 
 export type { ServiceSlug };
@@ -52,7 +53,7 @@ export interface Service {
   soft: string;
   deep: string;
   /** Which live demo plays on the laptop + phone. Omitted for AI, which shows the live chat. */
-  demo?: IndustrySlug;
+  demo?: DemoSlug;
   /** Short note under the devices. */
   demoNote: string;
   features: { icon: LucideIcon; title: string; text: string }[];
@@ -112,8 +113,8 @@ export const services: Service[] = [
     accent: "text-rose-deep",
     soft: "#fbe2ea",
     deep: "#b4245a",
-    demo: "salons",
-    demoNote: "A live single-page site with one clear action: book. Try it.",
+    demo: "startup",
+    demoNote: "A live launch page for a startup, with a working waitlist. Try joining it.",
     features: [
       { icon: Target, title: "Built for one action", text: "Every section leads to one button: book, buy, sign up or WhatsApp." },
       { icon: PenLine, title: "Words that persuade", text: "Clear headlines and short sections, written with you in plain language." },
@@ -123,7 +124,7 @@ export const services: Service[] = [
       { icon: FlaskConical, title: "Test and improve", text: "Try two headlines or offers side by side and keep the one that works better." },
     ],
     goodFor: ["Product launches", "Startup waitlists", "Events & workshops", "Festive offers", "Ad campaigns", "Courses & coaching", "Real estate projects", "New branches"],
-    related: ["salons", "gyms", "hotels"],
+    related: ["salons", "gyms", "hotels", "restaurants"],
     faqs: [
       {
         q: "How is a landing page different from a website?",

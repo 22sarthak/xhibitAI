@@ -57,4 +57,13 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - Landing pages use the salon demo for now; it gets swapped once the startup landing page demo exists.
 - Build passes; accessibility audit: 0 violations on home, all five service pages and /for/restaurants.
 
-Next up: new demos (startup landing page, SaaS web app, AI tool).
+**New demos for founders** (made-up brands, not tied to an industry page; listed in `src/content/showcase.ts`)
+- **ShiftSaathi landing page** (`src/demos/startup/`): a startup's launch page for shift, attendance and salary software, with a working waitlist form (validates the number, shows a place in line), product preview, features, how it works, FAQ.
+- **ShiftSaathi web app** (`src/demos/saas/`): the product itself: today's attendance with live check-ins and a WhatsApp reminder, an editable weekly roster (tap a shift to change it), leave approvals, and payroll with a "pay everyone by UPI" flow.
+- **Likho AI tool** (`src/demos/aitool/`): writes a product title, description, highlights and Instagram caption in English, Hindi or Hinglish, with three example products and word-by-word "writing" output. Text is pre-written, so it works offline and never says anything unexpected.
+- All three work on laptop and phone. "Our work" tabs are now: Website, Landing page, SaaS app, AI tool, Web app, Online store (hotel tab dropped to keep one row). For the new demos the button under the laptop links to the matching service page.
+- The Landing pages service page and its share image now use the ShiftSaathi launch page instead of the salon.
+- Dev-only page `/dev/demo/<slug>?mode=phone|laptop` renders any demo full size for screenshots; it isn't in the production build.
+- Build passes; accessibility audit 0 violations on home, landing pages and web apps service pages.
+
+Next up: logo (waiting on the founders' pick), product process for bigger projects.

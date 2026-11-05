@@ -1,12 +1,12 @@
 import { lazy, type ComponentType } from "react";
 import type { Chrome } from "../components/device/frames";
-import type { IndustrySlug } from "../content/industry-meta";
+import type { DemoSlug } from "../content/showcase";
 import type { DemoProps } from "./kit";
 
 type Loader = () => Promise<{ default: ComponentType<DemoProps> }>;
 
 /** Each demo website is its own lazy chunk (with its own fonts and photos). */
-export const demoLoaders: Record<IndustrySlug, Loader> = {
+export const demoLoaders: Record<DemoSlug, Loader> = {
   restaurants: () => import("./restaurant/RestaurantSite"),
   clinics: () => import("./clinic/ClinicSite"),
   schools: () => import("./school/SchoolSite"),
@@ -15,14 +15,17 @@ export const demoLoaders: Record<IndustrySlug, Loader> = {
   hotels: () => import("./hotel/HotelSite"),
   retail: () => import("./retail/RetailSite"),
   business: () => import("./business/BusinessApp"),
+  startup: () => import("./startup/StartupLanding"),
+  saas: () => import("./saas/SaasApp"),
+  aitool: () => import("./aitool/AiTool"),
 };
 
 export const demoComponents = Object.fromEntries(
   Object.entries(demoLoaders).map(([slug, loader]) => [slug, lazy(loader)]),
-) as unknown as Record<IndustrySlug, ComponentType<DemoProps>>;
+) as unknown as Record<DemoSlug, ComponentType<DemoProps>>;
 
 /** Status bar / browser colours that match each demo's header. */
-export const demoChrome: Record<IndustrySlug, Chrome> = {
+export const demoChrome: Record<DemoSlug, Chrome> = {
   restaurants: { bar: "#4e1512", tone: "light" },
   clinics: { bar: "#ffffff", tone: "dark" },
   schools: { bar: "#13213f", tone: "light" },
@@ -31,10 +34,13 @@ export const demoChrome: Record<IndustrySlug, Chrome> = {
   hotels: { bar: "#f8f4ec", tone: "dark" },
   retail: { bar: "#22305b", tone: "light" },
   business: { bar: "#ffffff", tone: "dark" },
+  startup: { bar: "#fffdf6", tone: "dark" },
+  saas: { bar: "#ffffff", tone: "dark" },
+  aitool: { bar: "#ffffff", tone: "dark" },
 };
 
 /** The first photo each demo shows, preloaded with its code so the phone never flashes an empty hero. */
-const heroPhoto: Partial<Record<IndustrySlug, string>> = {
+const heroPhoto: Partial<Record<DemoSlug, string>> = {
   restaurants: "/demos/restaurants/hero.webp",
   clinics: "/demos/clinics/hero.webp",
   schools: "/demos/schools/hero.webp",
@@ -45,7 +51,7 @@ const heroPhoto: Partial<Record<IndustrySlug, string>> = {
 };
 
 const prefetched = new Set<string>();
-export function prefetchDemo(slug: IndustrySlug) {
+export function prefetchDemo(slug: DemoSlug) {
   if (prefetched.has(slug)) return;
   prefetched.add(slug);
   void demoLoaders[slug]().catch(() => prefetched.delete(slug));

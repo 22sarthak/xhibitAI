@@ -1,5 +1,5 @@
 import { Suspense, type Ref } from "react";
-import type { Industry } from "../../content/industries";
+import type { DemoSpec } from "../../content/showcase";
 import { demoChrome, demoComponents } from "../../demos/registry";
 import { toDomain } from "../../lib/utils";
 import { DeviceScreen, type DeviceApi } from "./DeviceScreen";
@@ -28,7 +28,7 @@ export function DemoDevice({
   apiRef,
   className,
 }: {
-  industry: Industry;
+  industry: DemoSpec;
   name?: string;
   area?: string;
   city?: string;

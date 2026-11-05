@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { curtainFor, industryBySlug, type IndustrySlug } from "../../content/industries";
+import { curtainFor, industryBySlug } from "../../content/industries";
+import { curtainForService, serviceBySlug } from "../../content/services";
+import { demoSpec, showcaseBySlug, type DemoSlug } from "../../content/showcase";
 import { prefetchDemo } from "../../demos/registry";
 import { track } from "../../lib/api";
 import { useMediaQuery } from "../../lib/hooks";
@@ -12,12 +14,13 @@ import { Eyebrow } from "../ui/Eyebrow";
 import { Reveal, RevealHeading } from "../ui/Reveal";
 
 /** The projects shown on the laptop, each labelled by what kind of product it is. */
-const PROJECTS: { slug: IndustrySlug; kind: string }[] = [
+const PROJECTS: { slug: DemoSlug; kind: string }[] = [
   { slug: "restaurants", kind: "Website" },
+  { slug: "startup", kind: "Landing page" },
+  { slug: "saas", kind: "SaaS app" },
+  { slug: "aitool", kind: "AI tool" },
   { slug: "business", kind: "Web app" },
   { slug: "retail", kind: "Online store" },
-  { slug: "hotels", kind: "Booking site" },
-  { slug: "schools", kind: "Portal" },
 ];
 
 export function Work() {
@@ -26,7 +29,10 @@ export function Work() {
   const ref = useRef<HTMLDivElement>(null);
   const wide = useMediaQuery("(min-width: 1024px)");
   const project = PROJECTS[index];
-  const industry = industryBySlug(project.slug)!;
+  const industry = demoSpec(project.slug);
+  const page = industryBySlug(project.slug);
+  const product = showcaseBySlug(project.slug);
+  const service = product ? serviceBySlug(product.service) : undefined;
 
   // Build the live demos only when the section is about to be seen.
   useEffect(() => {
@@ -47,14 +53,14 @@ export function Work() {
           </div>
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.1}>
             <p className="text-lead text-ink-soft">
-              Websites, web apps and stores we've built to show what's possible. They're live: scroll and click around inside the laptop.
+              Websites, landing pages, web apps and AI tools we've built to show what's possible. They're live: scroll and click around inside the laptop.
             </p>
           </Reveal>
         </div>
 
         <div role="tablist" aria-label="Choose a project" className="no-scrollbar -mx-5 mt-10 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {PROJECTS.map((p, i) => {
-            const ind = industryBySlug(p.slug)!;
+            const ind = demoSpec(p.slug);
             const selected = i === index;
             return (
               <button
@@ -105,9 +111,17 @@ export function Work() {
           <p className="text-[0.9rem] text-ink-soft">
             <span className="font-semibold text-ink">{industry.demo.name}</span> · {project.kind} · {industry.demo.area}, {industry.demo.city}
           </p>
-          <ButtonRoute to={`/for/${project.slug}`} curtain={curtainFor(industry)} onIntent={() => prefetchDemo(project.slug)} variant="secondary" arrow>
-            Open the full demo
-          </ButtonRoute>
+          {page ? (
+            <ButtonRoute to={`/for/${page.slug}`} curtain={curtainFor(page)} onIntent={() => prefetchDemo(page.slug)} variant="secondary" arrow>
+              Open the full demo
+            </ButtonRoute>
+          ) : (
+            service && (
+              <ButtonRoute to={`/services/${service.slug}`} curtain={curtainForService(service)} variant="secondary" arrow>
+                More about {service.short.toLowerCase()}
+              </ButtonRoute>
+            )
+          )}
         </div>
       </div>
     </section>

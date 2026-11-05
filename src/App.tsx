@@ -15,15 +15,17 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 // Dev-only route used by `npm run og` to render social share images.
 const OgCard = import.meta.env.DEV ? lazy(() => import("./pages/OgCard")) : null;
+const DemoPreview = import.meta.env.DEV ? lazy(() => import("./pages/DemoPreview")) : null;
 
 function Shell() {
   const location = useLocation();
 
-  if (OgCard && location.pathname.startsWith("/og/")) {
+  if (OgCard && DemoPreview && (location.pathname.startsWith("/og/") || location.pathname.startsWith("/dev/"))) {
     return (
       <Suspense fallback={null}>
         <Routes>
           <Route path="/og/:slug" element={<OgCard />} />
+          <Route path="/dev/demo/:slug" element={<DemoPreview />} />
         </Routes>
       </Suspense>
     );
