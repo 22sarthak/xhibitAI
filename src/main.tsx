@@ -1,5 +1,6 @@
-import "@fontsource-variable/fraunces/opsz.css";
-import "@fontsource-variable/fraunces/opsz-italic.css";
+import "@fontsource/redaction/400.css";
+import "@fontsource/redaction/400-italic.css";
+import "@fontsource/redaction/700.css";
 import "@fontsource-variable/plus-jakarta-sans/wght.css";
 import "./index.css";
 

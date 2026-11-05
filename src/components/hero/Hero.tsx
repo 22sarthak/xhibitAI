@@ -12,7 +12,6 @@ import { waHref, waMessage } from "../../lib/whatsapp";
 import { DeviceScreen } from "../device/DeviceScreen";
 import { PHONE, PhoneFrame } from "../device/frames";
 import { Scaled } from "../device/Scaled";
-import { LogoMark } from "../brand/Logo";
 import { Button, ButtonLink } from "../ui/Button";
 import { WhatsAppDisc } from "../ui/icons";
 import { Magnetic } from "../ui/Magnetic";
@@ -70,7 +69,7 @@ function RotatingWord({ word, color }: { word: string; color: string }) {
           exit={{ y: "-45%", opacity: 0, filter: "blur(10px)" }}
           transition={{ duration: 0.8, ease }}
         >
-          {word}.
+          {word},
         </motion.span>
       </AnimatePresence>
     </span>
@@ -78,7 +77,7 @@ function RotatingWord({ word, color }: { word: string; color: string }) {
 }
 
 function RotatingBadge() {
-  const text = `MADE IN ${site.brand.city.toUpperCase()} • WEBSITES • APPS • AI • `;
+  const text = "MADE WITH YOU • MADE TO BE SEEN • ";
   return (
     <div className="relative size-[118px]" aria-hidden="true">
       <motion.svg
@@ -94,8 +93,8 @@ function RotatingBadge() {
           <textPath href="#badge-circle">{text}</textPath>
         </text>
       </motion.svg>
-      <div className="absolute inset-[30px] grid place-items-center rounded-full bg-ivory/90 shadow-soft backdrop-blur">
-        <LogoMark className="size-8" />
+      <div className="absolute inset-[30px] grid place-items-center rounded-full bg-linen shadow-soft">
+        <span className="font-display text-[1.65rem] italic leading-none text-ink">X</span>
       </div>
     </div>
   );
@@ -122,11 +121,10 @@ export function Hero() {
 
   const useWebgl = desktopFx && !reduced && webgl !== "failed";
   const trust = [
-    site.promises.freeDesignPreview && "Free design preview",
-    site.promises.liveInDays > 0 && `Live in ${site.promises.liveInDays} days`,
-    site.promises.inPersonVisits && `We visit you in ${site.brand.city}`,
+    site.promises.freeDesignPreview && "See your design before you pay",
+    "Live in days, not months",
+    site.promises.whatsappReplyHours > 0 && `Replies within ${site.promises.whatsappReplyHours} hours`,
   ].filter(Boolean) as string[];
-  const spotsLeft = site.foundingOffer.spots - site.foundingOffer.spotsTaken;
 
   return (
     <section ref={ref} id="top" aria-labelledby="hero-title" className="relative p-2 sm:p-3">
@@ -153,36 +151,19 @@ export function Hero() {
         <div className="container-x relative grid flex-1 items-center gap-10 pb-10 pt-28 sm:pt-32 lg:grid-cols-12 lg:gap-6 lg:pb-16 lg:pt-28 lg:[@media(max-height:820px)]:pb-10 lg:[@media(max-height:820px)]:pt-24">
           {/* Copy */}
           <div className="lg:col-span-7">
-            {site.foundingOffer.enabled && spotsLeft > 0 && (
-              <motion.a
-                href="#pricing"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo("#pricing");
-                }}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 0.15 }}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-linen/75 py-1.5 pl-2 pr-4 text-[0.8125rem] font-medium text-ink ring-1 ring-ink/10 backdrop-blur-md transition-colors hover:bg-linen"
-              >
-                <span className="whitespace-nowrap rounded-full bg-ink px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.08em] text-ivory">
-                  Founding offer
-                </span>
-                <span className="whitespace-nowrap">
-                  <span className="sm:hidden">{site.foundingOffer.perk.split(" ")[0]} off · first {site.foundingOffer.spots} clients</span>
-                  <span className="max-sm:hidden">
-                    {site.foundingOffer.perk.split(" and ")[0]} for our first {site.foundingOffer.spots} clients
-                  </span>
-                </span>
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
-              </motion.a>
-            )}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.15 }}
+              className="eyebrow"
+            >
+              <span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />
+              Websites · Web apps · AI tools
+            </motion.p>
 
-            <h1 id="hero-title" className="mt-6 text-hero text-ink">
+            <h1 id="hero-title" className="mt-7 text-hero text-ink">
               <span className="sr-only">
-                Let {site.brand.city} find your business — websites, apps and AI for restaurants, clinics, schools, salons, gyms, hotels and shops.
+                Your business, made to be seen. Websites, web apps and AI tools for restaurants, clinics, schools, salons, gyms, hotels, shops and startups.
               </span>
               <motion.span
                 aria-hidden="true"
@@ -191,7 +172,22 @@ export function Hero() {
                 animate="show"
                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.25 } } }}
               >
-                {["Let", site.brand.city, "find"].map((w) => (
+                <span className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-top">
+                  <motion.span
+                    className="inline-block"
+                    variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 1.1, ease } } }}
+                  >
+                    Your&nbsp;
+                  </motion.span>
+                </span>
+                <motion.span
+                  className="inline-block"
+                  variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 1.1, ease } } }}
+                >
+                  <RotatingWord word={industry.word} color={WORD_COLOR[industry.slug]} />
+                </motion.span>
+                <br />
+                {["made", "to", "be", "seen."].map((w) => (
                   <span key={w} className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-top">
                     <motion.span
                       className="inline-block"
@@ -201,22 +197,6 @@ export function Hero() {
                     </motion.span>
                   </span>
                 ))}
-                <br className="max-sm:hidden" />
-                <span className="-mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-top">
-                  <motion.span
-                    className="inline-block"
-                    variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 1.1, ease } } }}
-                  >
-                    your&nbsp;
-                  </motion.span>
-                </span>
-                <br className="sm:hidden" />
-                <motion.span
-                  className="inline-block"
-                  variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 1.1, ease } } }}
-                >
-                  <RotatingWord word={industry.word} color={WORD_COLOR[industry.slug]} />
-                </motion.span>
               </motion.span>
             </h1>
 
@@ -226,7 +206,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease, delay: 0.75 }}
               className="mt-7 max-w-[34rem] text-lead text-ink-soft"
             >
-              We build beautiful websites, booking apps and WhatsApp assistants for local businesses — so new customers can{" "}
+              We design and build websites, web apps and AI tools around your idea — so customers can{" "}
               <span className="text-ink">find you, trust you and reach you in one tap.</span>
             </motion.p>
 
@@ -241,9 +221,9 @@ export function Hero() {
                   href={waHref(waMessage({ businessName: name }))}
                   external
                   size="lg"
-                  icon={<WhatsAppDisc className="-ml-3 size-9" />}
+                  icon={<WhatsAppDisc />}
                   onClick={() => track("whatsapp_click", { location: "hero" })}
-                  className="w-full pl-3 sm:w-auto"
+                  className="w-full sm:w-auto"
                 >
                   Chat on WhatsApp
                 </ButtonLink>
@@ -295,7 +275,7 @@ export function Hero() {
                     >
                       <DeviceScreen interactive={false} label="" autoScroll>
                         <Suspense fallback={<div className="h-full" style={{ background: demoChrome[industry.slug].bar }} />}>
-                          <Site name={name.trim() || industry.demo.name} area={industry.demo.area} />
+                          <Site name={name.trim() || industry.demo.name} area={industry.demo.area} city={industry.demo.city} />
                         </Suspense>
                       </DeviceScreen>
                     </motion.div>
@@ -324,7 +304,7 @@ export function Hero() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="absolute -bottom-6 -right-2 hidden sm:block lg:-right-10">
+            <div className="absolute -bottom-20 -right-20 hidden xl:block xl:[@media(max-height:780px)]:hidden">
               <RotatingBadge />
             </div>
           </motion.div>

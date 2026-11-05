@@ -20,7 +20,7 @@ import { usePersonalization } from "../lib/personalization";
 import { useSeo } from "../lib/seo";
 import { useSmoothScroll } from "../lib/smooth-scroll";
 import { HOME_CURTAIN, TLink, useRouteReady } from "../lib/transition";
-import { cn, inr, toDomain } from "../lib/utils";
+import { cn, toDomain } from "../lib/utils";
 import { waHref, waMessage } from "../lib/whatsapp";
 import NotFound from "./NotFound";
 
@@ -34,7 +34,7 @@ export default function IndustryPage() {
 function IndustryView({ industry }: { industry: Industry }) {
   useRouteReady();
   useSeo({ title: industry.seoTitle, description: industry.seoDescription, path: `/for/${industry.slug}`, image: `/og/${industry.slug}.jpg` });
-  const { name, setName, area, setArea } = usePersonalization();
+  const { name, setName, area, setArea, city, setCity } = usePersonalization();
   const { scrollTo } = useSmoothScroll();
   const [, setSearchParams] = useSearchParams();
   const deviceRef = useRef<DeviceApi>(null);
@@ -54,10 +54,11 @@ function IndustryView({ industry }: { industry: Industry }) {
       const p: Record<string, string> = {};
       if (name.trim()) p.name = name.trim();
       if (area.trim()) p.area = area.trim();
+      if (city.trim()) p.city = city.trim();
       setSearchParams(p, { replace: true, preventScrollReset: true });
     }, 450);
     return () => window.clearTimeout(t);
-  }, [name, area, setSearchParams]);
+  }, [name, area, city, setSearchParams]);
 
   const goFeature = (i: number, fromScroll = false) => {
     setActive(i);
@@ -69,6 +70,7 @@ function IndustryView({ industry }: { industry: Industry }) {
     const u = new URL(`${site.brand.url}/for/${industry.slug}`);
     if (name.trim()) u.searchParams.set("name", name.trim());
     if (area.trim()) u.searchParams.set("area", area.trim());
+    if (city.trim()) u.searchParams.set("city", city.trim());
     return u.toString();
   };
 
@@ -83,14 +85,13 @@ function IndustryView({ industry }: { industry: Industry }) {
     }
   };
 
-  const plan = site.pricing.plans.find((p) => p.id === industry.plan)!;
   const others = industries.filter((i) => i.slug !== industry.slug);
 
   return (
     <article style={{ ["--tint" as string]: industry.theme.tint }}>
       {/* ── Hero + feature tour with a sticky live phone ── */}
       <section aria-labelledby="industry-title" className="relative p-2 sm:p-3">
-        <div className="grain relative overflow-clip rounded-[28px] sm:rounded-[36px] lg:rounded-[44px]" style={{ background: `linear-gradient(160deg, ${industry.theme.tint} 0%, #fbf7f0 70%)` }}>
+        <div className="grain relative overflow-clip rounded-[28px] sm:rounded-[36px] lg:rounded-[44px]" style={{ background: `linear-gradient(160deg, ${industry.theme.tint} 0%, #f5f5f2 70%)` }}>
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -right-40 -top-40 size-[44rem] rounded-full opacity-60 blur-3xl"
@@ -122,7 +123,7 @@ function IndustryView({ industry }: { industry: Industry }) {
                 className="mt-9 rounded-[26px] bg-linen/85 p-5 shadow-soft ring-1 ring-ink/[0.06] backdrop-blur sm:p-6"
               >
                 <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">Make it yours</p>
-                <div className="mt-3 grid gap-3 sm:grid-cols-[1.4fr_1fr]">
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <label className="block">
                     <span className="sr-only">Your {industry.kind.toLowerCase()}'s name</span>
                     <input
@@ -131,19 +132,31 @@ function IndustryView({ industry }: { industry: Industry }) {
                       placeholder={industry.kind === "Business" ? "Your business name" : `Your ${industry.kind.toLowerCase()}'s name`}
                       maxLength={40}
                       autoComplete="organization"
-                      className="h-14 w-full rounded-2xl bg-white px-4 font-display text-[1.3rem] ring-1 ring-ink/10 placeholder:text-ink-mute/60 focus:outline-none focus:ring-2 focus:ring-clay"
+                      className="h-14 w-full rounded-2xl bg-white px-4 font-display text-[1.3rem] ring-1 ring-ink/10 placeholder:text-ink-mute/60 focus:outline-none focus:ring-2 focus:ring-cobalt"
                     />
                   </label>
-                  <label className="block">
-                    <span className="sr-only">Area in {site.brand.city}</span>
-                    <input
-                      value={area}
-                      onChange={(e) => setArea(e.target.value)}
-                      placeholder={`Area, e.g. ${industry.demo.area}`}
-                      maxLength={30}
-                      className="h-14 w-full rounded-2xl bg-white px-4 text-[1rem] ring-1 ring-ink/10 placeholder:text-ink-mute/70 focus:outline-none focus:ring-2 focus:ring-clay"
-                    />
-                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="block">
+                      <span className="sr-only">Area</span>
+                      <input
+                        value={area}
+                        onChange={(e) => setArea(e.target.value)}
+                        placeholder={`Area, e.g. ${industry.demo.area}`}
+                        maxLength={30}
+                        className="h-14 w-full min-w-0 rounded-2xl bg-white px-4 text-[1rem] ring-1 ring-ink/10 placeholder:text-ink-mute/70 focus:outline-none focus:ring-2 focus:ring-cobalt"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="sr-only">City</span>
+                      <input
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder={`City, e.g. ${industry.demo.city}`}
+                        maxLength={30}
+                        className="h-14 w-full min-w-0 rounded-2xl bg-white px-4 text-[1rem] ring-1 ring-ink/10 placeholder:text-ink-mute/70 focus:outline-none focus:ring-2 focus:ring-cobalt"
+                      />
+                    </label>
+                  </div>
                 </div>
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-[0.8125rem] text-ink-soft">
                   <span className="flex items-center gap-2">
@@ -166,8 +179,7 @@ function IndustryView({ industry }: { industry: Industry }) {
                   href={waHref(waMessage({ kind: industry.kind, businessName: name }))}
                   external
                   size="lg"
-                  icon={<WhatsAppDisc className="-ml-3 size-9" />}
-                  className="pl-3"
+                  icon={<WhatsAppDisc />}
                   onClick={() => track("whatsapp_click", { location: "industry_hero", industry: industry.slug })}
                 >
                   Get this for {name.trim() && name.trim().length <= 20 ? name.trim() : `my ${industry.kind.toLowerCase()}`}
@@ -182,7 +194,7 @@ function IndustryView({ industry }: { industry: Industry }) {
                     scrollTo("#plan");
                   }}
                 >
-                  See the price
+                  What you get
                 </ButtonLink>
               </motion.div>
 
@@ -207,7 +219,7 @@ function IndustryView({ industry }: { industry: Industry }) {
                   onPointerDown={() => (lastTouch.current = Date.now())}
                   onWheel={() => (lastTouch.current = Date.now())}
                 >
-                  <DemoDevice industry={industry} name={name} area={area} apiRef={deviceRef} />
+                  <DemoDevice industry={industry} name={name} area={area} city={city} apiRef={deviceRef} />
                 </motion.div>
                 <div className="no-scrollbar -mx-5 mt-6 flex gap-2 overflow-x-auto px-5 lg:hidden" aria-label="Jump to a feature">
                   {industry.features.map((f, i) => (
@@ -234,7 +246,7 @@ function IndustryView({ industry }: { industry: Industry }) {
       </section>
 
       {/* ── The same site on a big screen ── */}
-      <BigScreen industry={industry} name={name} area={area} />
+      <BigScreen industry={industry} name={name} area={area} city={city} />
 
       {/* ── Features (phones get the full list here) ── */}
       <section className="container-x pb-4 lg:hidden" aria-label="What's included">
@@ -313,51 +325,36 @@ function IndustryView({ industry }: { industry: Industry }) {
       <section id="plan" aria-labelledby="plan-title" className="section-y scroll-mt-24">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <Eyebrow>Recommended for you</Eyebrow>
+            <Eyebrow>What you get</Eyebrow>
             <Reveal className="mt-6">
-              <div className="rounded-[30px] bg-ink p-7 text-ivory shadow-[0_40px_80px_-30px_rgb(29_26_22/0.6)] sm:p-9">
-                <h2 id="plan-title" className="font-display text-[2.2rem] leading-none">
-                  {plan.name}
+              <div className="rounded-[28px] bg-ink p-7 text-white sm:p-9">
+                <h2 id="plan-title" className="font-display text-[2.2rem] leading-[1.05]">
+                  Your {industry.kind === "Business" ? "business app" : `${industry.kind.toLowerCase()} website`}, built around you
                 </h2>
-                <p className="mt-3 text-ivory/65">{plan.forWho}</p>
-                {site.pricing.show && (
-                  <p className="mt-6 flex items-baseline gap-2">
-                    {plan.prefix && <span className="text-ivory/60">{plan.prefix}</span>}
-                    <span className="tabular font-display text-[3rem] leading-none">
-                      {site.pricing.currency}
-                      {inr(plan.price)}
-                    </span>
-                  </p>
-                )}
-                <p className="mt-3 inline-flex rounded-full bg-ivory/10 px-3 py-1 text-[0.8125rem] font-semibold">{industry.timeline}</p>
-                <ul className="mt-6 grid gap-2.5 text-[0.95rem] text-ivory/85">
-                  {plan.features.slice(0, 5).map((f) => (
+                <p className="mt-3 text-white/65">Every project is quoted after a short call, in writing, within a day. No surprises later.</p>
+                <ul className="mt-7 grid gap-2.5 text-[0.95rem] text-white/85">
+                  {industry.studioPoints.map((f) => (
                     <li key={f} className="flex gap-3">
                       <Check className="mt-1 size-4 shrink-0 text-ochre" /> {f}
                     </li>
                   ))}
+                  <li className="flex gap-3">
+                    <Check className="mt-1 size-4 shrink-0 text-ochre" /> Your domain, code and data in your name
+                  </li>
                 </ul>
                 <ButtonLink
-                  href={waHref(waMessage({ plan: plan.name, businessName: name }))}
+                  href={waHref(waMessage({ kind: industry.kind, businessName: name }))}
                   external
                   variant="light"
                   size="lg"
-                  icon={<WhatsAppDisc className="-ml-3 size-9" />}
-                  className="mt-8 w-full pl-3"
+                  icon={<WhatsAppDisc />}
+                  className="mt-8 w-full"
                   onClick={() => track("whatsapp_click", { location: "industry_plan", industry: industry.slug })}
                 >
-                  Talk about {plan.name}
+                  Get a written quote
                 </ButtonLink>
-                {site.foundingOffer.enabled && site.foundingOffer.spots > site.foundingOffer.spotsTaken && (
-                  <p className="mt-4 text-center text-[0.8125rem] text-ivory/60">
-                    Founding offer: {site.foundingOffer.perk} for our first {site.foundingOffer.spots} clients.
-                  </p>
-                )}
               </div>
             </Reveal>
-            <TLink to="/#pricing" curtain={HOME_CURTAIN} className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-ink-soft hover:text-ink">
-              Compare all packages <ArrowUpRight className="size-4" />
-            </TLink>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <Eyebrow>{industry.kind} questions</Eyebrow>
@@ -387,7 +384,7 @@ function IndustryView({ industry }: { industry: Industry }) {
                 curtain={curtainFor(o)}
                 onIntent={() => prefetchDemo(o.slug)}
                 className="group relative overflow-hidden rounded-[24px] p-5 ring-1 ring-ink/[0.07] transition-[transform,box-shadow] duration-500 ease-(--ease-soft) hover:-translate-y-1 hover:shadow-lift"
-                style={{ background: `linear-gradient(150deg, ${o.theme.tint}, #fffdf9 80%)` }}
+                style={{ background: `linear-gradient(150deg, ${o.theme.tint}, #ffffff 80%)` }}
               >
                 <span className="flex items-center justify-between">
                   <span className="tabular text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">Exhibit {o.no}</span>
@@ -459,7 +456,7 @@ function FeatureRow({
   );
 }
 
-function BigScreen({ industry, name, area }: { industry: Industry; name: string; area: string }) {
+function BigScreen({ industry, name, area, city }: { industry: Industry; name: string; area: string; city: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 30%"] });
@@ -491,9 +488,9 @@ function BigScreen({ industry, name, area }: { industry: Industry; name: string;
         </div>
         <motion.div ref={ref} style={{ scale, y }} className="mx-auto mt-14 max-w-[72rem]">
           {mounted ? (
-            <DemoDevice industry={industry} name={name} area={area} mode="desktop" />
+            <DemoDevice industry={industry} name={name} area={area} city={city} mode="laptop" />
           ) : (
-            <div className="aspect-[1280/820] rounded-[18px] bg-sand" />
+            <div className="aspect-[1440/912] rounded-[28px] bg-sand" />
           )}
         </motion.div>
       </div>

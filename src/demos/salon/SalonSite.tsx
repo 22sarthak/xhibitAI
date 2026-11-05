@@ -53,7 +53,7 @@ const TIMES = ["11:00 AM", "12:30 PM", "2:00 PM", "4:30 PM", "6:00 PM", "7:30 PM
 
 const fmt = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} hr${m % 60 ? ` ${m % 60} min` : ""}` : `${m} min`);
 
-export default function SalonSite({ name, area }: DemoProps) {
+export default function SalonSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [tab, setTab] = useState("Hair");
@@ -106,7 +106,7 @@ export default function SalonSite({ name, area }: DemoProps) {
       {/* Hero */}
       <section data-section="top" className="px-4 pb-4 @3xl:px-12">
         <div className="relative h-[520px] overflow-hidden rounded-[30px] @3xl:h-[580px]">
-          <DemoImg src={img("hero")} alt="Airy salon with styling chairs and mirrors" eager />
+          <DemoImg src={img("interior")} alt="Bright salon with a row of styling chairs" eager />
           <div className="absolute inset-0 bg-linear-to-t from-[#2b1d22]/85 via-[#2b1d22]/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-white @3xl:p-12">
             <span className="inline-block rounded-full bg-white/15 px-3 py-1.5 text-[12px] tracking-[0.04em] backdrop-blur">Festive Glow package · ₹1,999</span>
@@ -220,11 +220,9 @@ export default function SalonSite({ name, area }: DemoProps) {
             ["hair", "h-[200px]"],
             ["nails", "h-[150px]"],
             ["bridal-2", "h-[230px]"],
-            ["makeup", "h-[160px]"],
             ["spa", "h-[170px]"],
             ["facial", "h-[200px]"],
             ["mens", "h-[160px]"],
-            ["interior", "h-[150px]"],
           ].map(([src, h]) => (
             <div key={src} className={cn("mb-2.5 overflow-hidden rounded-[18px] @3xl:mb-4", h)}>
               <DemoImg src={img(src)} alt="" />
@@ -256,7 +254,7 @@ export default function SalonSite({ name, area }: DemoProps) {
             <p className="text-[30px] font-medium leading-tight @3xl:text-[40px]" style={serif}>
               Open all 7 days
             </p>
-            <p className="mt-1 text-[14.5px] text-black/60">10 AM – 8:30 PM · Main Road, {area}, Ranchi</p>
+            <p className="mt-1 text-[14.5px] text-black/60">10 AM – 8:30 PM · {area}, {city}</p>
           </div>
           <div className="mt-5 flex gap-2.5 @3xl:mt-0">
             <button type="button" onClick={() => showToast(realSiteNote("this opens Google Maps with directions."))} className="flex-1 rounded-full px-5 py-3 text-[13.5px] font-medium uppercase tracking-[0.08em] text-white" style={{ background: C.mauve }}>

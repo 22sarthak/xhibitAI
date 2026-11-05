@@ -11,6 +11,8 @@ export interface DemoProps {
   /** Business name to show (visitor's own, or the demo default). */
   name: string;
   area: string;
+  /** City shown in the demo's address lines. */
+  city: string;
 }
 
 export function DemoImg({

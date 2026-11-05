@@ -102,13 +102,13 @@ export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlu
             className="flex min-h-[30rem] flex-col items-center justify-center text-center"
             role="status"
           >
-            <SuccessTick color="#2e4b3c" size={76} />
+            <SuccessTick color="#0e7a55" size={76} />
             <h3 className="mt-6 font-display text-[2rem] leading-tight tracking-[-0.02em]">Thank you{firstName ? `, ${firstName}` : ""}!</h3>
             <p className="mt-3 max-w-[26rem] text-ink-soft">
               We've got your details and we'll {contact === "whatsapp" ? "WhatsApp" : "call"} you
               {site.promises.whatsappReplyHours ? ` within ${site.promises.whatsappReplyHours} hours` : " soon"} ({site.promises.workingHours}).
             </p>
-            <ButtonLink href={waHref(fallbackText)} external variant="secondary" className="mt-8 pl-2" icon={<WhatsAppDisc className="-ml-1 size-8" />}>
+            <ButtonLink href={waHref(fallbackText)} external variant="secondary" className="mt-8" icon={<WhatsAppDisc />}>
               Can't wait? Chat now
             </ButtonLink>
           </motion.div>

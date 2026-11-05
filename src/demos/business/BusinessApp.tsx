@@ -197,7 +197,7 @@ function StatusPill({ s }: { s: Status }) {
   );
 }
 
-export default function BusinessApp({ name, area }: DemoProps) {
+export default function BusinessApp({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [tab, setTab] = useState<Tab>("home");
@@ -498,7 +498,7 @@ export default function BusinessApp({ name, area }: DemoProps) {
           <span className="min-w-0">
             <span className="block truncate text-[14px] font-bold">{name}</span>
             <span className="text-[11.5px]" style={{ color: C.mute }}>
-              {area}, Ranchi
+              {area}, {city}
             </span>
           </span>
         </div>

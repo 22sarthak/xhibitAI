@@ -10,20 +10,20 @@ export function Process() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.6 });
-  const days = site.promises.liveInDays;
 
   return (
     <section id="process" aria-labelledby="process-title" className="section-y">
       <div className="container-x">
         <div className="max-w-[46rem]">
-          <Eyebrow no="05">How it works</Eyebrow>
+          <Eyebrow no="06">How it works</Eyebrow>
           <RevealHeading
             id="process-title"
-            text={days ? `From first hello to *live* in ${days} days.` : "From first hello to *live*, without the headache."}
+            text="From first call to *live*, without the headache."
+            emClass="italic text-rose"
             className="mt-6 text-display"
           />
           <Reveal delay={0.1}>
-            <p className="mt-6 text-lead text-ink-soft">No jargon, no endless meetings. Four simple steps — and you're always one WhatsApp away from us.</p>
+            <p className="mt-6 text-lead text-ink-soft">No jargon, no endless meetings. Four clear steps, a live preview link the whole way, and we're always one WhatsApp away.</p>
           </Reveal>
         </div>
 
@@ -83,8 +83,8 @@ function Step({
 }) {
   const at = index / (total - 1 || 1);
   const fill = useTransform(progress, [Math.max(0, at - 0.08), at], [0, 1]);
-  const bg = useTransform(fill, (f) => (f > 0.5 ? "#c4532d" : "#fbf7f0"));
-  const fg = useTransform(fill, (f) => (f > 0.5 ? "#fbf7f0" : "#1d1a16"));
+  const bg = useTransform(fill, (f) => (f > 0.5 ? "#e2501f" : "#f5f5f2"));
+  const fg = useTransform(fill, (f) => (f > 0.5 ? "#f5f5f2" : "#0b0b0c"));
 
   return (
     <motion.li

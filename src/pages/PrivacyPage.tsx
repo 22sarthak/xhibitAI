@@ -37,16 +37,10 @@ export default function PrivacyPage() {
       <p className="mt-5 text-lead text-ink-soft">
         In plain words: we only collect what we need to reply to you, we never sell it, and you can ask us to delete it anytime. Last updated {UPDATED}.
       </p>
-      {import.meta.env.DEV && (
-        <p className="mt-6 rounded-2xl border-2 border-dashed border-ink/15 p-4 text-[0.9rem] text-ink-soft">
-          <b className="text-ink">Dev note:</b> this is a sensible starting template, not legal advice. Have it reviewed before launch. (This note doesn't show on the live site.)
-        </p>
-      )}
-
       <div className="mt-10">
         <Block title="Who we are">
           <p>
-            {brand.name} ("we", "us") builds websites, apps and automation for businesses, based in {brand.city}, {brand.region}, India. For anything about your
+            {brand.name} ("we", "us") builds websites, web apps and AI tools for businesses, based in {brand.city}, {brand.region}, India. For anything about your
             data, write to <a href={mailHref("Privacy request")}>{contact.email}</a>.
           </p>
         </Block>

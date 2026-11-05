@@ -1,6 +1,5 @@
 import { Suspense, useEffect } from "react";
 import { useParams } from "react-router";
-import { site } from "../../site.config";
 import { LogoMark } from "../components/brand/Logo";
 import { DeviceScreen } from "../components/device/DeviceScreen";
 import { PHONE, PhoneFrame } from "../components/device/frames";
@@ -19,7 +18,7 @@ export default function OgCard() {
   const Site = demoComponents[industry.slug];
 
   useEffect(() => {
-    document.documentElement.style.background = "#fbf7f0";
+    document.documentElement.style.background = "#f5f5f2";
   }, []);
 
   return (
@@ -42,19 +41,19 @@ export default function OgCard() {
 
       <div className="absolute left-[72px] top-[170px] w-[640px]">
         <p className="text-[18px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
-          {isHome ? `Websites · Apps · AI · ${site.brand.city}` : `Exhibit ${industry.no} — ${industry.name}`}
+          {isHome ? "Websites · Web apps · AI tools" : `Exhibit ${industry.no} — ${industry.name}`}
         </p>
-        <p className="mt-6 font-display text-[76px] leading-[0.98] tracking-[-0.035em] text-ink" style={{ fontVariationSettings: '"opsz" 144' }}>
+        <p className="mt-6 font-display text-[76px] leading-[0.98] tracking-[-0.025em] text-ink">
           {isHome ? (
             <>
-              Let {site.brand.city} find <em className="text-clay">your business.</em>
+              Made with you. <em className="text-cobalt">Made to be seen.</em>
             </>
           ) : (
             industry.headline
           )}
         </p>
         <p className="mt-8 text-[22px] text-ink-soft">
-          {isHome ? "Free design preview · Live in 7 days" : "See a live demo — try it with your own name"}
+          {isHome ? "See your design before you pay · Live in days, not months" : "See a live demo — try it with your own name"}
         </p>
       </div>
 
@@ -64,7 +63,7 @@ export default function OgCard() {
             <PhoneFrame chrome={demoChrome[industry.slug]}>
               <DeviceScreen interactive={false} label="">
                 <Suspense fallback={null}>
-                  <Site name={industry.demo.name} area={industry.demo.area} />
+                  <Site name={industry.demo.name} area={industry.demo.area} city={industry.demo.city} />
                 </Suspense>
               </DeviceScreen>
             </PhoneFrame>

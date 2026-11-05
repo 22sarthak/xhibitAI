@@ -3,7 +3,7 @@ import type { Industry } from "../../content/industries";
 import { demoChrome, demoComponents } from "../../demos/registry";
 import { toDomain } from "../../lib/utils";
 import { DeviceScreen, type DeviceApi } from "./DeviceScreen";
-import { BrowserFrame, DESKTOP, PHONE, PhoneFrame } from "./frames";
+import { BrowserFrame, DESKTOP, LAPTOP, LaptopFrame, PHONE, PhoneFrame } from "./frames";
 import { Scaled } from "./Scaled";
 
 function Loading({ color }: { color: string }) {
@@ -22,6 +22,7 @@ export function DemoDevice({
   industry,
   name,
   area,
+  city,
   mode = "phone",
   interactive = true,
   apiRef,
@@ -30,7 +31,8 @@ export function DemoDevice({
   industry: Industry;
   name?: string;
   area?: string;
-  mode?: "phone" | "desktop";
+  city?: string;
+  mode?: "phone" | "desktop" | "laptop";
   interactive?: boolean;
   apiRef?: Ref<DeviceApi>;
   className?: string;
@@ -39,16 +41,24 @@ export function DemoDevice({
   const chrome = demoChrome[industry.slug];
   const displayName = name?.trim() || industry.demo.name;
   const displayArea = area?.trim() || industry.demo.area;
+  const displayCity = city?.trim() || industry.demo.city;
   const label = `Interactive demo: a ${industry.kind.toLowerCase()} website for ${displayName}`;
 
   const screen = (
-    <DeviceScreen apiRef={apiRef} interactive={interactive} label={label} mode={mode} accent={industry.theme.deep}>
+    <DeviceScreen apiRef={apiRef} interactive={interactive} label={label} mode={mode === "phone" ? "phone" : "desktop"} accent={industry.theme.deep}>
       <Suspense fallback={<Loading color={chrome.bar} />}>
-        <Site name={displayName} area={displayArea} />
+        <Site name={displayName} area={displayArea} city={displayCity} />
       </Suspense>
     </DeviceScreen>
   );
 
+  if (mode === "laptop") {
+    return (
+      <Scaled width={LAPTOP.w} height={LAPTOP.h} className={className}>
+        <LaptopFrame domain={toDomain(displayName)}>{screen}</LaptopFrame>
+      </Scaled>
+    );
+  }
   if (mode === "desktop") {
     return (
       <Scaled width={DESKTOP.w} height={DESKTOP.h} className={className}>

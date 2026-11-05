@@ -31,26 +31,25 @@ export function Footer() {
 
   return (
     <footer className="grain-light relative overflow-hidden bg-dusk text-ivory">
-      <div aria-hidden="true" className="pointer-events-none absolute -left-40 top-0 h-[36rem] w-[36rem] rounded-full bg-clay/20 blur-[120px]" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-ochre/10 blur-[120px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 top-0 h-[36rem] w-[36rem] rounded-full bg-cobalt/25 blur-[120px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-violet/20 blur-[120px]" />
 
       <div className="container-x relative pb-10 pt-24 sm:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
             <Logo tone="light" />
-            <p className="mt-8 max-w-[18ch] font-display text-[clamp(2rem,1.3rem+2.6vw,3.4rem)] leading-[1.04] tracking-[-0.03em]">
-              Your business, <em className="text-ochre">beautifully</em> on display.
+            <p className="mt-8 max-w-[16ch] font-display text-[clamp(2.2rem,1.4rem+2.8vw,3.6rem)] leading-[1.02] tracking-[-0.02em]">
+              Made with you. <em className="text-ochre">Made to be seen.</em>
             </p>
             <p className="mt-5 max-w-sm text-ivory/65">
-              Websites, apps and AI for local businesses — designed and built in {site.brand.city}, {site.brand.region}.
+              Websites, web apps and AI tools, designed and built around your idea for businesses and founders across India.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink
                 href={waHref(waMessage({ businessName: name }))}
                 external
                 variant="light"
-                icon={<WhatsAppDisc className="-ml-2 size-8" />}
-                className="pl-2"
+                icon={<WhatsAppDisc />}
                 onClick={() => track("whatsapp_click", { location: "footer" })}
               >
                 Chat on WhatsApp
@@ -112,9 +111,7 @@ export function Footer() {
                 <a href={mailHref()} className={linkCls}>
                   {site.contact.email}
                 </a>
-                <a href={site.contact.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  {site.contact.address}
-                </a>
+                <span className="text-ivory/45">{site.brand.city}, India</span>
                 <span className="text-ivory/45">{site.contact.hours}</span>
               </address>
               {socials.some((s) => site.socials[s.key]) && (
@@ -144,14 +141,14 @@ export function Footer() {
         <p
           aria-hidden="true"
           className="pointer-events-none mt-20 select-none bg-linear-to-b from-ivory/[0.16] to-ivory/[0.01] bg-clip-text text-center font-display text-[31vw] leading-[0.8] tracking-[-0.06em] text-transparent sm:mt-24 xl:text-[28rem]"
-          style={{ fontVariationSettings: '"opsz" 144', fontWeight: 420 }}
+          style={{ fontWeight: 400 }}
         >
           Xhibit
         </p>
 
         <div className="mt-8 flex flex-col gap-3 border-t border-ivory/10 pt-6 text-[0.8125rem] text-ivory/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {site.brand.name}. Made with care in {site.brand.city}, {site.brand.region}.
+            © {year} {site.brand.name} · {site.brand.city}, India
           </p>
           <p className="flex gap-5">
             <TLink to="/privacy" className="hover:text-ivory">

@@ -45,11 +45,7 @@ export function FacebookIcon(props: P) {
   );
 }
 
-/** A WhatsApp glyph sitting in its green disc — used inside dark buttons. */
-export function WhatsAppDisc({ className = "size-7" }: { className?: string }) {
-  return (
-    <span className={`grid shrink-0 place-items-center rounded-full bg-wa text-white ${className}`} aria-hidden="true">
-      <WhatsAppIcon className="size-[58%]" />
-    </span>
-  );
+/** The WhatsApp glyph used inside buttons: brand green, sized to the label. */
+export function WhatsAppDisc({ className = "size-[1.15rem]" }: { className?: string }) {
+  return <WhatsAppIcon className={`shrink-0 text-wa ${className}`} />;
 }

@@ -33,9 +33,22 @@ export const demoChrome: Record<IndustrySlug, Chrome> = {
   business: { bar: "#ffffff", tone: "dark" },
 };
 
+/** The first photo each demo shows, preloaded with its code so the phone never flashes an empty hero. */
+const heroPhoto: Partial<Record<IndustrySlug, string>> = {
+  restaurants: "/demos/restaurants/hero.webp",
+  clinics: "/demos/clinics/hero.webp",
+  schools: "/demos/schools/hero.webp",
+  salons: "/demos/salons/interior.webp",
+  gyms: "/demos/gyms/hero.webp",
+  hotels: "/demos/hotels/hero.webp",
+  retail: "/demos/retail/hero.webp",
+};
+
 const prefetched = new Set<string>();
 export function prefetchDemo(slug: IndustrySlug) {
   if (prefetched.has(slug)) return;
   prefetched.add(slug);
   void demoLoaders[slug]().catch(() => prefetched.delete(slug));
+  const photo = heroPhoto[slug];
+  if (photo) new Image().src = photo;
 }

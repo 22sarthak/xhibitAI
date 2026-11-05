@@ -31,10 +31,10 @@ export interface CurtainSpec {
 }
 
 export const HOME_CURTAIN: CurtainSpec = {
-  color: "#17152a",
-  ink: "#fbf7f0",
+  color: "#0d0e18",
+  ink: "#f5f5f2",
   eyebrow: "Xhibit AI",
-  title: "Your business, on display.",
+  title: "Made with you. Made to be seen.",
 };
 
 type Phase = "idle" | "cover" | "hold" | "reveal";

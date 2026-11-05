@@ -15,10 +15,10 @@ import { ButtonLink } from "../ui/Button";
 import { WhatsAppDisc } from "../ui/icons";
 
 export const NAV_LINKS = [
-  { id: "industries", label: "Industries" },
+  { id: "work", label: "Work" },
   { id: "services", label: "Services" },
+  { id: "industries", label: "Industries" },
   { id: "process", label: "How it works" },
-  { id: "pricing", label: "Pricing" },
   { id: "faq", label: "FAQ" },
 ] as const;
 
@@ -166,14 +166,15 @@ export function Nav() {
           <div className="flex items-center gap-2">
             <span className="hidden sm:inline-flex">
               <ButtonLink
-                href={wa}
-                external
+                href="/#contact"
                 size="sm"
-                icon={<WhatsAppDisc className="-ml-2 size-7" />}
-                onClick={() => track("whatsapp_click", { location: "nav" })}
-                className="pl-2"
+                arrow
+                onClick={(e) => {
+                  e.preventDefault();
+                  goSection("contact");
+                }}
               >
-                Talk to us
+                Start a project
               </ButtonLink>
             </span>
             <button
@@ -264,7 +265,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.6, ease } }}
               className="mt-auto grid gap-3 pt-10"
             >
-              <ButtonLink href={wa} external size="lg" icon={<WhatsAppDisc className="size-8" />} onClick={() => track("whatsapp_click", { location: "menu" })}>
+              <ButtonLink href={wa} external size="lg" icon={<WhatsAppDisc />} onClick={() => track("whatsapp_click", { location: "menu" })}>
                 Chat on WhatsApp
               </ButtonLink>
               <ButtonLink href={telHref()} variant="secondary" size="lg" onClick={() => track("call_click", { location: "menu" })}>

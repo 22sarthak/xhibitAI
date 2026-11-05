@@ -33,7 +33,7 @@ function PalashFlower({ size = 30 }: { size?: number }) {
 
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 
-export default function HotelSite({ name, area }: DemoProps) {
+export default function HotelSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const today = useMemo(() => new Date(), []);
@@ -59,14 +59,14 @@ export default function HotelSite({ name, area }: DemoProps) {
             <p className="truncate text-[21px] uppercase leading-none tracking-[0.2em]" style={{ ...serif, color: C.forest }}>
               {brand}
             </p>
-            <p className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.32em] text-black/45">Residency · Ranchi</p>
+            <p className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.32em] text-black/45">Residency · {city}</p>
           </div>
         </div>
         <nav className="hidden items-center gap-8 text-[13.5px] font-semibold text-black/60 @3xl:flex" aria-label="Demo menu">
           {[
             ["rooms", "Rooms"],
             ["banquets", "Weddings & events"],
-            ["explore", "Explore Ranchi"],
+            ["explore", `Explore ${city}`],
             ["reviews", "Reviews"],
           ].map(([id, l]) => (
             <button key={id} type="button" onClick={() => scrollToSection(id)} className="hover:text-black">
@@ -87,7 +87,7 @@ export default function HotelSite({ name, area }: DemoProps) {
           <div className="absolute inset-x-0 bottom-20 px-6 text-white @3xl:bottom-28 @3xl:px-12">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/75">Near Birsa Munda Airport · {area}</p>
             <h1 className="mt-3 text-[38px] leading-[1.06] @3xl:max-w-[720px] @3xl:text-[64px]" style={serif}>
-              Your calm stay in the heart of Ranchi.
+              Your calm stay in the heart of {city}.
             </h1>
           </div>
         </div>
@@ -251,7 +251,7 @@ export default function HotelSite({ name, area }: DemoProps) {
             <p className="mt-2 text-[28px] leading-tight" style={serif}>
               Saffron Leaf
             </p>
-            <p className="mt-2 text-[14px] text-black/60">Multi-cuisine restaurant with Jharkhandi specials, open 7 AM – 11 PM. Room service 24×7.</p>
+            <p className="mt-2 text-[14px] text-black/60">Multi-cuisine restaurant with regional specials, open 7 AM – 11 PM. Room service 24×7.</p>
           </div>
         </div>
       </section>
@@ -259,7 +259,7 @@ export default function HotelSite({ name, area }: DemoProps) {
       {/* Explore */}
       <section data-section="explore" className="px-5 pt-12 @3xl:px-12 @3xl:pt-20">
         <h2 className="text-[34px] leading-none @3xl:text-[48px]" style={serif}>
-          Explore Ranchi
+          Explore {city}
         </h2>
         <p className="mt-2 text-[14px] text-black/55">Our concierge plans day trips with a car and driver.</p>
         <div className="mt-5 grid gap-3 @3xl:grid-cols-2 @3xl:gap-5">
@@ -269,17 +269,25 @@ export default function HotelSite({ name, area }: DemoProps) {
             <div className="absolute inset-x-0 bottom-0 p-5 text-white">
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/75">Day trips</p>
               <p className="mt-1 text-[22px] leading-tight" style={serif}>
-                Hundru, Dassam & Jonha falls · Patratu Valley
+                Waterfalls, valleys and old temples, all within a drive
               </p>
             </div>
           </div>
           <ul className="grid content-start gap-2">
-            {[
-              ["Pahari Mandir", "Hilltop temple with city views"],
-              ["Rock Garden & Kanke Dam", "Evening walks by the water"],
-              ["Jagannath Temple", "17th-century temple, Dhurwa"],
-              ["Tagore Hill", "Sunrise point in Morabadi"],
-            ].map(([n, d]) => (
+            {(city.toLowerCase() === "ranchi"
+              ? [
+                  ["Pahari Mandir", "Hilltop temple with city views"],
+                  ["Rock Garden & Kanke Dam", "Evening walks by the water"],
+                  ["Jagannath Temple", "17th-century temple, Dhurwa"],
+                  ["Tagore Hill", "Sunrise point"],
+                ]
+              : [
+                  ["Old town walk", "Markets, food streets and heritage"],
+                  ["Lakeside evening", "Sunset walks by the water"],
+                  ["Temple trail", "The city's oldest temples"],
+                  ["Hill viewpoint", "Sunrise drive with breakfast"],
+                ]
+            ).map(([n, d]) => (
               <li key={n} className="flex items-center justify-between rounded-2xl bg-white p-4 ring-1" style={{ ["--tw-ring-color" as string]: C.line }}>
                 <span>
                   <span className="block text-[15px] font-bold">{n}</span>
@@ -305,7 +313,7 @@ export default function HotelSite({ name, area }: DemoProps) {
           <div className="mt-5 grid gap-3 @3xl:mt-0 @3xl:grid-cols-2">
             {[
               ["Ankit & Pooja", "We held our reception here — the team handled everything. Guests still talk about the food."],
-              ["Sanjay R.", "Ten minutes from the airport, spotless rooms and the best breakfast in Ranchi."],
+              ["Sanjay R.", `Ten minutes from the airport, spotless rooms and the best breakfast in ${city}.`],
             ].map(([w, t]) => (
               <figure key={w} className="rounded-2xl bg-white p-4">
                 <blockquote className="text-[14px] leading-relaxed">“{t}”</blockquote>
@@ -315,7 +323,7 @@ export default function HotelSite({ name, area }: DemoProps) {
           </div>
         </div>
         <p className="mt-8 text-center text-[12px] text-black/45">
-          {name} · Hinoo, Ranchi · © 2026 · Website by Xhibit AI
+          {name} · {area}, {city} · © 2026 · Website by Xhibit AI
         </p>
       </section>
 

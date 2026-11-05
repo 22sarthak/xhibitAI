@@ -78,7 +78,7 @@ function bmiInfo(b: number) {
   return { label: "Obese", color: "#e05a4f" };
 }
 
-export default function GymSite({ name, area }: DemoProps) {
+export default function GymSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [period, setPeriod] = useState<Period>("Monthly");
@@ -356,7 +356,7 @@ export default function GymSite({ name, area }: DemoProps) {
       {/* Gallery */}
       <section className="pt-12 @3xl:pt-20">
         <div tabIndex={0} role="region" aria-label="Gym photos" className="no-scrollbar flex gap-2 overflow-x-auto px-5 @3xl:grid @3xl:grid-cols-5 @3xl:px-12">
-          {["floor", "weights", "yoga", "boxing", "kettlebell"].map((s) => (
+          {["floor", "weights", "training", "boxing", "kettlebell"].map((s) => (
             <div key={s} className="h-[200px] w-[150px] shrink-0 overflow-hidden rounded-[18px] @3xl:h-[260px] @3xl:w-auto">
               <DemoImg src={img(s)} alt="" className="grayscale-[30%]" />
             </div>
@@ -366,7 +366,7 @@ export default function GymSite({ name, area }: DemoProps) {
 
       <footer className="px-5 pb-32 pt-12 @3xl:px-12 @3xl:pb-14">
         <p className="text-[34px] leading-none" style={display}>
-          Main Road, {area}, Ranchi
+          Main Road, {area}, {city}
         </p>
         <p className="mt-2 text-[13px]" style={{ color: C.mute }}>
           Mon – Sat 5 AM – 11 PM · Sun 6 AM – 12 PM · © 2026 {name} · Website by Xhibit AI

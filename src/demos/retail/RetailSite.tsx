@@ -28,7 +28,7 @@ const PRODUCTS: Product[] = [
 ];
 const FILTERS = ["All", "Sarees", "Lehengas", "Kurtis", "Men"] as const;
 
-export default function RetailSite({ name, area }: DemoProps) {
+export default function RetailSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
@@ -47,7 +47,7 @@ export default function RetailSite({ name, area }: DemoProps) {
   return (
     <div className="relative min-h-full" style={{ ...font, background: C.ecru }}>
       <div className="px-4 py-2 text-center text-[11.5px] font-medium tracking-[0.06em] text-white" style={{ background: C.indigo }}>
-        Free delivery in Ranchi above ₹1,999 · COD available
+        Free delivery in {city} above ₹1,999 · COD available
       </div>
 
       {/* Header */}
@@ -213,7 +213,7 @@ export default function RetailSite({ name, area }: DemoProps) {
             Visit our store
           </h2>
           <p className="mt-3 flex items-start gap-2 text-[14.5px] text-black/65">
-            <MapPin className="mt-0.5 size-4 shrink-0" /> Main Road, {area}, Ranchi · Open 10:30 AM – 9 PM, all days
+            <MapPin className="mt-0.5 size-4 shrink-0" /> {area}, {city} · Open 10:30 AM – 9 PM, all days
           </p>
           <div className="mt-5 rounded-2xl p-4" style={{ background: C.paper }}>
             <p className="flex items-center gap-2 text-[14.5px] font-semibold">

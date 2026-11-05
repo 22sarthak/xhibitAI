@@ -47,7 +47,7 @@ function Crest({ size = 40 }: { size?: number }) {
   );
 }
 
-export default function SchoolSite({ name, area }: DemoProps) {
+export default function SchoolSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [toast, showToast] = useToast(3400);
@@ -111,7 +111,7 @@ export default function SchoolSite({ name, area }: DemoProps) {
           <h1 className="mt-4 text-[38px] font-semibold leading-[1.05] tracking-[-0.03em] @3xl:text-[60px]">
             Where curious minds <span style={{ color: C.sun }}>grow.</span>
           </h1>
-          <p className="mt-3 text-[14.5px] text-white/80 @3xl:text-[17px]">Nurturing confident, kind and capable young people in Ranchi since 1998.</p>
+          <p className="mt-3 text-[14.5px] text-white/80 @3xl:text-[17px]">Nurturing confident, kind and capable young people in {city} since 1998.</p>
           <div className="mt-6 flex gap-2.5">
             <button type="button" onClick={() => scrollToSection("admissions")} className="flex-1 rounded-full py-3.5 text-[14.5px] font-semibold @3xl:flex-none @3xl:px-7" style={{ background: C.sun, color: C.navy }}>
               Apply for admission
@@ -394,7 +394,7 @@ export default function SchoolSite({ name, area }: DemoProps) {
 
       <footer className="px-5 pb-10 text-center text-[12.5px] text-black/45 @3xl:px-12">
         <p className="font-semibold text-black/70">
-          {name} · {area}, Ranchi
+          {name} · {area}, {city}
         </p>
         <p className="mt-1">Affiliation No. 33XXXX (CBSE) · © 2026 · Website by Xhibit AI</p>
       </footer>

@@ -3,6 +3,8 @@ import { cn } from "../../lib/utils";
 
 export const PHONE = { w: 414, h: 868, screenW: 390 } as const;
 export const DESKTOP = { w: 1280, h: 820 } as const;
+/** MacBook-style laptop: 1316 × 822 screen inside a 1360-wide lid, on a 1440-wide base. */
+export const LAPTOP = { w: 1440, h: 912 } as const;
 
 export interface Chrome {
   /** Colour behind the phone status bar / browser tab strip. */
@@ -109,6 +111,84 @@ export function BrowserFrame({ children, domain, className }: { children: ReactN
         <div className="w-[52px]" aria-hidden="true" />
       </div>
       <div className="relative min-h-0 flex-1">{children}</div>
+    </div>
+  );
+}
+
+function BrowserBar({ domain, compact }: { domain: string; compact?: boolean }) {
+  return (
+    <div
+      className={cn(
+        "flex shrink-0 items-center gap-4 border-b border-black/[0.07] bg-[#f4f4f2] px-5",
+        compact ? "h-[40px]" : "h-[52px]",
+      )}
+    >
+      <div className="flex gap-2" aria-hidden="true">
+        <span className="size-[12px] rounded-full bg-[#ff5f57]" />
+        <span className="size-[12px] rounded-full bg-[#febc2e]" />
+        <span className="size-[12px] rounded-full bg-[#28c840]" />
+      </div>
+      <div className="flex flex-1 justify-center">
+        <div className="flex h-[26px] w-[min(460px,56%)] items-center justify-center gap-2 rounded-[7px] bg-white text-[13px] text-black/60 shadow-[0_0_0_1px_rgba(0,0,0,.06)]">
+          <svg width="10" height="12" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+            <rect x="1" y="6" width="10" height="7.5" rx="2" fill="currentColor" opacity=".6" />
+            <path d="M3.2 6V4.4a2.8 2.8 0 0 1 5.6 0V6" stroke="currentColor" strokeWidth="1.5" opacity=".6" />
+          </svg>
+          <span className="truncate" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+            {domain}
+          </span>
+        </div>
+      </div>
+      <div className="w-[52px]" aria-hidden="true" />
+    </div>
+  );
+}
+
+/** A MacBook drawn in CSS: aluminium-edged lid with a notch, a browser window on screen, and the base. */
+export function LaptopFrame({ children, domain, className }: { children: ReactNode; domain: string; className?: string }) {
+  return (
+    <div className={cn("relative", className)} style={{ width: LAPTOP.w, height: LAPTOP.h }}>
+      <div
+        className="absolute left-1/2 top-0 -translate-x-1/2 rounded-t-[36px] rounded-b-[12px] bg-[#0b0b0d] p-[22px] pb-[34px]"
+        style={{ width: 1360, boxShadow: "inset 0 0 0 2px #2b2b30, 0 0 0 2px #c3c5ca, 0 0 0 3px #9a9ca2" }}
+      >
+        <div aria-hidden="true" className="absolute left-1/2 top-[22px] z-20 h-[24px] w-[160px] -translate-x-1/2 rounded-b-[12px] bg-[#0b0b0d]">
+          <span className="absolute left-1/2 top-[8px] size-[8px] -translate-x-1/2 rounded-full bg-[#1d2333] ring-1 ring-[#2f3446]" />
+        </div>
+        <div className="relative flex flex-col overflow-hidden rounded-[8px] bg-white" style={{ height: 822 }}>
+          {/* macOS menu bar: the notch sits inside it, as on a real MacBook */}
+          <div
+            className="flex h-[28px] shrink-0 items-center justify-between bg-[#ececee] px-5 text-[13px] text-black/80"
+            style={{ fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif" }}
+            aria-hidden="true"
+          >
+            <span className="flex items-center gap-5">
+              <svg width="13" height="15" viewBox="0 0 17 20" fill="currentColor">
+                <path d="M14.1 10.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8C3.8 5 2.2 6 1.4 7.6c-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1.1-2.7-4.2zM11.6 3.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z" />
+              </svg>
+              <b className="font-semibold">Safari</b>
+              <span>File</span>
+              <span>Edit</span>
+              <span>View</span>
+              <span>History</span>
+            </span>
+            <span className="flex items-center gap-4">
+              <span>Fri 6 Nov</span>
+              <span>9:41 AM</span>
+            </span>
+          </div>
+          <BrowserBar domain={domain} compact />
+          <div className="relative min-h-0 flex-1">{children}</div>
+        </div>
+      </div>
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-[8px] h-[26px]">
+        <div
+          className="absolute inset-0 rounded-b-[30px] rounded-t-[3px]"
+          style={{ background: "linear-gradient(180deg, #eceef1 0%, #d3d5da 38%, #a8abb1 100%)" }}
+        />
+        <div className="absolute left-1/2 top-0 h-[10px] w-[220px] -translate-x-1/2 rounded-b-[12px] bg-[#b2b4ba]" />
+      </div>
+      <div aria-hidden="true" className="absolute inset-x-[90px] bottom-0 h-[14px] rounded-[50%] bg-black/25 blur-[10px]" />
     </div>
   );
 }

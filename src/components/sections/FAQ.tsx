@@ -24,7 +24,7 @@ export function FAQ() {
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
             <Eyebrow no="08">Questions</Eyebrow>
-            <RevealHeading id="faq-title" text="Questions owners *ask us*." className="mt-6 text-display" />
+            <RevealHeading id="faq-title" text="Questions people *ask us*." emClass="italic text-violet" className="mt-6 text-display" />
             <Reveal delay={0.1}>
               <div className="mt-8 rounded-[26px] bg-sand p-6">
                 <p className="font-sans text-[1.0625rem] font-bold">Still unsure about something?</p>
@@ -35,8 +35,8 @@ export function FAQ() {
                 <ButtonLink
                   href={waHref(waMessage({ businessName: name, topic: "your services" }))}
                   external
-                  className="mt-5 pl-2"
-                  icon={<WhatsAppDisc className="-ml-1 size-8" />}
+                  className="mt-5"
+                  icon={<WhatsAppDisc />}
                   onClick={() => track("whatsapp_click", { location: "faq" })}
                 >
                   Ask a question

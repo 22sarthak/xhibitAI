@@ -6,11 +6,11 @@ import { Contact } from "../components/sections/Contact";
 import { FAQ } from "../components/sections/FAQ";
 import { LocalStrip } from "../components/sections/LocalStrip";
 import { PreviewStudio } from "../components/sections/PreviewStudio";
-import { Pricing } from "../components/sections/Pricing";
 import { Process } from "../components/sections/Process";
 import { SearchStory } from "../components/sections/SearchStory";
 import { Services } from "../components/sections/Services";
 import { WhyUs } from "../components/sections/WhyUs";
+import { Work } from "../components/sections/Work";
 import { useSeo } from "../lib/seo";
 import { useSmoothScroll } from "../lib/smooth-scroll";
 import { useRouteReady } from "../lib/transition";
@@ -20,7 +20,7 @@ export default function Home() {
   useSeo({ title: site.seo.title, description: site.seo.description, path: "/" });
   const { scrollTo } = useSmoothScroll();
 
-  // Arriving at /#pricing (etc.) from a shared link.
+  // Arriving at /#contact (etc.) from a shared link.
   useEffect(() => {
     if (!window.location.hash) return;
     const t = window.setTimeout(() => scrollTo(window.location.hash, { immediate: true }), 60);
@@ -32,11 +32,11 @@ export default function Home() {
       <Hero />
       <LocalStrip />
       <SearchStory />
+      <Work />
       <PreviewStudio />
       <Services />
       <AIAssistant />
       <Process />
-      {site.pricing.show && <Pricing />}
       <WhyUs />
       <FAQ />
       <Contact />

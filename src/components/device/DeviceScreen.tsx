@@ -60,7 +60,7 @@ export function DeviceScreen({
   interactive = true,
   label,
   mode = "phone",
-  accent = "#c4532d",
+  accent = "#e2501f",
   autoScroll = false,
 }: {
   children: ReactNode;

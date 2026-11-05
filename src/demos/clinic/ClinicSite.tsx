@@ -42,7 +42,7 @@ const T = {
     doctorsSub: "Experienced specialists, all under one roof.",
     services: "Specialities",
     packages: "Health check-up packages",
-    packagesSub: "Free home sample collection anywhere in Ranchi.",
+    packagesSub: "Free home sample collection anywhere in the city.",
     visit: "Visit the clinic",
     next: "Next available",
     bookShort: "Book",
@@ -112,7 +112,7 @@ function useDays() {
 const SLOTS = ["10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM"];
 const FULL = new Set(["10:00 AM", "11:30 AM", "5:00 PM"]);
 
-export default function ClinicSite({ name, area }: DemoProps) {
+export default function ClinicSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [lang, setLang] = useState<Lang>("en");
@@ -182,7 +182,6 @@ export default function ClinicSite({ name, area }: DemoProps) {
       <div data-section="emergency" className="flex items-center justify-between gap-3 px-5 py-2.5 text-white @3xl:px-12" style={{ background: C.coral }}>
         <p className="flex items-center gap-2 text-[13.5px] font-bold">
           <span className="relative flex size-2">
-            <span className="absolute inset-0 animate-ping rounded-full bg-white/80" />
             <span className="relative size-2 rounded-full bg-white" />
           </span>
           {t.emergency} · 0651-000-0000
@@ -359,7 +358,7 @@ export default function ClinicSite({ name, area }: DemoProps) {
         <div>
           <h2 className="text-[26px] font-extrabold tracking-[-0.02em] @3xl:text-[36px]">{t.visit}</h2>
           <p className="mt-2 text-[14.5px] text-black/60">
-            Main Road, {area}, Ranchi, Jharkhand
+            Main Road, {area}, {city}
             <br />
             Wheelchair access · Parking available
           </p>

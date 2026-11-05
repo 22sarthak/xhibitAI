@@ -1,8 +1,6 @@
 import { site } from "../../site.config";
-import { inr } from "../lib/utils";
 
-const { promises, pricing, contact } = site;
-const priceOf = (id: string) => pricing.plans.find((p) => p.id === id)!;
+const { promises, contact } = site;
 
 /* ── Local strip ── */
 export const businessTypes = [
@@ -18,30 +16,30 @@ export const businessTypes = [
   "Sweet shops",
   "Showrooms",
   "Homestays",
+  "Startups",
+  "D2C brands",
+  "Consultants",
 ];
 
-export const neighbourhoods = [
-  "Lalpur",
-  "Harmu",
-  "Bariatu",
-  "Kanke Road",
-  "Main Road",
-  "Morabadi",
-  "Doranda",
-  "Hinoo",
-  "Ashok Nagar",
-  "Argora",
-  "Kokar",
-  "Upper Bazar",
-  "Ratu Road",
-  "Hatia",
+/** What we build — the second line of the strip under the hero. */
+export const buildTypes = [
+  "Websites",
+  "Landing pages",
+  "Web apps",
+  "Online stores",
+  "Dashboards",
+  "Booking systems",
+  "Customer portals",
+  "AI assistants",
+  "WhatsApp automations",
+  "Internal tools",
 ];
 
 /* ── Search story ── */
 export const searchScenes = [
-  { query: "best family restaurant near Lalpur", slug: "restaurants", category: "Restaurant · North Indian", rating: "4.6", reviews: "1,240", status: "Open now · Closes 11 PM" },
-  { query: "child specialist near Bariatu", slug: "clinics", category: "Clinic · Paediatrics", rating: "4.8", reviews: "386", status: "Open now · OPD till 8 PM" },
-  { query: "bridal makeup salon in Harmu", slug: "salons", category: "Salon & Spa · Bridal", rating: "4.7", reviews: "512", status: "Open now · Closes 8:30 PM" },
+  { query: "best family restaurant near me", slug: "restaurants", category: "Restaurant · North Indian", rating: "4.6", reviews: "1,240", status: "Open now · Closes 11 PM" },
+  { query: "child specialist open now", slug: "clinics", category: "Clinic · Paediatrics", rating: "4.8", reviews: "386", status: "Open now · OPD till 8 PM" },
+  { query: "bridal makeup salon nearby", slug: "salons", category: "Salon & Spa · Bridal", rating: "4.7", reviews: "512", status: "Open now · Closes 8:30 PM" },
 ] as const;
 
 /* ── AI assistant demo — scripted conversations ── */
@@ -75,7 +73,7 @@ export const chatScripts: ChatScript[] = [
       { q: "Kal Sunday ko OPD khula hai?", a: "Haan! Sunday ko OPD subah 9 se dopahar 1 baje tak khula hai. Emergency 24×7 available hai." },
       {
         q: "How much is a full body check-up?",
-        a: "Our Full Body Check-up is ₹1,499 and covers 68 tests. Home sample collection is free anywhere in Ranchi. Shall I book a slot?",
+        a: "Our Full Body Check-up is ₹1,499 and covers 68 tests. Home sample collection is free anywhere in the city. Shall I book a slot?",
       },
     ],
   },
@@ -85,8 +83,8 @@ export const chatScripts: ChatScript[] = [
     business: "Kesar Kitchen",
     turns: [
       {
-        q: "Do you deliver to Kanke Road?",
-        a: "Yes, we deliver to Kanke Road in about 35 minutes. Today's special is Hyderabadi Dum Biryani at ₹249 — want the full menu?",
+        q: "Do you deliver to Koramangala?",
+        a: "Yes, we deliver to Koramangala in about 35 minutes. Today's special is Hyderabadi Dum Biryani at ₹249 — want the full menu?",
         actions: [{ label: "Send menu", reply: "Here you go: kesarkitchen.in/menu — just reply with your dishes and address, and we'll confirm." }],
       },
       { q: "Table for 6 tonight at 8?", a: "Done ✓ A table for 6 at 8:00 PM tonight is reserved. We'll send a reminder at 6. See you soon!" },
@@ -129,76 +127,71 @@ export const chatScripts: ChatScript[] = [
 /* ── How it works ── */
 export const steps = [
   {
-    day: "Day 1",
-    title: "We meet",
-    text: promises.inPersonVisits
-      ? "At your shop, clinic or school — anywhere in Ranchi — or on a call. Tell us about your business in your own words. No tech talk."
-      : "On a call or video chat. Tell us about your business in your own words. No tech talk.",
+    day: "Step 1",
+    title: "We listen",
+    text: "A call or video chat about your business or your idea, in your own words. No tech talk, no sales script.",
   },
   {
-    day: "Day 2–3",
+    day: "Step 2",
     title: "You see your design",
     text: promises.freeDesignPreview
-      ? "We design your homepage and show it to you. You pay only when you like what you see."
-      : "We design your homepage and walk you through it, page by page.",
+      ? "We design your key screens and show them to you. You pay only when you like what you see."
+      : "We design your key screens and walk you through them, one by one.",
   },
   {
-    day: "Day 4–6",
-    title: "We build and set up",
-    text: "Website, Google Maps listing, WhatsApp button and forms — all built and tested on real phones.",
+    day: "Step 3",
+    title: "We build it with you",
+    text: "Short build cycles with a live preview link, so you see progress every few days and can change course early.",
   },
   {
-    day: promises.liveInDays ? `Day ${promises.liveInDays}` : "Launch",
+    day: "Step 4",
     title: "You go live",
-    text: "Your site goes live. We show you how everything works and stay a WhatsApp message away.",
+    text: "We launch, show you how everything works and stay a WhatsApp message away for changes and care.",
   },
 ];
 
 /* ── FAQ ── */
-const starter = priceOf("starter");
-const growth = priceOf("growth");
-
 export const faqs: { q: string; a: string }[] = [
   {
-    q: "How much does a website cost?",
-    a: `Most small businesses start with our ${starter.name} package at ${pricing.currency}${inr(starter.price)} (one-time). Sites with bookings, menus or online orders start from ${pricing.currency}${inr(growth.price)}. You get a clear written quote before anything starts.`,
+    q: "What can you build?",
+    a: "Anything that runs in a browser: websites, landing pages, online stores, web apps, dashboards, booking systems, customer portals and AI assistants. Everything works beautifully on phones. We don't build native Android or iOS apps.",
   },
   {
-    q: "I don't know anything about computers. Is that okay?",
-    a: "Completely. That's exactly who we build for. You tell us about your business in your own words; we handle everything technical — and we'll show you the few things you need, in person.",
+    q: "How much does it cost?",
+    a: "It depends on what you need, so we don't publish a price list. After a short call you get a clear, written quote within a day, and the price doesn't change unless you change the scope.",
   },
   {
     q: "How long does it take?",
-    a: `${promises.liveInDays ? `Starter websites go live in about ${promises.liveInDays} days.` : "Starter websites go live within days."} Bigger projects take two to six weeks — you'll get a date before we begin.`,
+    a: "Most websites go live in days, not months. Web apps and larger projects take a few weeks. You'll get a date in writing before we begin.",
   },
   promises.freeDesignPreview
     ? {
         q: "Do I pay before I see anything?",
-        a: `No. We design your homepage first and show it to you. You pay only when you're happy with the direction. ${pricing.paymentTerms}`,
+        a: "No. We design your key screens first and show them to you. You pay only when you're happy with the direction.",
       }
-    : { q: "How do payments work?", a: pricing.paymentTerms },
+    : { q: "How do payments work?", a: "In clear milestones, agreed in writing before we start." },
   {
-    q: "Can I change prices, my menu or photos later?",
-    a: "Yes. Send us a WhatsApp and we'll update it — small changes are included in the care plan. If you prefer, we'll also give you a simple way to update things yourself.",
+    q: "I'm not technical. Is that okay?",
+    a: "Completely. Tell us about your business or your idea in your own words; we handle everything technical and explain the few things you need to know.",
+  },
+  {
+    q: "Do you work with clients outside your city?",
+    a: "Yes. We work with businesses and founders across India over calls, video and WhatsApp. Most of our work happens remotely, with a live preview link you can open anytime.",
+  },
+  {
+    q: "Who owns the website and the code?",
+    a: "You do. Your domain, code and data are registered in your name. No lock-ins, ever.",
   },
   {
     q: "Will my business show up on Google?",
-    a: "We set up your Google Maps listing, connect it to your website and follow Google's guidelines so people nearby can find you. Nobody can honestly promise the #1 spot — but we'll make sure you're properly listed and easy to find.",
-  },
-  {
-    q: "Do I need to buy a domain and hosting?",
-    a: "We take care of it. Your domain (like yourbusiness.in) is registered in your business's name, so it always belongs to you.",
+    a: "We set up your Google Business Profile, connect it to your website and follow Google's guidelines so people can find you. Nobody can honestly promise the #1 spot, but we make sure you're properly listed and easy to find.",
   },
   {
     q: "What is a WhatsApp AI assistant?",
-    a: "A smart auto-reply for your WhatsApp Business number. It answers common questions — timings, prices, availability — and can take bookings at any hour. You can read every chat and step in whenever you like.",
+    a: "A smart assistant on your WhatsApp Business number. It answers common questions about timings, prices and availability, and can take bookings at any hour. You can read every chat and step in whenever you like.",
   },
   {
-    q: "Do you work outside Ranchi?",
-    a: `Yes — we work with businesses across ${site.brand.region} and India over phone and video. But we love meeting ${site.brand.city} businesses in person.`,
-  },
-  {
-    q: "What happens after the website is live?",
-    a: `We stay with you. On the care plan we look after hosting, security, backups, updates and festive offers — just WhatsApp us${contact.hours ? ` (${contact.hours})` : ""}.`,
+    q: "What happens after launch?",
+    a: `We stay with you: hosting, security, backups, updates and new features. Just WhatsApp us${contact.hours ? ` (${contact.hours})` : ""}.`,
   },
 ];

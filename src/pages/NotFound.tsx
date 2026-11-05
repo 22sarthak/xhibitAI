@@ -18,7 +18,7 @@ export default function NotFound() {
   return (
     <section className="relative p-2 sm:p-3" aria-labelledby="nf-title">
       <div className="grain relative grid min-h-[calc(100svh-1rem)] place-items-center overflow-hidden rounded-[28px] bg-sand px-6 py-32 text-center sm:rounded-[44px]">
-        <div aria-hidden="true" className="absolute -right-32 -top-32 size-[30rem] rounded-full bg-[radial-gradient(closest-side,#f5c79d,transparent)]" />
+        <div aria-hidden="true" className="absolute -right-32 -top-32 size-[30rem] rounded-full bg-[radial-gradient(closest-side,#dfe5fb,transparent)]" />
         <div className="relative max-w-[40rem]">
           <p className="eyebrow mx-auto">Error 404</p>
           <h1 id="nf-title" className="mt-6 text-display">

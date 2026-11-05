@@ -71,16 +71,14 @@ function jsonLd() {
     email: site.contact.email,
     image: site.brand.url + site.seo.ogImage,
     logo: site.brand.url + "/favicon.svg",
-    priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.contact.address,
       addressLocality: site.brand.city,
       addressRegion: site.brand.region,
       addressCountry: "IN",
     },
-    areaServed: [{ "@type": "City", name: site.brand.city }, { "@type": "State", name: site.brand.region }],
-    knowsAbout: ["Website design", "Web app development", "WhatsApp AI assistants", "Business automation", "Local SEO"],
+    areaServed: { "@type": "Country", name: "India" },
+    knowsAbout: ["Website design", "Web app development", "Landing pages", "E-commerce websites", "AI assistants", "Business automation", "SEO"],
     ...(sameAs.length ? { sameAs } : {}),
   };
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;

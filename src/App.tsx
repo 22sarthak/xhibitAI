@@ -4,7 +4,6 @@ import { Route, Routes, useLocation } from "react-router";
 import { Footer } from "./components/layout/Footer";
 import { Nav } from "./components/layout/Nav";
 import { WhatsAppFab } from "./components/layout/WhatsAppFab";
-import { DevNotice } from "./components/layout/DevNotice";
 import { PersonalizationProvider } from "./lib/personalization";
 import { SmoothScrollProvider } from "./lib/smooth-scroll";
 import { TransitionProvider } from "./lib/transition";
@@ -47,7 +46,6 @@ function Shell() {
       </main>
       <Footer />
       <WhatsAppFab />
-      <DevNotice />
     </>
   );
 }

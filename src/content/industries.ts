@@ -35,7 +35,6 @@ import {
   UtensilsCrossed,
   Wallet,
 } from "lucide-react";
-import type { PlanId } from "../../site.config";
 import { industryMeta, type IndustrySlug } from "./industry-meta";
 import type { CurtainSpec } from "../lib/transition";
 
@@ -65,7 +64,7 @@ export interface Industry {
   icon: LucideIcon;
   tagline: string;
   alsoFor: string;
-  demo: { name: string; area: string };
+  demo: { name: string; area: string; city: string };
   theme: IndustryTheme;
   headline: string;
   intro: string;
@@ -73,7 +72,6 @@ export interface Industry {
   studioPoints: string[];
   automations: { title: string; trigger: string; steps: string[] }[];
   outcomes: { title: string; text: string }[];
-  plan: PlanId;
   timeline: string;
   faqs: { q: string; a: string }[];
   /** The little "this is what customers do" toast in the hero. */
@@ -90,7 +88,7 @@ export const industries: Industry[] = [
     icon: UtensilsCrossed,
     tagline: "Menus, table bookings and orders on WhatsApp",
     alsoFor: "cafés, bakeries, cloud kitchens, sweet shops, pubs and bars",
-    demo: { name: "Kesar Kitchen", area: "Lalpur" },
+    demo: { name: "Kesar Kitchen", area: "Indiranagar", city: "Bengaluru" },
     theme: { tint: "#f6e7d7", deep: "#7a2420", onDeep: "#fbefe2", silk: ["#fbf1e6", "#f4c28d", "#dd6b3d", "#8e2f28"] },
     headline: "A website that fills your tables.",
     intro:
@@ -125,7 +123,6 @@ export const industries: Industry[] = [
       { title: "More direct orders", text: "Orders on WhatsApp mean no commission cut from every bill." },
       { title: "Fuller weekends", text: "Easy bookings and reminders mean fewer no-shows." },
     ],
-    plan: "growth",
     timeline: "Live in about 10 days",
     faqs: [
       {
@@ -150,7 +147,7 @@ export const industries: Industry[] = [
     icon: HeartPulse,
     tagline: "Appointments, doctors' timings and health packages",
     alsoFor: "hospitals, dental clinics, diagnostic labs, physiotherapy centres and pharmacies",
-    demo: { name: "Arogya Clinic", area: "Bariatu" },
+    demo: { name: "Arogya Clinic", area: "Bariatu", city: "Ranchi" },
     theme: { tint: "#dcefea", deep: "#0e5e5d", onDeep: "#e9f7f3", silk: ["#eff8f5", "#bde3d8", "#6cbdad", "#2c7a80"] },
     headline: "Patients find you, book you, and arrive on time.",
     intro:
@@ -185,7 +182,6 @@ export const industries: Industry[] = [
       { title: "Fewer no-shows", text: "Reminders bring patients in on time." },
       { title: "More trust", text: "A professional site helps new patients feel safe choosing you." },
     ],
-    plan: "growth",
     timeline: "Live in about 10 days",
     faqs: [
       {
@@ -210,7 +206,7 @@ export const industries: Industry[] = [
     icon: GraduationCap,
     tagline: "Admissions, notices and a parent portal",
     alsoFor: "coaching institutes, play schools, colleges, tuition centres and music or dance academies",
-    demo: { name: "Sal Valley School", area: "Kanke Road" },
+    demo: { name: "Sal Valley School", area: "Kanke Road", city: "Ranchi" },
     theme: { tint: "#e1e9fa", deep: "#1b2a4e", onDeep: "#f6c445", silk: ["#eef3fe", "#c4d5fa", "#f2cc6a", "#4a68bd"] },
     headline: "One trusted place for admissions, notices and parents.",
     intro:
@@ -245,7 +241,6 @@ export const industries: Industry[] = [
       { title: "A quieter office", text: "Notices and fee questions answered without calls." },
       { title: "Happier parents", text: "Everything they need, in one trusted place." },
     ],
-    plan: "growth",
     timeline: "Live in about 2 weeks",
     faqs: [
       {
@@ -270,7 +265,7 @@ export const industries: Industry[] = [
     icon: Scissors,
     tagline: "Service menu, stylist booking and bridal packages",
     alsoFor: "beauty parlours, spas, barbershops, makeup artists and nail studios",
-    demo: { name: "Aura Salon", area: "Harmu" },
+    demo: { name: "Aura Salon", area: "Bandra West", city: "Mumbai" },
     theme: { tint: "#f5e1e0", deep: "#6e3349", onDeep: "#f9e9e6", silk: ["#fbefed", "#f1c7c2", "#d795a3", "#8c506b"] },
     headline: "Beautiful bookings, without the phone tag.",
     intro:
@@ -305,7 +300,6 @@ export const industries: Industry[] = [
       { title: "Fewer no-shows", text: "Reminders bring clients in on time." },
       { title: "Bigger bills", text: "Packages and add-ons sell themselves online." },
     ],
-    plan: "growth",
     timeline: "Live in about 10 days",
     faqs: [
       { q: "Can clients book a specific stylist?", a: "Yes. Each stylist can have their own days and timings, and clients choose who they want." },
@@ -321,7 +315,7 @@ export const industries: Industry[] = [
     icon: Dumbbell,
     tagline: "Membership plans, class timetable and free trials",
     alsoFor: "yoga studios, CrossFit boxes, dance studios, martial arts and sports academies",
-    demo: { name: "Pulse Fitness", area: "Morabadi" },
+    demo: { name: "Pulse Fitness", area: "Koramangala", city: "Bengaluru" },
     theme: { tint: "#e8efd6", deep: "#111111", onDeep: "#c8f031", silk: ["#f3f5ea", "#d9e9a4", "#a8c84e", "#36421c"] },
     headline: "Turn walk-ins into members.",
     intro:
@@ -356,11 +350,10 @@ export const industries: Industry[] = [
       { title: "Better renewals", text: "Members renew on time with reminders." },
       { title: "Less desk work", text: "Plans and timetable answer the common questions." },
     ],
-    plan: "growth",
     timeline: "Live in about 10 days",
     faqs: [
       { q: "Can members pay online?", a: "Yes. We can add UPI and card payments for memberships, with automatic receipts and renewal reminders." },
-      { q: "Can we track attendance?", a: "Yes — with the Automate plan we add check-ins, attendance and renewal tracking in a simple dashboard." },
+      { q: "Can we track attendance?", a: "Yes. We can add check-ins, attendance and renewal tracking in a simple dashboard." },
       { q: "Will this work for a yoga or dance studio?", a: "Definitely. Plans, timetables and trial bookings work for any fitness studio." },
     ],
     notification: { title: "Free trial booked", meta: "Rohit · Tomorrow, 6:30 AM", icon: Ticket },
@@ -372,16 +365,16 @@ export const industries: Industry[] = [
     icon: BedDouble,
     tagline: "Direct room bookings, banquets and a local guide",
     alsoFor: "homestays, resorts, guest houses, banquet halls and wedding venues",
-    demo: { name: "Palash Residency", area: "Hinoo" },
+    demo: { name: "Palash Residency", area: "Hinoo", city: "Ranchi" },
     theme: { tint: "#e3ebe3", deep: "#1e3a2f", onDeep: "#f2e3c6", silk: ["#f6f2e8", "#e8d2a4", "#e07d4c", "#2e5040"] },
     headline: "More direct bookings. Less commission.",
     intro:
-      "Let guests see your rooms, check dates and book directly with you — and show off your banquet halls in time for Ranchi's wedding season.",
+      "Let guests see your rooms, check dates and book directly with you — and show off your banquet halls in time for wedding season.",
     features: [
       { id: "top", title: "Check dates and book direct", text: "Guests choose dates and rooms right on your site. No middleman.", icon: CalendarCheck },
       { id: "rooms", title: "Rooms with photos and prices", text: "Every room, beautifully shown, with a clear price per night.", icon: BedDouble },
       { id: "banquets", title: "Banquets and weddings", text: "Show your halls, capacity and packages — and collect event enquiries.", icon: PartyPopper },
-      { id: "explore", title: "Explore Ranchi", text: "Hundru Falls, Patratu Valley and more — help guests plan their stay.", icon: Mountain },
+      { id: "explore", title: "A local guide", text: "Day trips and nearby sights — help guests plan their stay.", icon: Mountain },
       { id: "reviews", title: "Guest reviews", text: "Happy guests convince new ones better than any advert.", icon: Star },
     ],
     studioPoints: ["Date picker and direct booking", "Rooms with prices", "Banquet and wedding enquiries", "Nearby places guide"],
@@ -407,7 +400,6 @@ export const industries: Industry[] = [
       { title: "A full banquet calendar", text: "Wedding enquiries captured and followed up." },
       { title: "A better first impression", text: "Guests trust what they can see clearly." },
     ],
-    plan: "growth",
     timeline: "Live in about 2 weeks",
     faqs: [
       {
@@ -415,7 +407,7 @@ export const industries: Industry[] = [
         a: "Yes. We can work with your channel manager so availability stays in sync — or start simple with direct enquiries and grow from there.",
       },
       { q: "Can guests pay online?", a: "Yes, by UPI or card — or take a small advance online and collect the rest at check-in." },
-      { q: "We're a small homestay. Is this too much?", a: "Not at all. Our Get Online package suits homestays perfectly: beautiful photos, rooms and a WhatsApp booking button." },
+      { q: "We're a small homestay. Is this too much?", a: "Not at all. A simple, beautiful site with your rooms, photos and a WhatsApp booking button suits homestays perfectly." },
     ],
     notification: { title: "Direct booking", meta: "Deluxe room · 2 nights · ₹6,998", icon: BedDouble },
   },
@@ -426,7 +418,7 @@ export const industries: Industry[] = [
     icon: ShoppingBag,
     tagline: "Product catalogue, WhatsApp orders and store visits",
     alsoFor: "boutiques, electronics, sweet shops, hardware, furniture, gift and grocery stores",
-    demo: { name: "Tana Bana", area: "Main Road" },
+    demo: { name: "Tana Bana", area: "Koregaon Park", city: "Pune" },
     theme: { tint: "#ece6f4", deep: "#22305b", onDeep: "#f7d7e6", silk: ["#f7eff5", "#eab9d0", "#c9588b", "#3b407c"] },
     headline: "Your shop, open 24 hours — online.",
     intro:
@@ -461,7 +453,6 @@ export const industries: Industry[] = [
       { title: "Fewer “what's the price?” calls", text: "Prices and sizes are right there." },
       { title: "More walk-ins", text: "People arrive knowing exactly what they want." },
     ],
-    plan: "growth",
     timeline: "Live in about 10 days",
     faqs: [
       { q: "I have hundreds of products. Is that okay?", a: "Yes. We import your products from a spreadsheet and give you an easy way to add new ones." },
@@ -480,7 +471,7 @@ export const industries: Industry[] = [
     icon: LayoutDashboard,
     tagline: "Orders, stock, invoices and dues in one dashboard",
     alsoFor: "distributors, wholesalers, manufacturers, CA firms, real estate and service companies",
-    demo: { name: "Shree Traders", area: "Upper Bazar" },
+    demo: { name: "Shree Traders", area: "Chickpet", city: "Bengaluru" },
     theme: { tint: "#e2e8f2", deep: "#14213d", onDeep: "#e8eef8", silk: ["#eef2f8", "#c7d5ea", "#7d9ccb", "#33507e"] },
     headline: "Run your whole business from one screen.",
     intro:
@@ -515,7 +506,6 @@ export const industries: Industry[] = [
       { title: "No more stock-outs", text: "Alerts arrive before you run out." },
       { title: "Peace of mind", text: "Your whole business, on your phone." },
     ],
-    plan: "automate",
     timeline: "3–6 weeks",
     faqs: [
       {

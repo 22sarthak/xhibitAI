@@ -27,16 +27,14 @@ export function waMessage(ctx: MessageContext = {}) {
   }
   if (kind) {
     return name
-      ? `Hi ${brand}! I run ${name}, a ${kind} in ${site.brand.city}. I saw your ${kind} demo and I'd like a website like that.`
+      ? `Hi ${brand}! I run ${name}, a ${kind}. I saw your ${kind} demo and I'd like a website like that.`
       : `Hi ${brand}! I saw your ${kind} demo and I'd like something like that for my ${kind}.`;
   }
   if (ctx.topic) {
     return `Hi ${brand}! I'd like to know more about ${ctx.topic}${name ? ` for ${name}` : ""}.`;
   }
   return name
-    ? `Hi ${brand}! I run ${name} in ${site.brand.city} and I'd like to get it online.`
-    : `Hi ${brand}! I'd like to know more about getting my business online.`;
+    ? `Hi ${brand}! I run ${name} and I'd like to talk about a website or web app.`
+    : `Hi ${brand}! I'd like to talk about a website or web app.`;
 }
 
-/** True while the placeholder number in site.config.ts hasn't been replaced. */
-export const contactIsPlaceholder = /^91?0{10}$/.test(site.contact.whatsapp);

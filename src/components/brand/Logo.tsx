@@ -19,8 +19,7 @@ export function Logo({ tone = "ink", className }: { tone?: "ink" | "light"; clas
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark className="size-[1.6rem]" />
       <span
-        className={cn("font-display text-[1.45rem] leading-none tracking-[-0.03em]", tone === "light" ? "text-ivory" : "text-ink")}
-        style={{ fontWeight: 560, fontVariationSettings: '"opsz" 72' }}
+        className={cn("font-display text-[1.55rem] font-bold leading-none tracking-[-0.02em]", tone === "light" ? "text-white" : "text-ink")}
       >
         Xhibit
       </span>

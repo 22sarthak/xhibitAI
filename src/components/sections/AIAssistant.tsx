@@ -96,7 +96,7 @@ function ChatPhone({ script, chat }: { script: ChatScript; chat: ReturnType<type
         <div className="flex h-full flex-col" style={{ fontFamily: '"Plus Jakarta Sans Variable", system-ui, sans-serif' }}>
           {/* chat header */}
           <div className="flex items-center gap-3 border-b border-black/[0.06] bg-[#f7f5f2] px-4 pb-3 pt-1">
-            <svg width="11" height="18" viewBox="0 0 11 18" fill="none" stroke="#1d1a16" strokeWidth="2.2" aria-hidden="true">
+            <svg width="11" height="18" viewBox="0 0 11 18" fill="none" stroke="#0b0b0c" strokeWidth="2.2" aria-hidden="true">
               <path d="M9 2 2 9l7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="grid size-10 place-items-center rounded-full text-[15px] font-bold text-white" style={{ background: AVATAR[script.slug] }}>
@@ -205,7 +205,7 @@ function ChatPhone({ script, chat }: { script: ChatScript; chat: ReturnType<type
 
 const perks = [
   { icon: Clock, title: "Replies in seconds", text: "At 2 PM or 2 AM, every customer gets an answer." },
-  { icon: Languages, title: "Hindi, English, Hinglish", text: "It understands how Ranchi actually types." },
+  { icon: Languages, title: "Hindi, English, Hinglish", text: "It understands how India actually types." },
   { icon: Bot, title: "Books and reminds", text: "Takes bookings and sends reminders on its own." },
   { icon: Hand, title: "You're in control", text: "Read every chat and step in whenever you like." },
 ];
@@ -233,7 +233,7 @@ export function AIAssistant() {
 
         <div className="container-x section-y relative grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
-            <Eyebrow no="04" tone="light">
+            <Eyebrow no="05" tone="light">
               AI assistants
             </Eyebrow>
             <RevealHeading id="ai-title" text="Meet your new *24×7* assistant." className="mt-6 text-display" emClass="italic text-ochre" />
@@ -330,8 +330,8 @@ export function AIAssistant() {
               href={waHref(waMessage({ topic: "a WhatsApp AI assistant" }))}
               external
               variant="light"
-              icon={<WhatsAppDisc className="-ml-2 size-8" />}
-              className="shrink-0 pl-2"
+              icon={<WhatsAppDisc />}
+              className="shrink-0"
               onClick={() => track("whatsapp_click", { location: "ai" })}
             >
               Get an assistant

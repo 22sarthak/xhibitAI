@@ -16,7 +16,7 @@ const RIVALS: Record<string, [string, string]> = {
 };
 
 const steps = [
-  { title: "They search", text: "“Biryani near me.” “Child doctor in Bariatu.” People in Ranchi search like this every single day." },
+  { title: "They search", text: "“Biryani near me.” “Child doctor open now.” “Best CRM for small teams.” People search like this every single day." },
   { title: "They compare", text: "Photos, reviews, prices and timings decide who gets the visit — often in under a minute." },
   { title: "They reach out", text: "One tap to call, WhatsApp or get directions. If it's easy, they come to you." },
 ];
@@ -90,43 +90,38 @@ function SearchPhone() {
         <PhoneFrame chrome={{ bar: "#ffffff", tone: "dark" }}>
           <div className="h-full bg-white px-4 pt-2 font-sans" style={{ fontFamily: '"Plus Jakarta Sans Variable", system-ui, sans-serif' }}>
             {/* search bar */}
-            <div className="flex h-[52px] items-center gap-3 rounded-full bg-[#f3f1ee] px-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,.04)]">
+            <div className="flex h-[52px] items-center gap-3 rounded-full bg-[#f1f1ef] px-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,.04)]">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b6660" strokeWidth="2.2">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-3.5-3.5" strokeLinecap="round" />
               </svg>
-              <p className="min-w-0 flex-1 truncate text-[16px] text-[#1d1a16]">
+              <p className="min-w-0 flex-1 truncate text-[16px] text-[#0b0b0c]">
                 {s.query.slice(0, typed)}
-                <span className="ml-[1px] inline-block h-[18px] w-[2px] translate-y-[3px] animate-pulse bg-[#c4532d]" />
+                <span className="ml-[1px] inline-block h-[18px] w-[2px] translate-y-[3px] animate-pulse bg-[#e2501f]" />
               </p>
             </div>
             <div className="mt-3 flex gap-2 text-[13px] font-medium">
               {["All", "Maps", "Images", "Reviews"].map((t, i) => (
-                <span key={t} className={i === 1 ? "rounded-full bg-[#1d1a16] px-3 py-1.5 text-white" : "rounded-full px-3 py-1.5 text-[#6b6660]"}>
+                <span key={t} className={i === 1 ? "rounded-full bg-[#0b0b0c] px-3 py-1.5 text-white" : "rounded-full px-3 py-1.5 text-[#6b6660]"}>
                   {t}
                 </span>
               ))}
             </div>
 
             {/* map view */}
-            <div className="relative mt-3 h-[150px] overflow-hidden rounded-[20px] bg-[#ece6dc]">
-              <svg viewBox="0 0 360 150" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
-                <path d="M-10 112 C 70 92, 130 132, 210 104 S 330 72, 380 84" stroke="#cfe0e6" strokeWidth="12" fill="none" />
-                <path d="M0 40 H360 M0 82 H360 M80 0 V150 M190 0 V150 M285 0 V150" stroke="#faf7f2" strokeWidth="6" />
-                <path d="M0 140 L360 18" stroke="#faf7f2" strokeWidth="9" />
-                <rect x="200" y="48" width="52" height="24" rx="5" fill="#d6e3c6" />
-                <rect x="18" y="92" width="44" height="22" rx="5" fill="#d6e3c6" />
-              </svg>
-              <span className="absolute left-[22%] top-[30%] size-3 rounded-full bg-[#9b958c] ring-2 ring-white" />
-              <span className="absolute left-[74%] top-[62%] size-3 rounded-full bg-[#9b958c] ring-2 ring-white" />
+            <div className="relative mt-3 h-[150px] overflow-hidden rounded-[20px] bg-[#f2efe9]">
+              <img src="/maps/koramangala.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+              <span className="absolute left-[22%] top-[30%] size-3 rounded-full bg-[#ea4335]/70 ring-2 ring-white" />
+              <span className="absolute left-[74%] top-[62%] size-3 rounded-full bg-[#ea4335]/70 ring-2 ring-white" />
+              <span className="absolute bottom-1 right-1.5 rounded bg-white/80 px-1 text-[8px] text-black/55">© OpenStreetMap</span>
               <motion.span
                 className="absolute left-[50%] top-[22%] -translate-x-1/2"
                 animate={showResults ? { y: [0, -10, 0], scale: [1, 1.15, 1] } : { y: 0, scale: 1 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
                 <svg width="26" height="34" viewBox="0 0 38 48" className="drop-shadow-md">
-                  <path d="M19 47s17-15.6 17-28A17 17 0 0 0 2 19c0 12.4 17 28 17 28z" fill="#c4532d" />
-                  <circle cx="19" cy="19" r="7" fill="#fff" />
+                  <path d="M19 47s17-15.6 17-28A17 17 0 0 0 2 19c0 12.4 17 28 17 28z" fill="#ea4335" />
+                  <circle cx="19" cy="19" r="7" fill="#a50e0e" />
                 </svg>
               </motion.span>
             </div>
@@ -147,15 +142,15 @@ function SearchPhone() {
                   <motion.div
                     variants={{ hidden: { opacity: 0, y: 14, scale: 0.97 }, show: { opacity: 1, y: 0, scale: 1 } }}
                     transition={{ type: "spring", stiffness: 260, damping: 22 }}
-                    className="relative rounded-[22px] bg-white p-3 shadow-[0_0_0_2px_#c4532d,0_18px_40px_-14px_rgba(196,83,45,.55)]"
+                    className="relative rounded-[22px] bg-white p-3 shadow-[0_0_0_2px_#e2501f,0_18px_40px_-14px_rgba(196,83,45,.55)]"
                   >
-                    <span className="absolute -top-3 right-4 rounded-full bg-[#c4532d] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-white">
+                    <span className="absolute -top-3 right-4 rounded-full bg-[#e2501f] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-white">
                       That's you
                     </span>
                     <div className="flex gap-3">
-                      <img src={`/demos/${s.slug}/hero.webp`} alt="" className="size-[72px] shrink-0 rounded-xl object-cover" />
+                      <img src={`/demos/${s.slug}/${s.slug === "salons" ? "interior" : "hero"}.webp`} alt="" className="size-[72px] shrink-0 rounded-xl object-cover" />
                       <div className="min-w-0">
-                        <p className="truncate text-[16px] font-bold text-[#1d1a16]">{businessName}</p>
+                        <p className="truncate text-[16px] font-bold text-[#0b0b0c]">{businessName}</p>
                         <p className="mt-0.5 flex items-center gap-1.5 text-[12.5px] text-[#4a4641]">
                           <b>{s.rating}</b> <MiniStars /> <span className="text-[#77736d]">({s.reviews})</span>
                         </p>
@@ -169,8 +164,8 @@ function SearchPhone() {
                           key={a}
                           className={
                             i === 0
-                              ? "rounded-full bg-[#1d1a16] py-2 text-center text-[11.5px] font-semibold text-white"
-                              : "rounded-full bg-[#f3f1ee] py-2 text-center text-[11.5px] font-semibold text-[#1d1a16]"
+                              ? "rounded-full bg-[#0b0b0c] py-2 text-center text-[11.5px] font-semibold text-white"
+                              : "rounded-full bg-[#f1f1ef] py-2 text-center text-[11.5px] font-semibold text-[#0b0b0c]"
                           }
                         >
                           {a}
@@ -212,6 +207,7 @@ export function SearchStory() {
           <RevealHeading
             id="why-title"
             text="Your next customer is *searching* right now."
+            emClass="italic text-cobalt"
             className="mt-6 text-display text-ink"
           />
           <Reveal delay={0.1}>
@@ -223,7 +219,7 @@ export function SearchStory() {
           <RevealGroup className="mt-10 grid gap-6" stagger={0.1}>
             {steps.map((st, i) => (
               <RevealItem key={st.title} className="flex gap-5">
-                <span className="tabular mt-0.5 font-display text-[1.75rem] leading-none text-clay">0{i + 1}</span>
+                <span className="tabular mt-0.5 font-display text-[1.75rem] leading-none text-cobalt">0{i + 1}</span>
                 <div>
                   <h3 className="font-sans text-[1.0625rem] font-bold">{st.title}</h3>
                   <p className="mt-1 text-ink-soft">{st.text}</p>

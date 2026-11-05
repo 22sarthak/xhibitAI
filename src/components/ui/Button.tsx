@@ -7,22 +7,21 @@ export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
   "group/btn relative inline-flex select-none items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-semibold tracking-[-0.01em] " +
-  "transition-[transform,background-color,color,box-shadow] duration-300 ease-(--ease-soft) active:scale-[0.97] disabled:pointer-events-none disabled:opacity-60";
+  "transition-[transform,background-color,color,box-shadow] duration-200 ease-(--ease-soft) active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
 
 const sizes: Record<ButtonSize, string> = {
   sm: "h-10 px-4 text-[0.875rem]",
   md: "h-12 px-6 text-[0.95rem]",
-  lg: "h-14 pl-7 pr-7 text-[1rem]",
+  lg: "h-[3.4rem] px-7 text-[1rem]",
 };
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "bg-ink text-ivory shadow-[0_14px_30px_-14px_rgb(29_26_22/0.75)] hover:-translate-y-0.5 hover:bg-[#2a2520] hover:shadow-[0_20px_40px_-16px_rgb(29_26_22/0.7)]",
-  secondary: "bg-linen/70 text-ink ring-1 ring-ink/12 backdrop-blur-md hover:-translate-y-0.5 hover:bg-linen hover:ring-ink/25",
+  primary: "bg-ink text-white hover:bg-[#2b2b30]",
+  secondary: "bg-linen text-ink ring-1 ring-ink/15 hover:ring-ink/40",
   ghost: "text-ink hover:bg-ink/5",
-  light: "bg-ivory text-ink shadow-[0_14px_30px_-14px_rgb(0_0_0/0.6)] hover:-translate-y-0.5 hover:bg-white",
+  light: "bg-white text-ink hover:bg-white/85",
   "outline-light": "text-ivory ring-1 ring-ivory/25 hover:bg-ivory/10 hover:ring-ivory/45",
-  whatsapp: "bg-wa text-[#06301a] shadow-[0_14px_30px_-14px_rgb(18_140_126/0.8)] hover:-translate-y-0.5 hover:bg-[#2be070]",
+  whatsapp: "bg-wa text-[#06301a] hover:bg-[#2be070]",
 };
 
 export const buttonClasses = (variant: ButtonVariant = "primary", size: ButtonSize = "md", className?: string) =>

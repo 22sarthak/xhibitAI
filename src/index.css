@@ -3,46 +3,56 @@
 
 /* ──────────────────────────────────────────────────────────────────────────
  *  XHIBIT DESIGN SYSTEM
- *  Concept: "The Gallery" — a calm, well-lit space where every business is
- *  an exhibit. Palette drawn from Jharkhand's Sohrai/Khovar wall art and red
- *  earth (red oxide, ochre, kaolin white, charcoal), kept quiet and premium.
+ *  Concept: "The Gallery" — a bright, well-lit space where every idea is an
+ *  exhibit. Porcelain-white walls, black type, and a set of vivid accent hues
+ *  (vermilion, cobalt, emerald, violet, saffron, rose) used one per moment.
  * ────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  --color-ivory: #fbf7f0;
-  --color-linen: #fffdf9;
-  --color-sand: #f3ebdf;
-  --color-sand-deep: #e8dcc9;
-  --color-ink: #1d1a16;
-  --color-ink-soft: #5c544b;
-  --color-ink-mute: #8a8176;
-  --color-line: rgb(29 26 22 / 0.09);
-  --color-clay: #c4532d;
-  --color-clay-deep: #a33f1e;
-  --color-ochre: #e9a23b;
-  --color-ochre-soft: #f6dcae;
-  --color-sal: #2e4b3c;
-  --color-sal-soft: #dfe8df;
-  --color-dusk: #17152a;
-  --color-dusk-2: #221f3b;
-  --color-blush: #f4d9cc;
+  /* Neutral porcelain base, true-black ink, and a family of accent hues. */
+  --color-ivory: #f5f5f2;       /* page: porcelain white */
+  --color-linen: #ffffff;       /* cards */
+  --color-sand: #ebebe6;        /* stone: chips, alt surfaces */
+  --color-sand-deep: #dcdcd5;
+  --color-ink: #0b0b0c;
+  --color-ink-soft: #45454a;
+  --color-ink-mute: #76767b;
+  --color-line: rgb(11 11 12 / 0.09);
+
+  --color-clay: #e2501f;        /* vermilion */
+  --color-clay-deep: #b33a12;
+  --color-ochre: #f2a20c;       /* saffron */
+  --color-ochre-soft: #fbe6b8;
+  --color-sal: #0e7a55;         /* emerald */
+  --color-sal-soft: #dcefe5;
+  --color-cobalt: #2747e3;
+  --color-cobalt-deep: #1b34b5;
+  --color-cobalt-soft: #e3e8fc;
+  --color-violet: #6a46d9;
+  --color-violet-soft: #ece6fb;
+  --color-rose: #d93a6b;
+  --color-rose-deep: #b4245a;
+  --color-rose-soft: #fbe2ea;
+  --color-blush: #f6e1e6;
+  --color-dusk: #0d0e18;        /* dark sections */
+  --color-dusk-2: #1a1c2b;
   --color-wa: #25d366;
   --color-wa-deep: #128c7e;
 
-  --font-display: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Redaction", ui-serif, Georgia, "Times New Roman", serif;
   --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     sans-serif;
 
   /* Fluid type scale */
   --text-hero: min(clamp(2.45rem, 1.15rem + 5.6vw, 6.9rem), 11svh);
   --text-hero--line-height: 0.98;
-  --text-hero--letter-spacing: -0.035em;
+  --text-hero--letter-spacing: -0.025em;
   --text-display: clamp(2.2rem, 1.25rem + 3.5vw, 4.4rem);
   --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.03em;
+  --text-display--letter-spacing: -0.02em;
   --text-title: clamp(1.45rem, 1.2rem + 0.9vw, 2rem);
   --text-title--line-height: 1.15;
-  --text-title--letter-spacing: -0.018em;
+  --text-title--letter-spacing: -0.01em;
   --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3rem);
   --text-lead--line-height: 1.6;
   --text-eyebrow: 0.75rem;
@@ -52,20 +62,18 @@
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-swift: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* Warm-tinted shadows — never grey */
-  --shadow-soft: 0 1px 2px rgb(60 35 15 / 0.05), 0 8px 20px -6px rgb(60 35 15 / 0.08);
-  --shadow-lift: 0 1px 2px rgb(60 35 15 / 0.05), 0 14px 30px -10px rgb(60 35 15 / 0.16),
-    0 42px 80px -30px rgb(60 35 15 / 0.22);
-  --shadow-device: 0 2px 6px rgb(30 18 8 / 0.1), 0 30px 60px -18px rgb(30 18 8 / 0.38),
-    0 80px 120px -50px rgb(30 18 8 / 0.4);
-  --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.5) inset, 0 10px 30px -10px rgb(196 83 45 / 0.45);
+  /* Neutral, slightly cool shadows */
+  --shadow-soft: 0 1px 2px rgb(12 14 24 / 0.05), 0 8px 20px -6px rgb(12 14 24 / 0.08);
+  --shadow-lift: 0 1px 2px rgb(12 14 24 / 0.05), 0 14px 30px -10px rgb(12 14 24 / 0.14),
+    0 42px 80px -30px rgb(12 14 24 / 0.2);
+  --shadow-device: 0 2px 6px rgb(12 14 24 / 0.1), 0 30px 60px -18px rgb(12 14 24 / 0.34),
+    0 80px 120px -50px rgb(12 14 24 / 0.36);
 
   --radius-card: 1.75rem;
 
   --animate-marquee: marquee var(--marquee-duration, 48s) linear infinite;
   --animate-marquee-reverse: marquee-reverse var(--marquee-duration, 48s) linear infinite;
   --animate-float: float 7s ease-in-out infinite;
-  --animate-pulse-ring: pulse-ring 2.4s var(--ease-soft) infinite;
   --animate-drift-a: drift-a 22s ease-in-out infinite alternate;
   --animate-drift-b: drift-b 26s ease-in-out infinite alternate;
   --animate-drift-c: drift-c 30s ease-in-out infinite alternate;
@@ -81,10 +89,6 @@
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0); }
     50% { transform: translate3d(0, -10px, 0); }
-  }
-  @keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 0.55; }
-    80%, 100% { transform: scale(1.75); opacity: 0; }
   }
   @keyframes drift-a {
     from { transform: translate3d(-8%, -6%, 0) scale(1); }
@@ -126,8 +130,7 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 380;
-    font-optical-sizing: auto;
+    font-weight: 400;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
@@ -136,9 +139,9 @@
     font-family: inherit;
     font-weight: inherit;
   }
-  ::selection { background: var(--color-ochre-soft); color: var(--color-ink); }
+  ::selection { background: var(--color-cobalt-soft); color: var(--color-ink); }
   :focus-visible {
-    outline: 2.5px solid var(--color-clay);
+    outline: 2.5px solid var(--color-cobalt);
     outline-offset: 3px;
   }
   button { cursor: pointer; }
@@ -178,7 +181,7 @@
     inset: 0;
     pointer-events: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    opacity: 0.11;
+    opacity: 0.05;
     mix-blend-mode: multiply;
     border-radius: inherit;
   }

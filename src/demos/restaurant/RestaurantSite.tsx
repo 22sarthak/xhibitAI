@@ -27,13 +27,13 @@ type Item = { name: string; desc: string; price: number; veg: boolean; img?: str
 
 const MENU: Record<string, Item[]> = {
   Biryani: [
-    { name: "Hyderabadi Dum Biryani", desc: "Chicken, saffron rice, sealed and slow-cooked", price: 249, veg: false, img: "biryani", tag: "Today's special" },
+    { name: "Hyderabadi Dum Biryani", desc: "Chicken, saffron rice, sealed and slow-cooked", price: 249, veg: false, img: "festive", tag: "Today's special" },
     { name: "Veg Dum Biryani", desc: "Seasonal vegetables, fried onions, mint", price: 199, veg: true },
     { name: "Mutton Biryani", desc: "Tender mutton, whole spices, kewra", price: 349, veg: false },
   ],
   Starters: [
     { name: "Paneer Tikka", desc: "Char-grilled cottage cheese, mint chutney", price: 249, veg: true, img: "paneer-tikka" },
-    { name: "Chicken Seekh Kebab", desc: "Minced chicken, smoked in the tandoor", price: 299, veg: false, img: "kebab" },
+    { name: "Chicken Tikka Skewers", desc: "Marinated chicken, smoked in the tandoor", price: 299, veg: false, img: "kebab" },
     { name: "Hara Bhara Kebab", desc: "Spinach and green-pea patties", price: 199, veg: true },
   ],
   Mains: [
@@ -73,7 +73,7 @@ function VegMark({ veg }: { veg: boolean }) {
   );
 }
 
-export default function RestaurantSite({ name, area }: DemoProps) {
+export default function RestaurantSite({ name, area, city }: DemoProps) {
   const { mode, scrollToSection } = useScreen();
   const desktop = mode === "desktop";
   const [tab, setTab] = useState("Biryani");
@@ -118,7 +118,7 @@ export default function RestaurantSite({ name, area }: DemoProps) {
             <p className="truncate text-[20px] leading-none" style={serif}>
               {name}
             </p>
-            <p className="mt-1 text-[10.5px] uppercase tracking-[0.16em] opacity-70">{area}, Ranchi</p>
+            <p className="mt-1 text-[10.5px] uppercase tracking-[0.16em] opacity-70">{area}, {city}</p>
           </div>
         </div>
         <nav className="hidden items-center gap-9 text-[15px] @3xl:flex" aria-label="Demo menu">
@@ -150,7 +150,6 @@ export default function RestaurantSite({ name, area }: DemoProps) {
         <div className="absolute inset-x-0 bottom-0 p-6 text-[#fbefe2] @3xl:inset-y-0 @3xl:flex @3xl:max-w-[660px] @3xl:flex-col @3xl:justify-center @3xl:p-14">
           <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[12.5px] backdrop-blur-md">
             <span className="relative flex size-2">
-              <span className="absolute inset-0 animate-ping rounded-full bg-[#4ade80] opacity-70" />
               <span className="relative size-2 rounded-full bg-[#4ade80]" />
             </span>
             Open now · till 11 PM
@@ -197,7 +196,7 @@ export default function RestaurantSite({ name, area }: DemoProps) {
       <section className="px-5 @3xl:px-12">
         <div className="overflow-hidden rounded-[26px] @3xl:grid @3xl:grid-cols-2" style={{ background: C.maroon, color: "#fbefe2" }}>
           <div className="relative h-[220px] @3xl:h-auto">
-            <DemoImg src={img("biryani")} alt="Hyderabadi dum biryani" />
+            <DemoImg src={img("festive")} alt="Hyderabadi dum biryani" />
             <span className="absolute left-4 top-4 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em]" style={{ background: C.saffron, color: C.deep }}>
               Today's special
             </span>
@@ -269,18 +268,18 @@ export default function RestaurantSite({ name, area }: DemoProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.28 }}
-            className="mt-5 grid gap-3 @3xl:grid-cols-3 @3xl:gap-5"
+            className="mt-5 grid gap-3 @3xl:grid-cols-2 @3xl:gap-4"
           >
             {MENU[tab].map((it) => {
               const q = cart[it.name] ?? 0;
               return (
-                <li key={it.name} className="flex gap-4 rounded-[22px] bg-white p-3 shadow-[0_1px_2px_rgba(60,20,10,.05),0_8px_24px_-12px_rgba(60,20,10,.15)] @3xl:flex-col @3xl:p-4">
+                <li key={it.name} className="flex gap-4 rounded-[22px] bg-white p-3 shadow-[0_1px_2px_rgba(60,20,10,.05),0_8px_24px_-12px_rgba(60,20,10,.15)] @3xl:p-4">
                   {it.img ? (
-                    <div className="size-[92px] shrink-0 overflow-hidden rounded-[16px] bg-[#f3e2cc] @3xl:h-[170px] @3xl:w-full">
+                    <div className="size-[92px] shrink-0 overflow-hidden rounded-[16px] bg-[#f3e2cc] @3xl:size-[112px]">
                       <DemoImg src={img(it.img)} alt={it.name} />
                     </div>
                   ) : (
-                    <div className="grid size-[92px] shrink-0 place-items-center rounded-[16px] @3xl:hidden" style={{ background: C.paper }}>
+                    <div className="grid size-[92px] shrink-0 place-items-center rounded-[16px] @3xl:size-[112px]" style={{ background: C.paper }}>
                       <span className="text-[30px]" style={{ ...serif, color: C.maroon }}>
                         {it.name[0]}
                       </span>
@@ -412,7 +411,7 @@ export default function RestaurantSite({ name, area }: DemoProps) {
         <div tabIndex={0} role="region" aria-label="Photo gallery" className="no-scrollbar mt-6 flex snap-x gap-3 overflow-x-auto px-5 @3xl:grid @3xl:grid-cols-4 @3xl:px-12">
           {[
             ["interior", "Our dining room"],
-            ["festive", "Festive specials"],
+            ["curry", "Chef's specials"],
             ["thali", "The Kesar thali"],
             ["ambience", "Family dinners"],
           ].map(([src, caption], i) => (
@@ -436,7 +435,7 @@ export default function RestaurantSite({ name, area }: DemoProps) {
           </div>
           <div className="mt-6 grid gap-3 @3xl:mt-0 @3xl:grid-cols-3">
             {[
-              ["Priya S.", "The best dum biryani in Ranchi. They even remembered our order from last time!"],
+              ["Priya S.", `The best dum biryani in ${city}. They even remembered our order from last time!`],
               ["Rahul K.", "Booked a table for eight in under a minute. Butter chicken was perfect."],
               ["Ananya M.", "Lovely for family dinners — clean, quick, and the phirni is a must."],
             ].map(([who, text]) => (
@@ -452,17 +451,10 @@ export default function RestaurantSite({ name, area }: DemoProps) {
 
       {/* Visit */}
       <section data-section="visit" className="px-5 pb-16 @3xl:grid @3xl:grid-cols-2 @3xl:gap-10 @3xl:px-12 @3xl:pb-24">
-        <div className="relative h-[220px] overflow-hidden rounded-[26px] @3xl:h-auto" style={{ background: "#f0e2cd" }} aria-hidden="true">
-          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
-            <rect width="400" height="240" fill="#efe0c9" />
-            <path d="M-10 170 C 80 150, 140 190, 230 160 S 360 120, 420 140" stroke="#cfe0e8" strokeWidth="18" fill="none" />
-            <path d="M0 60 H400 M0 120 H400 M90 0 V240 M210 0 V240 M320 0 V240" stroke="#fff" strokeWidth="9" />
-            <path d="M0 200 L400 30" stroke="#fff" strokeWidth="13" />
-            <rect x="230" y="70" width="70" height="38" rx="6" fill="#d9e7c9" />
-            <rect x="20" y="130" width="54" height="34" rx="6" fill="#d9e7c9" />
-          </svg>
+        <div className="relative h-[220px] overflow-hidden rounded-[26px] @3xl:h-auto" style={{ background: "#f2efe9" }} aria-hidden="true">
+          <img src="/maps/indiranagar.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+          <span className="absolute bottom-1.5 right-2 rounded bg-white/80 px-1.5 py-0.5 text-[9px] text-black/60">© OpenStreetMap</span>
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
-            <span className="absolute left-1/2 top-full size-5 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full" style={{ background: `${C.maroon}55` }} />
             <svg width="38" height="48" viewBox="0 0 38 48" className="relative drop-shadow-lg">
               <path d="M19 47s17-15.6 17-28A17 17 0 0 0 2 19c0 12.4 17 28 17 28z" fill={C.maroon} />
               <circle cx="19" cy="19" r="7" fill={C.saffron} />
@@ -474,7 +466,7 @@ export default function RestaurantSite({ name, area }: DemoProps) {
             Visit us
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-black/70">
-            Main Road, {area}, Ranchi, Jharkhand
+            {area}, {city}
             <br />
             Free parking for 20 cars
           </p>

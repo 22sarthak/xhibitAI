@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowUpRight, CalendarDays, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Mail, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { site } from "../../../site.config";
 import type { IndustrySlug } from "../../content/industries";
@@ -7,7 +7,7 @@ import { track } from "../../lib/api";
 import { ease } from "../../lib/motion";
 import { usePersonalization } from "../../lib/personalization";
 import { cn } from "../../lib/utils";
-import { telHref, waHref, waMessage } from "../../lib/whatsapp";
+import { mailHref, telHref, waHref, waMessage } from "../../lib/whatsapp";
 import { EnquiryForm } from "../forms/EnquiryForm";
 import { Eyebrow } from "../ui/Eyebrow";
 import { WhatsAppIcon } from "../ui/icons";
@@ -52,21 +52,21 @@ function ContactCard({
 
 export function Contact({ defaultType, source = "home" }: { defaultType?: IndustrySlug; source?: string }) {
   const { name } = usePersonalization();
-  const { contact, promises, brand } = site;
+  const { contact, promises } = site;
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative px-2 pb-2 sm:px-3 sm:pb-3">
       <div className="grain relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[44px]">
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-sand" />
-        <div aria-hidden="true" className="absolute -right-[15%] -top-[25%] -z-10 h-[80%] w-[70%] rounded-full bg-[radial-gradient(closest-side,#f5c79d,transparent)]" />
-        <div aria-hidden="true" className="absolute -bottom-[30%] -left-[10%] -z-10 h-[80%] w-[60%] rounded-full bg-[radial-gradient(closest-side,#f4d9cc,transparent)]" />
+        <div aria-hidden="true" className="absolute -right-[15%] -top-[25%] -z-10 h-[80%] w-[70%] rounded-full bg-[radial-gradient(closest-side,#dfe5fb,transparent)]" />
+        <div aria-hidden="true" className="absolute -bottom-[30%] -left-[10%] -z-10 h-[80%] w-[60%] rounded-full bg-[radial-gradient(closest-side,#f8dfe6,transparent)]" />
 
         <div className="container-x section-y grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
             <Eyebrow no="09">Contact</Eyebrow>
-            <RevealHeading id="contact-title" text="Let's put your business *online*." className="mt-6 text-display" />
+            <RevealHeading id="contact-title" text="Tell us what you want to *build*." className="mt-6 text-display" />
             <Reveal delay={0.1}>
               <p className="mt-6 text-lead text-ink-soft">
-                Tell us a little about your business.
+                A website, a web app or just an idea. Tell us a little about it.
                 {promises.whatsappReplyHours ? ` We'll reply on WhatsApp within ${promises.whatsappReplyHours} hours (${promises.workingHours}).` : ""}
               </p>
             </Reveal>
@@ -77,7 +77,7 @@ export function Contact({ defaultType, source = "home" }: { defaultType?: Indust
                 external
                 icon={<WhatsAppIcon className="size-6" />}
                 title="Chat on WhatsApp"
-                text={`Fastest way to reach us · ${contact.phoneDisplay}`}
+                text={`Fastest way to reach us · ${contact.whatsappDisplay}`}
                 onClick={() => track("whatsapp_click", { location: `contact_${source}` })}
               />
               <ContactCard
@@ -88,20 +88,20 @@ export function Contact({ defaultType, source = "home" }: { defaultType?: Indust
                 onClick={() => track("call_click", { location: `contact_${source}` })}
               />
               <ContactCard
-                href={contact.bookingUrl}
-                external
-                icon={<CalendarDays className="size-5" strokeWidth={1.8} />}
-                title="Book a free 20-minute call"
-                text="Pick a time that suits you"
-                onClick={() => track("booking_click", { location: `contact_${source}` })}
+                href={mailHref()}
+                icon={<Mail className="size-5" strokeWidth={1.8} />}
+                title="Email us"
+                text={contact.email}
+                onClick={() => track("email_click", { location: `contact_${source}` })}
               />
-              {promises.inPersonVisits && (
+              {contact.bookingUrl && (
                 <ContactCard
-                  href={contact.mapsUrl}
+                  href={contact.bookingUrl}
                   external
-                  icon={<MapPin className="size-5" strokeWidth={1.8} />}
-                  title="We'll come to you"
-                  text={`Anywhere in ${brand.city} · based in ${contact.address.split(",")[0]}`}
+                  icon={<CalendarDays className="size-5" strokeWidth={1.8} />}
+                  title="Book a free 20-minute call"
+                  text="Pick a time that suits you"
+                  onClick={() => track("booking_click", { location: `contact_${source}` })}
                 />
               )}
             </Reveal>

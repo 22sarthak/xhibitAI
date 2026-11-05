@@ -42,7 +42,7 @@ export function PreviewStudio() {
         <div className="container-x section-y relative grid gap-12 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-0">
           {/* Top: heading + inputs */}
           <div className="lg:col-span-6 lg:row-start-1">
-            <Eyebrow no="02">Try it yourself</Eyebrow>
+            <Eyebrow no="03">Try it yourself</Eyebrow>
             <RevealHeading id="studio-title" text="See your business online — in *five seconds*." className="mt-6 text-display" />
             <Reveal delay={0.1}>
               <p className="mt-5 max-w-[32rem] text-lead text-ink-soft">
@@ -105,7 +105,7 @@ export function PreviewStudio() {
                       {selected && (
                         <motion.span
                           layoutId="studio-chip"
-                          className="absolute inset-0 rounded-2xl bg-ink shadow-[0_10px_24px_-10px_rgb(29_26_22/0.6)]"
+                          className="absolute inset-0 rounded-2xl bg-ink shadow-[0_10px_24px_-10px_rgb(11_11_12/0.6)]"
                           transition={{ type: "spring", stiffness: 420, damping: 34 }}
                         />
                       )}
@@ -133,13 +133,7 @@ export function PreviewStudio() {
                     <DemoDevice industry={industry} name={name} />
                   </motion.div>
                 </AnimatePresence>
-                <p className="mt-6 flex items-center justify-center gap-2 text-[0.8125rem] font-medium text-ink-soft">
-                  <span className="relative flex size-2">
-                    <span className="absolute inset-0 animate-ping rounded-full bg-sal/60" />
-                    <span className="relative size-2 rounded-full bg-sal" />
-                  </span>
-                  It's live — tap, scroll and try things
-                </p>
+                <p className="mt-6 text-center text-[0.8125rem] font-medium text-ink-soft">It's live: tap, scroll and try things.</p>
               </div>
             </div>
           </div>
@@ -186,8 +180,7 @@ export function PreviewStudio() {
                 size="lg"
                 href={waHref(waMessage({ kind: industry.kind, businessName: name }))}
                 external
-                icon={<WhatsAppDisc className="-ml-3 size-8" />}
-                className="pl-4"
+                icon={<WhatsAppDisc />}
                 onClick={() => track("whatsapp_click", { location: "studio", industry: slug })}
               >
                 I want this for {who.length > 18 ? "my business" : who}
