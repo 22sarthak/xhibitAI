@@ -64,12 +64,12 @@ export function normalisePhone(raw: string) {
 const fieldCls =
   "h-14 w-full rounded-2xl bg-white px-4 text-[1rem] text-ink ring-1 ring-ink/12 transition-shadow placeholder:text-ink-mute/70 focus:outline-none focus:ring-2 focus:ring-clay aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-[#c2410c]";
 
-export function EnquiryForm({ defaultType, source }: { defaultType?: IndustrySlug; source: string }) {
+export function EnquiryForm({ defaultType, defaultProject, source }: { defaultType?: IndustrySlug; defaultProject?: string; source: string }) {
   const uid = useId();
   const { name: businessName, setName: setBusinessName, city: personalCity } = usePersonalization();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [project, setProject] = useState("");
+  const [project, setProject] = useState(defaultProject ?? "");
   const [budget, setBudget] = useState("");
   const [city, setCity] = useState(personalCity);
   const [message, setMessage] = useState("");

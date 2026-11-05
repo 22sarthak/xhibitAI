@@ -1,6 +1,7 @@
 import { useLocation } from "react-router";
 import { site } from "../../../site.config";
 import { curtainFor, industries } from "../../content/industries";
+import { curtainForService, services } from "../../content/services";
 import { track } from "../../lib/api";
 import { usePersonalization } from "../../lib/personalization";
 import { useSmoothScroll } from "../../lib/smooth-scroll";
@@ -60,7 +61,20 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Industries" className="lg:col-span-3 lg:col-start-7">
+          <nav aria-label="Services" className="lg:col-span-2 lg:col-start-6">
+            <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ivory/45">Services</p>
+            <ul className="mt-5 grid gap-2.5">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <TLink to={`/services/${s.slug}`} curtain={curtainForService(s)} className={linkCls}>
+                    {s.short}
+                  </TLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Industries" className="lg:col-span-2 lg:col-start-8">
             <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ivory/45">Live demos</p>
             <ul className="mt-5 grid gap-2.5">
               {industries.map((ind) => (
@@ -73,7 +87,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="grid grid-cols-2 gap-10 lg:col-span-3 lg:grid-cols-1">
+          <div className="grid grid-cols-2 gap-10 lg:col-span-3 lg:col-start-10 lg:grid-cols-1">
             <nav aria-label="Company">
               <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ivory/45">Xhibit</p>
               <ul className="mt-5 grid gap-2.5">

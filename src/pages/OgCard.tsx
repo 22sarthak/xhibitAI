@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { LogoMark } from "../components/brand/Logo";
 import { DemoDevice } from "../components/device/DemoDevice";
+import { LiveChat, LiveNotifications } from "../components/sections/LiveVisuals";
 import { baseSilk, industries, industryBySlug } from "../content/industries";
+import { serviceBySlug } from "../content/services";
 
 /**
  * Development-only: a 1200×630 social share card. `npm run og` screenshots
@@ -10,9 +12,10 @@ import { baseSilk, industries, industryBySlug } from "../content/industries";
  */
 export default function OgCard() {
   const { slug } = useParams();
-  const industry = industryBySlug(slug) ?? industries[0];
+  const service = slug?.startsWith("service-") ? serviceBySlug(slug.slice("service-".length)) : undefined;
+  const industry = industryBySlug(service ? (service.demo ?? "clinics") : slug) ?? industries[0];
   const isHome = slug === "home";
-  const silk = isHome ? baseSilk : industry.theme.silk;
+  const silk = isHome || (service && !service.demo) ? baseSilk : industry.theme.silk;
 
   useEffect(() => {
     document.documentElement.style.background = "#f5f5f2";
@@ -38,29 +41,49 @@ export default function OgCard() {
 
       <div className="absolute left-[72px] top-[160px] w-[500px]">
         <p className="text-[16px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
-          {isHome ? "Websites · Web apps · AI tools" : `Exhibit ${industry.no} — ${industry.name}`}
+          {isHome ? "Websites · Web apps · AI tools" : service ? `Services — ${service.name}` : `Exhibit ${industry.no} — ${industry.name}`}
         </p>
         <p className="mt-6 font-display text-[64px] leading-[1] tracking-[-0.025em] text-ink">
           {isHome ? (
             <>
               Made with you. <em className="text-cobalt">Made to be seen.</em>
             </>
+          ) : service ? (
+            service.headline.split("*").map((part, i) => (i % 2 ? <em key={i} className={service.accent}>{part}</em> : part))
           ) : (
             industry.headline
           )}
         </p>
         <p className="mt-7 text-[21px] leading-snug text-ink-soft">
-          {isHome ? "See your design before you pay · Live in days, not months" : "See a live demo — try it with your own name"}
+          {isHome || service ? "See your design before you pay · Live in days, not months" : "See a live demo — try it with your own name"}
         </p>
       </div>
 
-      {/* MacBook bleeding off the right edge, iPhone in front of it */}
-      <div className="absolute right-[-150px] top-[120px] w-[760px] drop-shadow-[0_30px_40px_rgb(0_0_0/0.18)]">
-        <DemoDevice industry={industry} mode="laptop" interactive={false} />
-      </div>
-      <div className="absolute bottom-[-150px] left-[600px] w-[210px] rotate-[-4deg] drop-shadow-[0_24px_30px_rgb(0_0_0/0.28)]">
-        <DemoDevice industry={industry} mode="phone" interactive={false} />
-      </div>
+      {service && !service.demo ? (
+        /* AI: the assistant chat and the lock screen, side by side */
+        <>
+          <div className="absolute right-[250px] top-[90px] h-[600px] w-[300px] rotate-[-3deg] rounded-[46px] bg-[#111] p-[9px] drop-shadow-[0_30px_40px_rgb(0_0_0/0.25)]">
+            <div className="relative h-full overflow-hidden rounded-[38px]">
+              <LiveChat autoplay={false} />
+            </div>
+          </div>
+          <div className="absolute right-[-40px] top-[150px] h-[600px] w-[300px] rotate-[4deg] rounded-[46px] bg-[#111] p-[9px] drop-shadow-[0_30px_40px_rgb(0_0_0/0.25)]">
+            <div className="relative h-full overflow-hidden rounded-[38px]">
+              <LiveNotifications autoplay={false} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* MacBook bleeding off the right edge, iPhone in front of it */}
+          <div className="absolute right-[-150px] top-[120px] w-[760px] drop-shadow-[0_30px_40px_rgb(0_0_0/0.18)]">
+            <DemoDevice industry={industry} mode="laptop" interactive={false} />
+          </div>
+          <div className="absolute bottom-[-150px] left-[600px] w-[210px] rotate-[-4deg] drop-shadow-[0_24px_30px_rgb(0_0_0/0.28)]">
+            <DemoDevice industry={industry} mode="phone" interactive={false} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -50,7 +50,7 @@ function ContactCard({
   );
 }
 
-export function Contact({ defaultType, source = "home" }: { defaultType?: IndustrySlug; source?: string }) {
+export function Contact({ defaultType, defaultProject, source = "home" }: { defaultType?: IndustrySlug; defaultProject?: string; source?: string }) {
   const { name } = usePersonalization();
   const { contact, promises } = site;
   return (
@@ -62,7 +62,7 @@ export function Contact({ defaultType, source = "home" }: { defaultType?: Indust
 
         <div className="container-x section-y grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <Eyebrow no="09">Contact</Eyebrow>
+            <Eyebrow no={source === "home" ? "09" : undefined}>Contact</Eyebrow>
             <RevealHeading id="contact-title" text="Tell us what you want to *build*." className="mt-6 text-display" />
             <Reveal delay={0.1}>
               <p className="mt-6 text-lead text-ink-soft">
@@ -117,7 +117,7 @@ export function Contact({ defaultType, source = "home" }: { defaultType?: Indust
             <div className="rounded-[30px] bg-linen/95 p-6 shadow-lift ring-1 ring-ink/[0.06] backdrop-blur sm:p-9">
               <h3 className="font-display text-[1.75rem] leading-tight tracking-[-0.02em]">Send us a message</h3>
               <p className="mb-7 mt-1.5 text-ink-soft">Takes 30 seconds. No spam, ever.</p>
-              <EnquiryForm defaultType={defaultType} source={source} />
+              <EnquiryForm defaultType={defaultType} defaultProject={defaultProject} source={source} />
             </div>
           </motion.div>
         </div>

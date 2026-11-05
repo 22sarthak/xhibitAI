@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { site } from "./site.config";
 import { industryMeta } from "./src/content/industry-meta";
+import { serviceMeta } from "./src/content/service-meta";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * SEO plugin
@@ -23,6 +24,12 @@ const routes: RouteMeta[] = [
     title: m.seoTitle,
     description: m.seoDescription,
     image: `/og/${m.slug}.jpg`,
+  })),
+  ...serviceMeta.map((m) => ({
+    path: `/services/${m.slug}`,
+    title: m.seoTitle,
+    description: m.seoDescription,
+    image: `/og/service-${m.slug}.jpg`,
   })),
   {
     path: "/privacy",

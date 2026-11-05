@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
+import { curtainForService, serviceBySlug, services, type ServiceSlug } from "../../content/services";
 import { ease } from "../../lib/motion";
+import { TLink } from "../../lib/transition";
 import { cn } from "../../lib/utils";
 import { Eyebrow } from "../ui/Eyebrow";
 import { Marquee } from "../ui/Marquee";
@@ -9,7 +12,8 @@ import { LiveChat, LiveNotifications } from "./LiveVisuals";
 
 /* Every visual here is real: screenshots of our own demo products, a real map, and live, self-playing phone screens. */
 
-function Tile({ className, visual, title, text, tag, tagClass }: { className?: string; visual: ReactNode; title: string; text: string; tag: string; tagClass: string }) {
+function Tile({ className, visual, title, text, tag, tagClass, to }: { className?: string; visual: ReactNode; title: string; text: string; tag: string; tagClass: string; to?: ServiceSlug }) {
+  const service = to ? serviceBySlug(to) : undefined;
   return (
     <motion.article
       initial={{ opacity: 0, y: 32 }}
@@ -26,6 +30,15 @@ function Tile({ className, visual, title, text, tag, tagClass }: { className?: s
         <p className={cn("text-[0.75rem] font-semibold uppercase tracking-[0.16em]", tagClass)}>{tag}</p>
         <h3 className="mt-2 text-title text-ink">{title}</h3>
         <p className="mt-2 max-w-[46ch] text-ink-soft">{text}</p>
+        {service && (
+          <TLink
+            to={`/services/${service.slug}`}
+            curtain={curtainForService(service)}
+            className="mt-4 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-ink underline-offset-4 hover:underline"
+          >
+            More about {service.short.toLowerCase()} <ArrowRight className="size-4" aria-hidden="true" />
+          </TLink>
+        )}
       </div>
     </motion.article>
   );
@@ -115,6 +128,7 @@ export function Services() {
             className="md:col-span-2 lg:col-span-4"
             tag="Websites & landing pages"
             tagClass="text-clay-deep"
+            to="websites"
             title="Websites that make people stop scrolling."
             text="Fast, beautiful sites and landing pages that work on every screen, from a phone to a big monitor, and are easy to find on Google."
             visual={<WebsiteVisual />}
@@ -123,6 +137,7 @@ export function Services() {
             className="lg:col-span-2"
             tag="AI assistants"
             tagClass="text-sal"
+            to="ai-automation"
             title="A WhatsApp assistant that never sleeps."
             text="Answers the questions you hear fifty times a day, books customers in, and hands over to you anytime."
             visual={<ChatVisual />}
@@ -131,6 +146,7 @@ export function Services() {
             className="lg:col-span-2"
             tag="Web apps & dashboards"
             tagClass="text-cobalt"
+            to="web-apps"
             title="Software for how you actually work."
             text="Booking systems, order and stock dashboards, customer portals and internal tools, all in the browser."
             visual={<WebAppVisual />}
@@ -152,6 +168,21 @@ export function Services() {
             visual={<MapVisual />}
           />
         </div>
+
+        <nav aria-label="All services" className="mt-5 flex flex-wrap items-center gap-2 rounded-[24px] bg-linen p-3 ring-1 ring-ink/[0.07] sm:p-4">
+          <span className="px-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">Explore</span>
+          {services.map((s) => (
+            <TLink
+              key={s.slug}
+              to={`/services/${s.slug}`}
+              curtain={curtainForService(s)}
+              className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[0.9rem] font-semibold text-ink ring-1 ring-ink/10 transition-colors hover:bg-ink hover:text-ivory"
+            >
+              {s.short}
+              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </TLink>
+          ))}
+        </nav>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

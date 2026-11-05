@@ -23,7 +23,10 @@ const CHROME =
     "/usr/bin/google-chrome",
   ].find((p) => fs.existsSync(p));
 
-const slugs = ["home", "restaurants", "clinics", "schools", "salons", "gyms", "hotels", "retail", "business"];
+const slugs = [
+  "home", "restaurants", "clinics", "schools", "salons", "gyms", "hotels", "retail", "business",
+  "service-websites", "service-landing-pages", "service-web-apps", "service-online-stores", "service-ai-automation",
+];
 const outDir = path.join(root, "public", "og");
 fs.mkdirSync(outDir, { recursive: true });
 

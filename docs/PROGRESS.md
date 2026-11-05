@@ -48,4 +48,13 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - Server stores `project_type`, `budget` and `city`, includes them in the Telegram alert and CSV export, and adds the columns to an existing database on start-up. Tested against a database with the old layout.
 - API tests: 14 pass (3 new). Real submission through the form verified end to end.
 
-Next up: service pages, new demos.
+**Service pages** (`/services/<slug>`)
+- Five pages: Websites, Landing pages, Web apps & dashboards, Online stores, AI & automation. Content lives in `src/content/services.ts` (SEO titles in `service-meta.ts`).
+- Each page: live MacBook + iPhone demo (AI page: the live WhatsApp chat and lock screen), what you get, who it's for, links to related live demos, how it works, promises, FAQs, contact form with that service already picked, links to the other services.
+- Linked from the home Services section ("More about…" on tiles and an Explore row) and a new Services column in the footer.
+- Each page has its own title, description, share image (`public/og/service-*.jpg`) and sitemap entry (15 URLs in total).
+- The contact section only shows the "No. 09" marker on the home page now.
+- Landing pages use the salon demo for now; it gets swapped once the startup landing page demo exists.
+- Build passes; accessibility audit: 0 violations on home, all five service pages and /for/restaurants.
+
+Next up: new demos (startup landing page, SaaS web app, AI tool).

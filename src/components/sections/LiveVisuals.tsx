@@ -100,7 +100,7 @@ const greeting = (c: Convo): Msg => ({
   text: `Namaste! I'm the ${c.business} assistant. Ask me about timings, prices or bookings.`,
 });
 
-export function LiveChat() {
+export function LiveChat({ autoplay = true }: { autoplay?: boolean }) {
   const reduced = useReducedMotion();
   const visible = usePageVisible();
   const ref = useRef<HTMLDivElement>(null);
@@ -118,7 +118,7 @@ export function LiveChat() {
   const [typing, setTyping] = useState(false);
   const [pressed, setPressed] = useState<string | null>(null);
 
-  useRunner(inView && visible && !reduced, async (wait) => {
+  useRunner(autoplay && inView && visible && !reduced, async (wait) => {
     for (;;) {
       const c = CONVOS[convoIndex.current % CONVOS.length];
       setConvo(c);
@@ -289,7 +289,7 @@ type Note = { key: number; i: number; at: number };
 const START_MIN = 9 * 60 + 41;
 const clock = (m: number) => `${((Math.floor(m / 60) + 11) % 12) + 1}:${String(m % 60).padStart(2, "0")}`;
 
-export function LiveNotifications() {
+export function LiveNotifications({ autoplay = true }: { autoplay?: boolean }) {
   const reduced = useReducedMotion();
   const visible = usePageVisible();
   const ref = useRef<HTMLDivElement>(null);
@@ -304,7 +304,7 @@ export function LiveNotifications() {
     { key: 0, i: 0, at: START_MIN },
   ]);
 
-  useRunner(inView && visible && !reduced, async (wait) => {
+  useRunner(autoplay && inView && visible && !reduced, async (wait) => {
     let now = minute;
     for (;;) {
       await wait(2600 + Math.random() * 1200);

@@ -10,6 +10,7 @@ import { TransitionProvider } from "./lib/transition";
 import Home from "./pages/Home";
 
 const IndustryPage = lazy(() => import("./pages/IndustryPage"));
+const ServicePage = lazy(() => import("./pages/ServicePage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 // Dev-only route used by `npm run og` to render social share images.
@@ -39,6 +40,7 @@ function Shell() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/for/:slug" element={<IndustryPage />} />
+            <Route path="/services/:slug" element={<ServicePage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
