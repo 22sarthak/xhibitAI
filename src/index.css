@@ -74,6 +74,8 @@
   --animate-marquee: marquee var(--marquee-duration, 48s) linear infinite;
   --animate-marquee-reverse: marquee-reverse var(--marquee-duration, 48s) linear infinite;
   --animate-float: float 7s ease-in-out infinite;
+  /* A screenshot that reads itself: glides down a page, pauses, and back up. */
+  --animate-page-scroll: page-scroll 26s ease-in-out infinite;
   --animate-drift-a: drift-a 22s ease-in-out infinite alternate;
   --animate-drift-b: drift-b 26s ease-in-out infinite alternate;
   --animate-drift-c: drift-c 30s ease-in-out infinite alternate;
@@ -85,6 +87,11 @@
   @keyframes marquee-reverse {
     from { transform: translate3d(-50%, 0, 0); }
     to { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes page-scroll {
+    0%, 8% { object-position: 50% 0%; }
+    46%, 58% { object-position: 50% 100%; }
+    94%, 100% { object-position: 50% 0%; }
   }
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0); }

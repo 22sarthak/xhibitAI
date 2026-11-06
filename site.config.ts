@@ -68,8 +68,8 @@ export const site = {
   },
 
   contact: {
-    phone: "+918809387090", // used for tap-to-call links
-    phoneDisplay: "+91 88093 87090",
+    phone: "+919263930093", // used for tap-to-call links (same number as WhatsApp)
+    phoneDisplay: "+91 92639 30093",
     whatsapp: "919263930093", // country code + number, digits only (used for wa.me links)
     whatsappDisplay: "+91 92639 30093",
     email: "contact.xhibitai@gmail.com",

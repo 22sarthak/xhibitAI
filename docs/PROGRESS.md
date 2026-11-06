@@ -83,4 +83,16 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - Live in header, footer, hero badge, favicon, iPhone icon and all share images. Brand files: wordmark light/dark, mark, mono mark, 1024 px mark and a padded profile picture.
 - Colours stay as the studio palette (founders compared twelve colourways and kept this one). To change them later: edit `HUES` in `scripts/logo.mjs`, run `npm run logo` and `npm run og`.
 
+**Contact**
+- One number for everything: +91 92639 30093 is now both the WhatsApp and the call number; +91 88093 87090 is removed from the site.
+
+**Polish after review (2026-11-07)**
+- Hero: the floating "new booking" card is gone. Instead the phone's Dynamic Island expands into a live notification for each demo ("Appointment booked · Token A-14", "New admission enquiry"…), holds about two seconds and shrinks back before the next demo, the way iOS shows live alerts. Same on every screen size; stays open for reduced motion. `PhoneFrame` takes an optional `alert`.
+- Phone frames: screen content no longer spills past the rounded corners while animating (clip-path as well as overflow).
+- "Sweet shops" removed from the business-types strip.
+- Services, Websites tile: a fresh brand. The ShiftSaathi launch page replaces Kesar Kitchen and slowly scrolls through the page by itself. The old restaurant screenshot was deleted.
+- Services, Google tile: a self-playing Maps-style search. Someone types a search, pins drop, the map glides to "Your business", the place card slides up, "Call" is tapped and a review is added. Three searches rotate (restaurant, clinic, salon). Real OpenStreetMap data at higher resolution (`public/maps/jayanagar-hd.webp`); no live map library, so nothing extra to load.
+- "More about AI & automation" keeps AI capitalised.
+- Bug fix: a name typed in "Try it yourself" no longer appears in the hero phone, which rotates through every industry and always shows the demo businesses' own names. The typed name still personalises the studio, industry pages and WhatsApp messages.
+
 All "Now" and "Next" items are done. Remaining items need the founders: domain + email, trademark search, hosting, photo swaps, first client reviews.

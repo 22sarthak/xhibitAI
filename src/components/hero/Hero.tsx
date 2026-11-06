@@ -116,6 +116,18 @@ export function Hero() {
   const Site = demoComponents[industry.slug];
 
   useInterval(() => setIndex((i) => (i + 1) % industries.length), !reduced && inView && visible ? 3600 : null);
+
+  // "What this business receives": the phone's Dynamic Island grows into a live notification for each demo.
+  const [alertOpen, setAlertOpen] = useState(false);
+  useEffect(() => {
+    setAlertOpen(false);
+    const open = window.setTimeout(() => setAlertOpen(true), reduced ? 0 : 1100);
+    const close = reduced ? 0 : window.setTimeout(() => setAlertOpen(false), 3150);
+    return () => {
+      window.clearTimeout(open);
+      window.clearTimeout(close);
+    };
+  }, [index, reduced]);
   useEffect(() => {
     prefetchDemo(industries[(index + 1) % industries.length].slug);
   }, [index]);
@@ -264,7 +276,17 @@ export function Hero() {
           >
             <div className="animate-float">
               <Scaled width={PHONE.w} height={PHONE.h}>
-                <PhoneFrame chrome={demoChrome[industry.slug]}>
+                <PhoneFrame
+                  chrome={demoChrome[industry.slug]}
+                  alertOpen={alertOpen}
+                  alert={{
+                    key: industry.slug,
+                    color: industry.theme.deep,
+                    icon: <industry.notification.icon className="size-[24px]" strokeWidth={1.8} />,
+                    title: industry.notification.title,
+                    meta: industry.notification.meta,
+                  }}
+                >
                   <AnimatePresence initial={false}>
                     <motion.div
                       key={industry.slug}
@@ -276,7 +298,8 @@ export function Hero() {
                     >
                       <DeviceScreen interactive={false} label="" autoScroll>
                         <Suspense fallback={<div className="h-full" style={{ background: demoChrome[industry.slug].bar }} />}>
-                          <Site name={name.trim() || industry.demo.name} area={industry.demo.area} city={industry.demo.city} />
+                          {/* Always the demo's own name: the hero rotates through every industry, so a typed name doesn't belong here */}
+                          <Site name={industry.demo.name} area={industry.demo.area} city={industry.demo.city} />
                         </Suspense>
                       </DeviceScreen>
                     </motion.div>
@@ -285,25 +308,6 @@ export function Hero() {
               </Scaled>
             </div>
 
-            {/* What this business receives */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={industry.slug}
-                initial={{ opacity: 0, y: 16, scale: 0.92 }}
-                animate={{ opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 260, damping: 22, delay: 0.7 } }}
-                exit={{ opacity: 0, y: -10, scale: 0.96, transition: { duration: 0.25 } }}
-                className="absolute -left-4 top-[18%] flex w-[15.5rem] items-center gap-3 rounded-2xl bg-linen/90 p-3 pr-4 shadow-lift ring-1 ring-ink/5 backdrop-blur-xl sm:-left-16 lg:-left-24"
-              >
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl text-white" style={{ background: industry.theme.deep }}>
-                  <industry.notification.icon className="size-5" strokeWidth={1.8} />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-[0.8125rem] font-semibold leading-tight text-ink">{industry.notification.title}</span>
-                  <span className="mt-0.5 block truncate text-[0.75rem] text-ink-soft">{industry.notification.meta}</span>
-                </span>
-                <span className="absolute right-3 top-2.5 text-[0.625rem] font-medium text-ink-mute">now</span>
-              </motion.div>
-            </AnimatePresence>
 
             <div className="absolute -bottom-24 -right-24 hidden xl:block xl:[@media(max-height:780px)]:hidden">
               <RotatingBadge />

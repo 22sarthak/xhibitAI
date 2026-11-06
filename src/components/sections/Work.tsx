@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { curtainFor, industryBySlug } from "../../content/industries";
-import { curtainForService, serviceBySlug } from "../../content/services";
+import { curtainForService, serviceBySlug, serviceInSentence } from "../../content/services";
 import { demoSpec, showcaseBySlug, type DemoSlug } from "../../content/showcase";
 import { prefetchDemo } from "../../demos/registry";
 import { track } from "../../lib/api";
@@ -118,7 +118,7 @@ export function Work() {
           ) : (
             service && (
               <ButtonRoute to={`/services/${service.slug}`} curtain={curtainForService(service)} variant="secondary" arrow>
-                More about {service.short.toLowerCase()}
+                More about {serviceInSentence(service)}
               </ButtonRoute>
             )
           )}

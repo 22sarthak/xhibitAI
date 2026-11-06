@@ -13,7 +13,6 @@ export const businessTypes = [
   "Boutiques",
   "Coaching centres",
   "Diagnostic labs",
-  "Sweet shops",
   "Showrooms",
   "Homestays",
   "Startups",
@@ -178,7 +177,7 @@ export const productSteps = [
 export const faqs: { q: string; a: string }[] = [
   {
     q: "What can you build?",
-    a: "Anything that runs in a browser: websites, landing pages, online stores, web apps, dashboards, booking systems, customer portals and AI assistants. Everything works beautifully on phones. We don't build native Android or iOS apps.",
+    a: "Anything that runs in a browser: websites, landing pages, online stores, web apps, dashboards, booking systems, customer portals and AI assistants. Everything works beautifully on phones.",
   },
   {
     q: "How much does it cost?",

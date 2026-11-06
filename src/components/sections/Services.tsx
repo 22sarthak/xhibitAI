@@ -1,14 +1,14 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { curtainForService, serviceBySlug, services, type ServiceSlug } from "../../content/services";
+import { curtainForService, serviceBySlug, serviceInSentence, services, type ServiceSlug } from "../../content/services";
 import { ease } from "../../lib/motion";
 import { TLink } from "../../lib/transition";
 import { cn } from "../../lib/utils";
 import { Eyebrow } from "../ui/Eyebrow";
 import { Marquee } from "../ui/Marquee";
 import { Reveal, RevealHeading } from "../ui/Reveal";
-import { LiveChat, LiveNotifications } from "./LiveVisuals";
+import { LiveChat, LiveMap, LiveNotifications } from "./LiveVisuals";
 
 /* Every visual here is real: screenshots of our own demo products, a real map, and live, self-playing phone screens. */
 
@@ -36,7 +36,7 @@ function Tile({ className, visual, title, text, tag, tagClass, to }: { className
             curtain={curtainForService(service)}
             className="mt-4 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-ink underline-offset-4 hover:underline"
           >
-            More about {service.short.toLowerCase()} <ArrowRight className="size-4" aria-hidden="true" />
+            More about {serviceInSentence(service)} <ArrowRight className="size-4" aria-hidden="true" />
           </TLink>
         )}
       </div>
@@ -45,7 +45,7 @@ function Tile({ className, visual, title, text, tag, tagClass, to }: { className
 }
 
 /** A screenshot in a slim browser window. */
-function BrowserShot({ src, domain, alt, className }: { src: string; domain: string; alt: string; className?: string }) {
+function BrowserShot({ src, domain, alt, className, scroll }: { src: string; domain: string; alt: string; className?: string; scroll?: boolean }) {
   return (
     <div className={cn("flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-soft ring-1 ring-ink/[0.08]", className)}>
       <div className="flex h-8 items-center gap-1.5 border-b border-ink/[0.06] bg-[#f4f4f2] px-3">
@@ -54,7 +54,16 @@ function BrowserShot({ src, domain, alt, className }: { src: string; domain: str
         <span className="size-2.5 rounded-full bg-[#28c840]" />
         <span className="mx-auto rounded-md bg-white px-3 py-0.5 text-[0.6875rem] text-ink-mute ring-1 ring-ink/[0.05]">{domain}</span>
       </div>
-      <img src={src} alt={alt} loading="lazy" decoding="async" className="block aspect-[5/3] min-h-0 w-full flex-1 object-cover object-left-top transition-transform duration-[1.2s] ease-(--ease-soft) group-hover:scale-[1.02]" />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className={cn(
+          "block aspect-[5/3] min-h-0 w-full flex-1 object-cover",
+          scroll ? "animate-page-scroll object-top" : "object-left-top transition-transform duration-[1.2s] ease-(--ease-soft) group-hover:scale-[1.02]",
+        )}
+      />
     </div>
   );
 }
@@ -62,7 +71,7 @@ function BrowserShot({ src, domain, alt, className }: { src: string; domain: str
 function WebsiteVisual() {
   return (
     <div className="relative h-full">
-      <BrowserShot src="/showcase/web-restaurant.webp" domain="kesarkitchen.in" alt="Kesar Kitchen restaurant website on a laptop screen" />
+      <BrowserShot src="/showcase/web-startup.webp" domain="shiftsaathi.in" alt="ShiftSaathi, a startup's launch page with a waitlist, rosters and features" scroll />
     </div>
   );
 }
@@ -89,20 +98,8 @@ function NotificationsVisual() {
 
 function MapVisual() {
   return (
-    <div className="relative h-full min-h-[14rem] overflow-hidden rounded-xl bg-[#f2efe9]">
-      <img src="/maps/jayanagar.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
-      <svg width="30" height="40" viewBox="0 0 38 48" className="absolute left-1/2 top-[34%] -translate-x-1/2 -translate-y-full drop-shadow-md" aria-hidden="true">
-        <path d="M19 47s17-15.6 17-28A17 17 0 0 0 2 19c0 12.4 17 28 17 28z" fill="#ea4335" />
-        <circle cx="19" cy="19" r="7" fill="#a50e0e" />
-      </svg>
-      <div className="absolute inset-x-3 bottom-3 rounded-xl bg-white p-3 shadow-soft" style={{ fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif" }}>
-        <p className="text-[0.875rem] font-semibold text-[#202124]">Your business</p>
-        <p className="mt-0.5 flex items-center gap-1 text-[0.75rem] text-[#5f6368]">
-          4.8 <span className="text-[#fbbc04]">★★★★★</span> (212) · Restaurant
-        </p>
-        <p className="text-[0.75rem] text-[#188038]">Open · Closes 11 PM</p>
-      </div>
-      <span className="absolute right-2 top-2 rounded bg-white/85 px-1.5 py-0.5 text-[0.625rem] text-ink-mute">© OpenStreetMap</span>
+    <div className="relative h-full min-h-[18rem]">
+      <LiveMap />
     </div>
   );
 }

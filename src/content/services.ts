@@ -246,4 +246,7 @@ export const services: Service[] = [
 
 export const serviceBySlug = (slug?: string) => services.find((s) => s.slug === slug);
 
+/** "web apps", "online stores"… but keep "AI" capitalised. For "More about …" links. */
+export const serviceInSentence = (s: Service) => s.short.toLowerCase().replace(/ai/, "AI");
+
 export const curtainForService = (s: Service): CurtainSpec => ({ color: s.deep, ink: "#ffffff", eyebrow: "Services", title: s.name });

@@ -367,3 +367,156 @@ export function LiveNotifications({ autoplay = true }: { autoplay?: boolean }) {
     </div>
   );
 }
+
+/* ------------------------------------------------------------- live map */
+
+const SEARCHES = [
+  { q: "biryani near me", kind: "Restaurant", hours: "Open · Closes 11 PM", rating: 4.8, reviews: 212 },
+  { q: "clinic open now", kind: "Clinic", hours: "Open 24 hours", rating: 4.9, reviews: 186 },
+  { q: "salon in Jayanagar", kind: "Salon", hours: "Open · Closes 9 PM", rating: 4.7, reviews: 158 },
+];
+/** Other results (left %, top %) and ours, on /maps/jayanagar-hd.webp (real OpenStreetMap data). */
+const OTHERS = [
+  [22, 36],
+  [86, 33],
+  [38, 66],
+  [84, 60],
+];
+const OURS = [60, 41];
+const MAP_FONT = { fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" };
+
+function Pin({ big }: { big?: boolean }) {
+  const w = big ? 30 : 18;
+  return (
+    <svg width={w} height={w * 1.33} viewBox="0 0 30 40" aria-hidden="true" className="drop-shadow-[0_3px_3px_rgba(0,0,0,.3)]">
+      <path d="M15 39s13-12.3 13-22A13 13 0 0 0 2 17c0 9.7 13 22 13 22z" fill={big ? "#ea4335" : "#d4473b"} stroke="#fff" strokeWidth={big ? 1.5 : 2} />
+      <circle cx="15" cy="16" r={big ? 5.5 : 5} fill={big ? "#a50e0e" : "#fff"} />
+    </svg>
+  );
+}
+
+/** A Google-Maps-style search that plays itself: someone searches, the pins drop, the map moves to you, they tap. */
+export function LiveMap() {
+  const reduced = useReducedMotion();
+  const visible = usePageVisible();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.35 });
+  const which = useRef(0);
+
+  const [s, setS] = useState(SEARCHES[0]);
+  const [query, setQuery] = useState(SEARCHES[0].q);
+  const [pins, setPins] = useState(OTHERS.length + 1);
+  const [zoom, setZoom] = useState(true);
+  const [card, setCard] = useState(true);
+  const [tapped, setTapped] = useState<string | null>(null);
+  const [reviews, setReviews] = useState(SEARCHES[0].reviews);
+
+  useRunner(inView && visible && !reduced, async (wait) => {
+    for (;;) {
+      const next = SEARCHES[which.current % SEARCHES.length];
+      setCard(false);
+      setZoom(false);
+      setTapped(null);
+      await wait(500);
+      setPins(0);
+      setQuery("");
+      setS(next);
+      setReviews(next.reviews);
+      await wait(400);
+      for (let i = 1; i <= next.q.length; i++) {
+        setQuery(next.q.slice(0, i));
+        await wait(55 + Math.random() * 45);
+      }
+      await wait(350);
+      for (let i = 1; i <= OTHERS.length + 1; i++) {
+        setPins(i);
+        await wait(i === OTHERS.length ? 380 : 170);
+      }
+      await wait(450);
+      setZoom(true);
+      await wait(1000);
+      setCard(true);
+      await wait(1500);
+      setTapped("Call");
+      await wait(600);
+      setTapped(null);
+      await wait(700);
+      setReviews((r) => r + 1);
+      await wait(3600);
+      which.current++;
+    }
+  });
+
+  return (
+    <div ref={ref} aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-xl bg-[#f2efe9]" style={MAP_FONT}>
+      {/* map + pins move together */}
+      <div
+        className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)]"
+        style={{ transform: zoom ? "scale(1.22)" : "scale(1)", transformOrigin: `${OURS[0]}% ${OURS[1]}%` }}
+      >
+        <img src="/maps/jayanagar-hd.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+        {OTHERS.map(([x, y], i) => (
+          <span
+            key={i}
+            className="absolute -translate-x-1/2 -translate-y-full transition-[opacity,transform] duration-300"
+            style={{ left: `${x}%`, top: `${y}%`, opacity: pins > i ? 1 : 0, transform: `translate(-50%, ${pins > i ? "-100%" : "-160%"})` }}
+          >
+            <Pin />
+          </span>
+        ))}
+        <span
+          className="absolute flex items-end gap-1 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.34,1.56,.64,1)]"
+          style={{ left: `${OURS[0]}%`, top: `${OURS[1]}%`, opacity: pins > OTHERS.length ? 1 : 0, transform: `translate(-15px, ${pins > OTHERS.length ? "-100%" : "-180%"})` }}
+        >
+          <Pin big />
+          <span className="mb-4 whitespace-nowrap rounded-md bg-white px-1.5 py-0.5 text-[10.5px] font-semibold text-[#202124] shadow-[0_1px_3px_rgba(0,0,0,.25)]">Your business</span>
+        </span>
+      </div>
+
+      {/* search bar */}
+      <div className="absolute inset-x-3 top-3 flex h-10 items-center gap-2.5 rounded-full bg-white px-3.5 shadow-[0_2px_6px_rgba(0,0,0,.18)]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5f6368" strokeWidth="2.4" strokeLinecap="round">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m20 20-4.6-4.6" />
+        </svg>
+        <span className="min-w-0 flex-1 truncate text-[13.5px] text-[#202124]">
+          {query || <span className="text-[#70757a]">Search here</span>}
+          {query && query.length < s.q.length && <span className="ml-px inline-block h-[1em] w-[1.5px] translate-y-[2px] bg-[#1a73e8]" />}
+        </span>
+        <span className="grid size-6 shrink-0 place-items-center rounded-full bg-[#1a73e8] text-[10px] font-bold text-white">A</span>
+      </div>
+
+      {/* place card */}
+      <div
+        className="absolute inset-x-3 bottom-3 rounded-xl bg-white p-3 shadow-[0_4px_14px_rgba(0,0,0,.18)] transition-[opacity,transform] duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
+        style={{ opacity: card ? 1 : 0, transform: card ? "translateY(0)" : "translateY(24px)" }}
+      >
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="text-[14px] font-semibold text-[#202124]">Your business</p>
+            <p className="mt-0.5 flex items-center gap-1 text-[12px] text-[#5f6368]">
+              {s.rating} <span className="text-[#fbbc04]">★★★★★</span>
+              <span className="tabular-nums">({reviews})</span> · {s.kind}
+            </p>
+            <p className="text-[12px] text-[#188038]">{s.hours}</p>
+          </div>
+          <span className="shrink-0 text-[9px] text-[#70757a]">© OpenStreetMap</span>
+        </div>
+        <div className="mt-2.5 flex gap-1.5 text-[11.5px] font-medium">
+          {["Directions", "Call", "Website"].map((c, i) => (
+            <span
+              key={c}
+              className={cn(
+                "rounded-full px-2.5 py-1 transition-colors duration-200",
+                i === 0 ? "bg-[#1a73e8] text-white" : "text-[#1a73e8] ring-1 ring-[#dadce0]",
+                tapped === c && "bg-[#d2e3fc]",
+              )}
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

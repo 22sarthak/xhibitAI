@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "../../lib/utils";
 
@@ -34,8 +35,70 @@ function StatusIcons({ color }: { color: string }) {
   );
 }
 
+/** What the Dynamic Island shows when it expands into a live notification. */
+export interface IslandAlert {
+  /** Changes whenever a new alert should play (e.g. the industry slug). */
+  key: string;
+  icon: ReactNode;
+  color: string;
+  title: string;
+  meta: string;
+}
+
+const ISLAND_EASE = [0.32, 0.72, 0, 1] as const;
+
+/** The black pill at the top of the screen. With an alert it grows into a live notification, like iOS. */
+function DynamicIsland({ alert, open }: { alert?: IslandAlert; open: boolean }) {
+  const expanded = !!alert && open;
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="absolute left-1/2 top-[11px] z-40 overflow-hidden bg-black"
+      style={{ x: "-50%" }}
+      initial={false}
+      animate={expanded ? { width: 366, height: 78, borderRadius: 39 } : { width: 118, height: 34, borderRadius: 17 }}
+      transition={{ duration: 0.55, ease: ISLAND_EASE }}
+    >
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            key={alert.key}
+            className="absolute inset-0 flex items-center gap-[12px] pl-[14px] pr-[22px]"
+            style={{ fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif" }}
+            initial={{ opacity: 0, scale: 0.92, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)", transition: { delay: 0.18, duration: 0.35 } }}
+            exit={{ opacity: 0, transition: { duration: 0.15 } }}
+          >
+            <span className="grid size-[50px] shrink-0 place-items-center rounded-full text-white" style={{ background: alert.color }}>
+              {alert.icon}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[16px] font-semibold leading-tight text-white">{alert.title}</span>
+              <span className="mt-[2px] block truncate text-[13.5px] text-white/60">{alert.meta}</span>
+            </span>
+            <span className="shrink-0 self-start pt-[16px] text-[12px] font-medium text-white/45">now</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 /** A modern phone, drawn in CSS so it's crisp at any size. Logical size 414×868. */
-export function PhoneFrame({ children, chrome, className }: { children: ReactNode; chrome: Chrome; className?: string }) {
+export function PhoneFrame({
+  children,
+  chrome,
+  className,
+  alert,
+  alertOpen = false,
+}: {
+  children: ReactNode;
+  chrome: Chrome;
+  className?: string;
+  /** Optional live notification in the Dynamic Island. */
+  alert?: IslandAlert;
+  alertOpen?: boolean;
+}) {
   const ink = chrome.tone === "light" ? "#ffffff" : "#111111";
   return (
     <div
@@ -53,7 +116,8 @@ export function PhoneFrame({ children, chrome, className }: { children: ReactNod
       <span aria-hidden="true" className="absolute -left-[3px] top-[252px] h-[62px] w-[4px] rounded-l-[2px] bg-[#232325]" />
       <span aria-hidden="true" className="absolute -right-[3px] top-[206px] h-[96px] w-[4px] rounded-r-[2px] bg-[#232325]" />
 
-      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[52px] bg-white">
+      {/* clip-path as well as overflow: Chrome lets animated (composited) children escape a rounded overflow clip */}
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[52px] bg-white [clip-path:inset(0_round_52px)]">
         {/* status bar */}
         <div
           className="relative z-30 flex h-[50px] shrink-0 items-center justify-between px-[34px] pt-[6px]"
@@ -65,7 +129,7 @@ export function PhoneFrame({ children, chrome, className }: { children: ReactNod
           <StatusIcons color={ink} />
         </div>
         {/* dynamic island */}
-        <div aria-hidden="true" className="absolute left-1/2 top-[11px] z-40 h-[34px] w-[118px] -translate-x-1/2 rounded-full bg-black" />
+        <DynamicIsland alert={alert} open={alertOpen} />
         <div className="relative min-h-0 flex-1">{children}</div>
         {/* home indicator */}
         <div
