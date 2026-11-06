@@ -1,13 +1,22 @@
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { useRef } from "react";
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "motion/react";
+import { useRef, useState } from "react";
 import { site } from "../../../site.config";
-import { steps } from "../../content/home";
+import { productSteps, steps } from "../../content/home";
+import { track } from "../../lib/api";
+import { cn } from "../../lib/utils";
 import { ease } from "../../lib/motion";
 import { Eyebrow } from "../ui/Eyebrow";
 import { Reveal, RevealHeading } from "../ui/Reveal";
 
+const TRACKS = [
+  { id: "business", label: "Business website", steps },
+  { id: "product", label: "Startup or product", steps: productSteps },
+] as const;
+
 export function Process() {
   const ref = useRef<HTMLDivElement>(null);
+  const [trackId, setTrackId] = useState<(typeof TRACKS)[number]["id"]>("business");
+  const current = TRACKS.find((t) => t.id === trackId)!;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.6 });
 
@@ -25,6 +34,26 @@ export function Process() {
           <Reveal delay={0.1}>
             <p className="mt-6 text-lead text-ink-soft">No jargon, no endless meetings. Four clear steps, a live preview link the whole way, and we're always one WhatsApp away.</p>
           </Reveal>
+          <Reveal delay={0.15} className="mt-8">
+            <div role="tablist" aria-label="What are you building?" className="inline-flex rounded-full bg-sand p-1">
+              {TRACKS.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={trackId === t.id}
+                  onClick={() => {
+                    setTrackId(t.id);
+                    track("process_track", { track: t.id });
+                  }}
+                  className={cn("relative rounded-full px-4 py-2 text-[0.875rem] font-semibold transition-colors sm:px-5", trackId === t.id ? "text-ivory" : "text-ink-soft hover:text-ink")}
+                >
+                  {trackId === t.id && <motion.span layoutId="process-track" className="absolute inset-0 rounded-full bg-ink" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+                  <span className="relative">{t.label}</span>
+                </button>
+              ))}
+            </div>
+          </Reveal>
         </div>
 
         <div ref={ref} className="relative mt-16 lg:mt-20">
@@ -41,11 +70,20 @@ export function Process() {
             className="absolute left-0 right-0 top-[1.1rem] hidden h-px origin-left bg-clay lg:block"
           />
 
-          <ol className="grid gap-12 lg:grid-cols-4 lg:gap-8">
-            {steps.map((step, i) => (
-              <Step key={step.title} index={i} total={steps.length} progress={progress} {...step} />
-            ))}
-          </ol>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.ol
+              key={trackId}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.3, ease }}
+              className="grid gap-12 lg:grid-cols-4 lg:gap-8"
+            >
+              {current.steps.map((step, i) => (
+                <Step key={step.title} index={i} total={current.steps.length} progress={progress} {...step} />
+              ))}
+            </motion.ol>
+          </AnimatePresence>
         </div>
 
         {site.promises.freeDesignPreview && (
@@ -55,8 +93,17 @@ export function Process() {
                 “
               </span>
               <p className="flex-1 font-display text-[clamp(1.35rem,1.1rem+1vw,1.9rem)] leading-snug tracking-[-0.01em]">
-                Our promise: you'll see your homepage design <em className="text-clay-deep">before</em> you pay a single rupee. If you don't love it,
-                you don't pay.
+                {trackId === "business" ? (
+                  <>
+                    Our promise: you'll see your homepage design <em className="text-clay-deep">before</em> you pay a single rupee. If you don't love it,
+                    you don't pay.
+                  </>
+                ) : (
+                  <>
+                    Our promise: you'll tap through a working prototype <em className="text-clay-deep">before</em> we write a line of code, so you
+                    only pay to build what you're sure about.
+                  </>
+                )}
               </p>
             </div>
           </Reveal>

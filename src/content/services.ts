@@ -56,6 +56,8 @@ export interface Service {
   demo?: DemoSlug;
   /** Short note under the devices. */
   demoNote: string;
+  /** Which "how it works" steps fit: a business website, or a product built in weekly steps. */
+  process?: "business" | "product";
   features: { icon: LucideIcon; title: string; text: string }[];
   goodFor: string[];
   related: IndustrySlug[];
@@ -146,6 +148,7 @@ export const services: Service[] = [
     soft: "#e3e8fc",
     deep: "#1b34b5",
     demo: "business",
+    process: "product",
     demoNote: "A live sales and stock dashboard we built. Click through it.",
     features: [
       { icon: Workflow, title: "Built around your workflow", text: "We map how your team works today, then build screens that fit it, not the other way round." },

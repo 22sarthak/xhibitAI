@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { LogoMark } from "../components/brand/Logo";
+import { Logo } from "../components/brand/Logo";
 import { DemoDevice } from "../components/device/DemoDevice";
 import { LiveChat, LiveNotifications } from "../components/sections/LiveVisuals";
 import { baseSilk, industries, industryBySlug } from "../content/industries";
@@ -33,12 +33,8 @@ export default function OgCard() {
         background: `radial-gradient(60% 80% at 85% 20%, ${silk[1]} 0%, transparent 70%), radial-gradient(50% 70% at 95% 95%, ${silk[2]}cc 0%, transparent 70%), radial-gradient(40% 60% at 10% 110%, ${silk[3]}55 0%, transparent 70%), ${silk[0]}`,
       }}
     >
-      <div className="absolute left-[72px] top-[64px] flex items-center gap-3">
-        <LogoMark className="size-9" />
-        <span className="font-display text-[34px] leading-none tracking-[-0.03em]" style={{ fontWeight: 560 }}>
-          Xhibit
-        </span>
-        <span className="rounded-md bg-ink px-2 py-1 text-[13px] font-bold leading-none tracking-[0.14em] text-ivory">AI</span>
+      <div className="absolute left-[64px] top-[60px]">
+        <Logo className="h-[44px]" />
       </div>
 
       <div className="absolute left-[72px] top-[160px] w-[500px]">

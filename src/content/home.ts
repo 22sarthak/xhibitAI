@@ -150,6 +150,30 @@ export const steps = [
   },
 ];
 
+/** For startups and bigger products: prove the idea early, then build in short, visible steps. */
+export const productSteps = [
+  {
+    day: "Step 1",
+    title: "Discovery",
+    text: "We map the problem, the people who'll use it and the smallest version worth building. You get a one-page plan and a written quote.",
+  },
+  {
+    day: "Step 2",
+    title: "Clickable prototype",
+    text: "Real screens you can tap through on your phone and show to users or investors, before any code is written.",
+  },
+  {
+    day: "Step 3",
+    title: "Weekly builds",
+    text: "A working build on a private link every week. You test it, we adjust. Scope and changes stay in writing.",
+  },
+  {
+    day: "Step 4",
+    title: "Launch and grow",
+    text: "We launch, set up analytics and error alerts, and keep shipping improvements with you as real users arrive.",
+  },
+];
+
 /* ── FAQ ── */
 export const faqs: { q: string; a: string }[] = [
   {

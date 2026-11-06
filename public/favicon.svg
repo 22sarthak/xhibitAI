@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#1d1a16"/>
-  <g transform="translate(16 16) scale(0.78) translate(-16 -16)">
-    <rect x="12.6" y="1.2" width="6.8" height="29.6" rx="3.4" transform="rotate(45 16 16)" fill="#e9a23b"/>
-    <rect x="12.6" y="1.2" width="6.8" height="29.6" rx="3.4" transform="rotate(-45 16 16)" fill="#c4532d"/>
-    <path d="M16 11.2 20.8 16 16 20.8 11.2 16Z" fill="#8f3417" opacity=".55"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32"><title>Xhibit AI</title><defs><clipPath id="m5"><rect width="100" height="100" rx="23"/></clipPath></defs><g clip-path="url(#m5)"><path d="M5.3 -2.3Q3.6 -4 6 -4L94 -4Q96.4 -4 94.7 -2.3L51.7 40.7Q50 42.4 48.3 40.7Z" fill="#2747e3"/><path d="M102.3 5.3Q104 3.6 104 6L104 94Q104 96.4 102.3 94.7L59.3 51.7Q57.6 50 59.3 48.3Z" fill="#6a46d9"/><path d="M94.7 102.3Q96.4 104 94 104L6 104Q3.6 104 5.3 102.3L48.3 59.3Q50 57.6 51.7 59.3Z" fill="#e2501f"/><path d="M-2.3 94.7Q-4 96.4 -4 94L-4 6Q-4 3.6 -2.3 5.3L40.7 48.3Q42.4 50 40.7 51.7Z" fill="#0e7a55"/></g></svg>

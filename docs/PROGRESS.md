@@ -66,4 +66,21 @@ Newest first. The plan and decisions live in [PLAN.md](PLAN.md).
 - Dev-only page `/dev/demo/<slug>?mode=phone|laptop` renders any demo full size for screenshots; it isn't in the production build.
 - Build passes; accessibility audit 0 violations on home, landing pages and web apps service pages.
 
-Next up: logo (waiting on the founders' pick), product process for bigger projects.
+**Logo**
+- (Replaced on 7 Nov by the Window logo, below.) New logo drawn from Redaction's own italic X: the thick stroke in ink, the thin diagonal that cuts across it in cobalt ("made with you": a pen stroke crossing a printed one). Wordmark: that X + "hibit" in Redaction Regular (same weight as the site's headlines) + "AI" in Redaction Italic cobalt, the way the site italicises accent words. In the wordmark the diagonal ends flat where its serif would start, so it points at the h.
+- Used in the header, footer (light version), hero badge, favicon, iPhone home-screen icon and all share images.
+- Brand files for profiles and documents in `public/brand/`: logo SVG/PNG (light and dark), mark, app icon SVG and a 1024 px profile picture.
+- `npm run logo` regenerates everything from the font (`scripts/logo.mjs`, uses `opentype.js`, dev-only).
+
+**How it works, for products**
+- The process section has a switch: "Business website" (the four existing steps) or "Startup or product": discovery → clickable prototype → weekly builds → launch and grow. No week numbers, in line with the no-timeline-promise rule.
+- The promise card changes with it: for products, "you'll tap through a working prototype before we write a line of code".
+- The Web apps service page uses the product steps.
+
+**Logo, round two (2026-11-07)**
+- After a short study of big-tech, SaaS and Indian startup logos and five concepts, the founders chose "Window" and replaced the serif X from the day before. Study and alternatives were removed from the repo once the choice was made.
+- Founders picked concept 02, "Window": a rounded square cut by an X into four tiles (cobalt, violet, vermilion, emerald), with "xhibit ai" in Plus Jakarta Sans (ExtraBold + grey Medium). Small sizes use a wider cut.
+- Live in header, footer, hero badge, favicon, iPhone icon and all share images. Brand files: wordmark light/dark, mark, mono mark, 1024 px mark and a padded profile picture.
+- Colours stay as the studio palette (founders compared twelve colourways and kept this one). To change them later: edit `HUES` in `scripts/logo.mjs`, run `npm run logo` and `npm run og`.
+
+All "Now" and "Next" items are done. Remaining items need the founders: domain + email, trademark search, hosting, photo swaps, first client reviews.

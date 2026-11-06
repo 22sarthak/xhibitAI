@@ -1,3 +1,4 @@
+import { LogoMark } from "../brand/Logo";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
 import { site } from "../../../site.config";
@@ -94,7 +95,7 @@ function RotatingBadge() {
         </text>
       </motion.svg>
       <div className="absolute inset-[30px] grid place-items-center rounded-full bg-linen shadow-soft">
-        <span className="font-display text-[1.65rem] italic leading-none text-ink">X</span>
+        <LogoMark className="w-[30px]" />
       </div>
     </div>
   );

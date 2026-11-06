@@ -132,7 +132,7 @@ export function Nav() {
             className="rounded-full"
             aria-label={`${site.brand.name} — home`}
           >
-            <Logo />
+            <Logo className="pointer-events-none" />
           </a>
 
           <ul className="hidden items-center gap-1 lg:flex">

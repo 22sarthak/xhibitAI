@@ -11,7 +11,7 @@ import { ButtonLink } from "../components/ui/Button";
 import { Eyebrow } from "../components/ui/Eyebrow";
 import { WhatsAppDisc } from "../components/ui/icons";
 import { Reveal, RevealHeading } from "../components/ui/Reveal";
-import { steps } from "../content/home";
+import { productSteps, steps } from "../content/home";
 import { curtainFor, industryBySlug } from "../content/industries";
 import { curtainForService, serviceBySlug, services, type Service } from "../content/services";
 import { demoSpec } from "../content/showcase";
@@ -202,7 +202,7 @@ function ServiceView({ service }: { service: Service }) {
           <Eyebrow>How it works</Eyebrow>
           <RevealHeading id="how-title" text="From first call to *live*." className="mt-6 text-display" emClass={`italic ${service.accent}`} />
           <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
+            {(service.process === "product" ? productSteps : steps).map((s, i) => (
               <motion.li
                 key={s.title}
                 initial={{ opacity: 0, y: 24 }}

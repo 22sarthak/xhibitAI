@@ -4,7 +4,7 @@
  *   npm run dev            (in another terminal)
  *   npm run og             (or: BASE_URL=http://localhost:5174 npm run og)
  *
- * Re-run whenever you change headlines, colours or the logo.
+ * Re-run whenever you change headlines, colours or the logo (after `npm run logo`).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -46,7 +46,4 @@ for (const slug of slugs) {
 }
 await browser.close();
 
-// App icon for iPhone home screens (180×180) from the favicon.
-const svg = fs.readFileSync(path.join(root, "public", "favicon.svg"));
-await sharp(svg, { density: 600 }).resize(180, 180).png().toFile(path.join(root, "public", "apple-touch-icon.png"));
-console.log("icon: apple-touch-icon.png");
+// The iPhone home-screen icon (apple-touch-icon.png) is made by `npm run logo`.
